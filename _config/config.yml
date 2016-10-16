@@ -1,0 +1,15 @@
+Page:
+  extensions:
+    - InsiteCommonPageExtension
+
+Page_Controller:
+  extensions:
+    - InsiteCommonPageControllerExtension
+
+ListingHolder:
+  extensions:
+    - InsiteCommonListingExtension
+
+ListingHolder_Controller:
+  extensions:
+    - InsiteCommonListingControllerExtension

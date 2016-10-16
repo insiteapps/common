@@ -1,0 +1,26 @@
+{
+  "name": "insiteapps/insiteapps-common",
+  "version": "master",
+  "type": "silverstripe-module",
+  "require": {
+    "silverstripe/framework": "3.*",
+    "silverstripe/cms": "3.*"
+  },
+  "repositories": [
+    {
+      "type": "vcs",
+      "url": "git@bitbucket.org:insiteapps/insiteapps-common.git"
+    }
+  ]
+  "authors": [
+    {
+      "name": "Itayi Patrick Chitovoro",
+      "email": "patrick@insiteapps.co.za"
+    }
+  ],
+  "extra": {
+    "installer-name": "insiteapps-common"
+  }
+}
+
+
