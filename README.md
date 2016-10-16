@@ -1,2 +1,1 @@
-# silverstripe-utility-plugins
-silverstripe utility plugins
+Silverstripe Insite Apps (south africa) commonly used project files

@@ -2,7 +2,7 @@
   "name": "insiteapps/common",
   "description": "Silverstripe Insite Apps (south africa) commonly used project files",
   "type": "silverstripe-module",
-  "keywords": [""insite"],
+  "keywords": ["insite"],
   "license": "BSD-3-Clause",
   "authors": [
     {
