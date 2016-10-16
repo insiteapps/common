@@ -1,0 +1,63 @@
+{
+  "name": "utilities",
+  "version": "2.0.1",
+  "authors": [
+    "Itayi Paul Patrick Chitovoro <patrick@chitosystems.com>"
+  ],
+  "description": "Insite Apps Utility Plugins",
+  "moduleType": [
+    "globals",
+    "node"
+  ],
+  "keywords": [
+    "silverstripe",
+    "insiteApps",
+    "chitosystems"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.txt",
+    "node_modules",
+    "bower_components",
+    "components",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "*",
+    "bootstrap-sass": "*",
+    "fullcalendar": "*",
+    "fullcalendar-scheduler": "*",
+    "owl.carousel": "*",
+    "jquery-form": "*",
+    "jquery-ui": "*",
+    "jquery-pjax": "1.9.6",
+    "font-awesome": "4.5.0",
+    "select2": "3.5.4",
+    "slimScroll": "1.3.7",
+    "animate.css": "3.5.0",
+    "magnific-popup": "1.0.0",
+    "underscore": "*",
+    "moment": "*",
+    "eonasdan-bootstrap-datetimepicker": "4.17.37",
+    "jquery-migrate": "http://code.jquery.com/jquery-migrate-1.2.1.js",
+    "chosen": "https://github.com/harvesthq/chosen/releases/download/v1.3.0/chosen_v1.3.0.zip",
+    "masonry": "*",
+    "isotope": "*",
+    "bootstrap": "~3",
+    "mixitup": "*",
+    "nouislider": "*",
+    "bootstrap-social": "*"
+  },
+  "private": true,
+  "resolutions": {
+    "jquery": "~2.1.3",
+    "d3": "~3.5.4",
+    "underscore": "1.8.3",
+    "backbone": "^1.1.2",
+    "bootstrap": "~4"
+  },
+  "devDependencies": {
+    "tether": "~1.1.1",
+    "glyphicons-halflings": "*"
+  }
+}

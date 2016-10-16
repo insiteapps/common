@@ -1,12 +1,11 @@
 {
   "name": "jquery-migrate",
   "_cacheHeaders": {
-    "ETag": "\"54499a48-40ed\"",
+    "ETag": "W/\"54499a48-40ed\"",
     "Last-Modified": "Fri, 24 Oct 2014 00:16:08 GMT",
-    "Content-Length": "16621",
     "Content-Type": "application/javascript; charset=utf-8"
   },
-  "_release": "e-tag:54499a48-",
+  "_release": "e-tag:W/\"54499a4",
   "main": "index.js",
   "_source": "http://code.jquery.com/jquery-migrate-1.2.1.js",
   "_target": "*",
