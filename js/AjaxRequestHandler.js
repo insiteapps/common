@@ -9,6 +9,9 @@ var AjaxRequestHandler = function () {
                 success: successHandler,
                 error: errorHandler
             });
+        },
+        errorHandler: function () {
+            alert('Sorry there has been an error');
         }
     }
 
