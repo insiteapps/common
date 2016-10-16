@@ -1,26 +1,21 @@
 {
-  "name": "insiteapps/insiteapps-common",
-  "version": "master",
+  "name": "insiteapps/common",
+  "description": "Silverstripe Insite Apps (south africa) commonly used project files",
   "type": "silverstripe-module",
-  "require": {
-    "silverstripe/framework": "3.*",
-    "silverstripe/cms": "3.*"
-  },
-  "repositories": [
-    {
-      "type": "vcs",
-      "url": "git@bitbucket.org:insiteapps/insiteapps-common.git"
-    }
-  ]
+  "keywords": [""insite"],
+  "license": "BSD-3-Clause",
   "authors": [
     {
       "name": "Itayi Patrick Chitovoro",
-      "email": "patrick@insiteapps.co.za"
+      "email": "patrick@chitosystems.com"
     }
   ],
+  "require":
+  {
+    "silverstripe/framework": "3.*",
+    "silverstripe/cms": "3.*"
+  },
   "extra": {
     "installer-name": "insiteapps-common"
   }
 }
-
-
