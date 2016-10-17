@@ -1,4 +1,4 @@
-function PluginManager() {
+function InsiteAppsPluginManager() {
     var currentTallest = 0, currentRowStart = 0, rowDivs = new Array(), $el, topPosition = 0;
     this.setSameSize = function (element) {
         $(element).each(function () {
