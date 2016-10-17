@@ -14,7 +14,7 @@ class ListingPage extends Page
         "Summary" => "HTMLText",
     );
     private static $has_many = array(
-        "ListingImages" => "ListingImageResource"
+        "ListingImages" => "ImageResource"
     );
     private static $many_many = array();
 
