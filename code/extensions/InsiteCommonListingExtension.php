@@ -14,7 +14,16 @@ class InsiteCommonListingExtension extends DataExtension
 
     }
 
-
+    function LayoutView()
+    {
+        $DefaultView = $this->View;
+        $LayoutView = Cookie::get('LayoutView_' . $this->ID);
+        if ($LayoutView) {
+            return $LayoutView;
+        }
+        Cookie::set('LayoutView_' . $this->ID, $DefaultView);
+        return $DefaultView ? $DefaultView : "List";
+    }
 }
 
 class InsiteCommonListingControllerExtension extends DataExtension
@@ -32,15 +41,5 @@ class InsiteCommonListingControllerExtension extends DataExtension
 
     }
 
-    function LayoutView()
-    {
-        $DefaultView = $this->View;
-        $LayoutView = Cookie::get('LayoutView_' . $this->ID);
-        if ($LayoutView) {
-            return $LayoutView;
-        }
-        Cookie::set('LayoutView_' . $this->ID, $DefaultView);
-        return $DefaultView ? $DefaultView : "List";
-    }
 
 }
