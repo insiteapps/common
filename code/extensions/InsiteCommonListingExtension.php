@@ -8,8 +8,14 @@ class InsiteCommonListingExtension extends DataExtension
 
             ToggleCompositeField::create('ViewConfiguration', 'View', [
                 DropdownField::create("View")->setSource($this->owner->dbObject("View")->enumValues()),
-                DropdownField::create("Columns")->setSource(self::getColumnEnums()),
-                CheckboxField::create("AllowViewChange")
+                DropdownField::create("Columns")->setSource(self::getColumnEnums())
+
+            ]),
+            ToggleCompositeField::create('ActionBarConfiguration', 'ActionBar', [
+                CheckboxField::create("AllowViewChange"),
+                TextField::create("ActionBarBackgroundColour")->addExtraClass('colorpicker'),
+                //TextField::create("ActionBarButtonColour")->addExtraClass('colorpicker'),
+                //TextField::create("ActionBarButtonActiveStateColour")->addExtraClass('colorpicker')
             ]),
             ToggleCompositeField::create('ViewConfiguration', 'Display', [
                 CheckboxField::create("SameHeightBoxes", "Same height boxes on Grid"),
@@ -53,6 +59,7 @@ class InsiteCommonListingExtension extends DataExtension
         "RemoveChildLinking" => "Boolean",
         "RandomDisplayImage" => "Boolean",
         "ShowListImagesAsCarousel" => "Boolean",
+        "ActionBarBackgroundColour" => "Varchar(255)",
     );
     private static $defaults = array(
         "SidebarPosition" => "left",
