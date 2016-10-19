@@ -106,12 +106,6 @@ class InsiteCommonListingControllerExtension extends DataExtension
 
     public function onAfterInit()
     {
-        Requirements::css(INSITE_COMMON_DIR . '/css/ListItemsContainer.css');
-        Requirements::javascript(ISOTOPE_DIR . '/dist/isotope.pkgd.min.js');
-        Requirements::javascript(INSITE_COMMON_DIR . '/js/ListingManager.js');
-        Requirements::javascript(INSITE_COMMON_DIR . '/js/imagesloaded.pkgd.min.js');
-        Requirements::javascript(INSITE_COMMON_DIR . '/js/PluginManager.js');
-        Requirements::javascript(INSITE_COMMON_DIR . "/js/js.cookie.js");
 
 
     }
