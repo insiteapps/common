@@ -84,12 +84,12 @@ class InsiteCommonListingExtension extends DataExtension
 
     function LayoutView()
     {
-        $DefaultView = $this->View;
-        $LayoutView = Cookie::get('LayoutView_' . $this->ID);
+        $DefaultView = $this->owner->View;
+        $LayoutView = Cookie::get('LayoutView_' . $this->owner->ID);
         if ($LayoutView) {
             return $LayoutView;
         }
-        Cookie::set('LayoutView_' . $this->ID, $DefaultView);
+        Cookie::set('LayoutView_' . $this->owner->ID, $DefaultView);
         return $DefaultView ? $DefaultView : "List";
     }
 

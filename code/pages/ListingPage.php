@@ -16,7 +16,12 @@ class ListingPage extends Page
     private static $has_many = array(
         "ListingImages" => "ImageResource"
     );
-    private static $many_many = array();
+    private static $many_many = array(
+        "Areas" => "ListingArea",
+        "Collections" => "ListingCollection",
+        "Locations" => "ListingLocation",
+        "Types" => "ListingType",
+    );
 
     public function getCMSFields()
     {
@@ -67,6 +72,15 @@ class ListingPage extends Page
         $gridFieldConfig->addComponent(new GridFieldSortableRows('SortOrder'));
         $ImageGridfield = new GridField('Images', 'Images', $this->ListingImages(), $gridFieldConfig);
         $fields->addFieldToTab('Root.Images', $ImageGridfield);
+
+
+        $oListingArea = ListingArea::get();
+        $oListingAreaMap = $oListingArea ? $oListingArea->map()->toArray() : array();
+        asort($oListingAreaMap);
+        $fields->addFieldToTab('Root.Configurations', ListboxField::create('Areas')
+            ->setMultiple(true)
+            ->setSource($oListingAreaMap)
+            ->setAttribute('data-placeholder', 'Areas'));
 
 
         return $fields;

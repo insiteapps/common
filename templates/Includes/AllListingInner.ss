@@ -1,11 +1,11 @@
 <section class="ListingContainer">
     <% if $ActiveListings %>
         <% include ListingPagination %>
-        <section id="ListItemsContainer" class="isotopeContainer {$LayoutView} {$MakeSameHeight} ">
+        <section id="ListItemsContainer" class="isotopeContainer {$LayoutView} ">
             <section id="LayoutView" class="{$LayoutView}">
                 <% loop $ActiveListings %>
                     <article
-                            class="list-item isotopeitem {$filterCategories} <% if $Parent.RemoveChildLinking %>normalIcon<% end_if %> col-sm-{$Top.ColumnsSpanWidth}"
+                            class="list-item isotopeitem {$filterCategories} {$Parent.MakeSameHeight}  <% if $Parent.RemoveChildLinking %>normalIcon<% end_if %> col-sm-{$Top.ColumnsSpanWidth}"
                             itemtype="https://schema.org/LodgingBusiness">
                         <div class="row">
 

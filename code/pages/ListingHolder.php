@@ -8,14 +8,41 @@ class ListingHolder extends Page
     private static $db = array();
 
     private static $has_one = array();
-    private static $has_many = array();
+    private static $has_many = array(
+        "Areas" => "ListingArea",
+        "Collections" => "ListingCollection",
+        "Locations" => "ListingLocation",
+        "Types" => "ListingType",
+        "FilterComponents" => "ListingSidebarComponent"
+    );
+    private static $many_many = array();
 
     private static $defaults = array();
 
     public function getCMSFields()
     {
-        $fields = parent::getCMSFields();
-        return $fields;
+        $f = parent::getCMSFields();
+
+        $gridFieldConfig = GridFieldConfig_RecordEditor::create();
+        $gridFieldConfig->addComponent(new GridFieldAddNewMultiClass());
+        $gridFieldConfig->removeComponentsByType('GridFieldAddNewButton');
+        $gridFieldConfig->addComponent(new GridFieldSortableRows('SortOrder'));
+
+        $f->addFieldsToTab('Root.Settings', [
+            new GridField('FilterComponents', 'FilterComponents', $this->FilterComponents(), $gridFieldConfig),
+            GridField::create('Areas', 'Areas', $this->Areas(), GridFieldConfig_RecordEditor::create()),
+            GridField::create('Locations', 'Locations', $this->Locations(), GridFieldConfig_RecordEditor::create()),
+            new GridField('Types', 'Types', $this->Types(), GridFieldConfig_RecordEditor::create()),
+            new GridField('Collections', 'Collections', $this->Collections(), GridFieldConfig_RecordEditor::create())
+        ]);
+
+        return $f;
+    }
+
+    public function requireDefaultRecords()
+    {
+        parent::requireDefaultRecords();
+
     }
 }
 

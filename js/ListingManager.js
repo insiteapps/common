@@ -12,7 +12,7 @@ var colonial = $("#ListingOuterContainer").data('parent');
     /*global jQuery, document, window*/
     jQuery(document).ready(function () {
         ListingManager.init();
-        //ListingManager.initSliders();
+        ListingManager.isotope();
         ListingManager.initializeLiveHandlers();
     });
 }(jQuery));
@@ -22,6 +22,7 @@ var ListingManager = function () {
     var ControllerURL = 'listing-manager/';
     var ItemsContainer = $("#ListItemsContainer");
 
+    var insiteAppsPluginManager = new InsiteAppsPluginManager();
 
     function cleanArray(actual) {
         var newArray = new Array();
@@ -49,6 +50,20 @@ var ListingManager = function () {
 
         },
         initializeLiveHandlers: function () {
+            $(document).on('submit', 'form#FilterComponents', function (e) {
+               // e.preventDefault();
+                var $t = $(this);
+
+                var data = $t.closest('form').serialize();
+                console.log(data);
+
+
+
+              //  SubmitListingFilter
+
+               // return false;
+            });
+
 
             $(".ListLayout").on('click', 'a', function (e) {
                 e.preventDefault();
@@ -87,9 +102,9 @@ var ListingManager = function () {
 
         },
         isotope: function () {
-            var $container = $('.isotopeContainer'), $items = $('.isotopeitem');
-            pluginManager.initiateIsotope($container);
-           
+            var $container = $('.isotopeContainer');
+            insiteAppsPluginManager.initiateIsotope($container);
+
         },
         loadAjaxStart: function (id, reverse) {
             var AjaxLoading = "<div class=\"AjaxLoading show-overlay\"></div>";

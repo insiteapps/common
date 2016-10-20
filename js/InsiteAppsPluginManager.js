@@ -1,5 +1,8 @@
 function InsiteAppsPluginManager() {
     var currentTallest = 0, currentRowStart = 0, rowDivs = new Array(), $el, topPosition = 0;
+
+    var window_width = $(window).width();
+
     this.setSameSize = function (element) {
         $(element).each(function () {
 
@@ -35,25 +38,28 @@ function InsiteAppsPluginManager() {
         });
     }
     this.initiateIsotope = function ($container) {
-        var SameHeightBoxes = $('.SameHeightBoxes  .content-summary');
+        var SameHeightBoxes = $('.SameHeightBoxes');
+       var  Manager = this;
         if ($container.length) {
             var $resize = $container.attr('id');
             $container.isotope();
             var $grid = $container.imagesLoaded(function () {
                 $grid.isotope({
-                    itemSelector: '.item',
+                    itemSelector: '.isotopeitem',
                     percentPosition: true
                 });
+                if ($(window).width() > 767) {
+                    Manager.setSameSize('.SameHeightBoxes');
+                } else {
+                    SameHeightBoxes.height("auto");
+                }
 
             });
 
             $container.imagesLoaded(function () {
                 $container.isotope('layout');
-                if ($(window).width() < 767) {
-                    pluginManager.heightsEqualizer(SameHeightBoxes);
-                } else {
-                    SameHeightBoxes.height("auto");
-                }
+
+
             });
         }
     }
@@ -67,7 +73,7 @@ function InsiteAppsPluginManager() {
                 highest = $(this).height();
             }
         });
-        if ($(window).width() > 767) {
+        if ($(window).width() < 767) {
             highest = "auto";
         }
 
@@ -88,7 +94,10 @@ function InsiteAppsPluginManager() {
                 }
             }
             for (i = 0; i < len; i++) { // set max height to all elements
-                if ($(window).width() < 767) {
+
+               console.log(window_width);
+
+                if (window_width < 767) {
                     h = 'auto'
                 } else {
                     h = max_height + 'px';
