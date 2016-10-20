@@ -6,6 +6,7 @@
 class ListingSidebarComponent extends DataObject
 {
 
+    private static $default_sort = 'SortOrder';
     private static $db = array(
         "Title" => "Varchar(255)",
         "RemoveTitle" => "Boolean",
