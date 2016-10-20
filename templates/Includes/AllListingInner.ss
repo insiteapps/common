@@ -33,7 +33,7 @@
                                         <article class="content-summary">  $ContentSummary(200)</article>
 
                                         <% if not $Parent.RemoveReadMore %>
-                                            <a href="{$Link}" class="btn btn-primary btn-lg btn-rounded">
+                                            <a href="{$Link}" class="btn btn-primary ">
                                                 {$Parent.ReadMoreText}
                                             </a>
                                         <% end_if %>
