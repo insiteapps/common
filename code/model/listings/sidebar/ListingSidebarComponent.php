@@ -8,6 +8,7 @@ class ListingSidebarComponent extends DataObject
 
     private static $db = array(
         "Title" => "Varchar(255)",
+        "RemoveTitle" => "Boolean",
         'SortOrder' => 'Int',
     );
     private static $has_one = array(
@@ -36,7 +37,11 @@ class ListingSidebarComponent extends DataObject
     {
         return $this->$method();
     }
-
+    function ListItems()
+    {
+        $method = Config::inst()->get(get_class($this), 'singular_name');
+        return $this->ListingHolder()->$method();
+    }
     public function requireDefaultRecords()
     {
         parent::requireDefaultRecords();

@@ -71,16 +71,41 @@ class ListingPage extends Page
         $gridFieldConfig->getComponentByType('GridFieldBulkUpload')->setUfSetup('setFolderName', $folder);
         $gridFieldConfig->addComponent(new GridFieldSortableRows('SortOrder'));
         $ImageGridfield = new GridField('Images', 'Images', $this->ListingImages(), $gridFieldConfig);
-        $fields->addFieldToTab('Root.Images', $ImageGridfield);
+        $fields->addFieldToTab('Root.Components', $ImageGridfield);
 
 
         $oListingArea = ListingArea::get();
         $oListingAreaMap = $oListingArea ? $oListingArea->map()->toArray() : array();
         asort($oListingAreaMap);
-        $fields->addFieldToTab('Root.Configurations', ListboxField::create('Areas')
+        $fields->addFieldToTab('Root.Details', ListboxField::create('Areas', 'Please select your Areas')
             ->setMultiple(true)
             ->setSource($oListingAreaMap)
             ->setAttribute('data-placeholder', 'Areas'));
+
+        $oListingLocation = ListingLocation::get();
+        $oListingLocationMap = $oListingLocation ? $oListingLocation->map()->toArray() : array();
+        asort($oListingLocationMap);
+        $fields->addFieldToTab('Root.Details', ListboxField::create('Locations', 'Please select your Locations')
+            ->setMultiple(true)
+            ->setSource($oListingLocationMap)
+            ->setAttribute('data-placeholder', 'Locations'));
+
+        $oListingType = ListingType::get();
+        $oListingTypeMap = $oListingType ? $oListingType->map()->toArray() : array();
+        asort($oListingTypeMap);
+        $fields->addFieldToTab('Root.Details', ListboxField::create('Types', 'Please select your Types')
+            ->setMultiple(true)
+            ->setSource($oListingTypeMap)
+            ->setAttribute('data-placeholder', 'Types'));
+
+
+        $oListingCollection = ListingCollection::get();
+        $oListingCollectionMap = $oListingCollection ? $oListingCollection->map()->toArray() : array();
+        asort($oListingTypeMap);
+        $fields->addFieldToTab('Root.Details', ListboxField::create('Collections', 'Please select your Collections')
+            ->setMultiple(true)
+            ->setSource($oListingCollectionMap)
+            ->setAttribute('data-placeholder', 'Collections'));
 
 
         return $fields;
@@ -134,7 +159,6 @@ class ListingPage extends Page
 
     function Image()
     {
-
         $sort = ($this->Parent()->RandomDisplayImage) ? "Rand()" : null;
         $height = ($ImageMaxHeight = $this->Parent()->ImageMaxHeight) ? str_ireplace(["px", "PX"], "", $ImageMaxHeight) : "520";
         if (count($this->ListingImages())) {

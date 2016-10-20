@@ -20,4 +20,7 @@ class SidebarComponentCollection extends ListingSidebarComponent
      * @config
      */
     private static $plural_name = "Collections";
+
+   
+
 }

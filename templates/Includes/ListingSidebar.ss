@@ -3,6 +3,9 @@
         <form id="FilterComponents" action="{$Link}">
             <% loop $FilterComponents %>
                 <article class="SideBarItem">
+                    <% if not $RemoveTitle %>
+                        <h3 class="sidebar-header-title">{$Title}</h3>
+                    <% end_if %>
                     $IncludeTemplate
                 </article>
             <% end_loop %>
