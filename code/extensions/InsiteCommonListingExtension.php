@@ -40,7 +40,7 @@ class InsiteCommonListingExtension extends DataExtension
 
     function MakeSameHeight()
     {
-        if ($this->owner->View === 'Grid' && $this->owner->SameHeightBoxes) {
+        if ($this->owner->View === 'grid' && $this->owner->SameHeightBoxes) {
             return "SameHeightBoxes";
         }
         return false;
@@ -48,7 +48,7 @@ class InsiteCommonListingExtension extends DataExtension
     }
 
     private static $db = array(
-        "View" => "Enum('List,Grid','List')",
+        "View" => "Enum('list,grid','list')",
         "AllowViewChange" => "Boolean",
         "Columns" => "Int",
         "RemoveReadMore" => "Boolean",
@@ -63,7 +63,7 @@ class InsiteCommonListingExtension extends DataExtension
     );
     private static $defaults = array(
         "SidebarPosition" => "left",
-        "View" => "List",
+        "View" => "list",
     );
 
     public static function getColumnEnums()
@@ -90,7 +90,7 @@ class InsiteCommonListingExtension extends DataExtension
             return $LayoutView;
         }
         Cookie::set('LayoutView_' . $this->owner->ID, $DefaultView);
-        return $DefaultView ? $DefaultView : "List";
+        return $DefaultView ? $DefaultView : "list";
     }
 
     /**
