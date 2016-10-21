@@ -1,4 +1,4 @@
-@import "mixins", "sharing","ListingsActionBar","listinglist",
+@import "mixins", "sharing", "ListingsActionBar", "listinglist",
 "footercredits";
 
 .normalIcon {
@@ -6,7 +6,6 @@
     cursor: default !important;
   }
 }
-
 
 input[type=checkbox] {
   + label {
@@ -20,4 +19,8 @@ input[type=checkbox] {
   &:checked + label {
     background-position: 0 -140px;
   }
+}
+
+input[type=checkbox].nice_checkbox {
+  display: none;
 }
