@@ -7,3 +7,17 @@
   }
 }
 
+
+input[type=checkbox] {
+  + label {
+    background: url(../images/nice_checkbox.png) 0 0 no-repeat;
+    display: inline-block;
+    height: 16px;
+    margin-bottom: -2px;
+    padding-left: 20px;
+
+  }
+  &:checked + label {
+    background-position: 0 -140px;
+  }
+}
