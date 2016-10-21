@@ -1,1 +1,0 @@
-$NumericDropdown(bedrooms)
