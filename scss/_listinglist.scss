@@ -1,0 +1,190 @@
+
+.ListingFiltering {
+  background: #E4E1DE;
+  padding: 7px;
+  margin: 0;
+  display: inline-block;
+  width: 100%;
+  select {
+    @include border-radius(0);
+    margin-bottom: 0;
+  }
+  .ListControls {
+    text-align: center;
+    border-bottom: 0;
+    margin-bottom: 0;
+    ul.ListingPagination {
+      margin: 0;
+      @include float-full;
+      li {
+        margin: 0;
+        &.active {
+          a {
+            border: none;
+            color: #F68740;
+            font-size: 15px;
+            font-weight: 700;
+          }
+        }
+        a {
+          background: none;
+          padding: 0 15px;
+          border: none;
+          font-weight: 700;
+          &:hover {
+            border: none;
+          }
+        }
+      }
+    }
+  }
+}
+
+ul.ListLayout {
+  margin: 0 !important;
+  padding: 0 !important;
+  text-align: right;
+  li {
+    margin: 0 !important;
+    padding: 0;
+    padding-right: 5px;
+    padding-left: 5px;
+    a {
+      font-size: 26px;
+      line-height: 34px;
+      &.active {
+        //color: #F68740;
+
+      }
+    }
+  }
+}
+
+.ListingContainerddd {
+  @include float-full;
+  margin: 0 0 20px;
+
+  .list-item {
+
+    background: #fff;
+    position: relative;
+    display: inline-block;
+    margin-bottom: 15px;
+    //padding: 5px;
+    //border: 1px solid #ddd;
+
+    .listing-details {
+      //padding: 10px 0;
+      //background: #fff;
+
+    }
+
+    h3 {
+      &.listing-title {
+        font-weight: 400;
+        margin: 0;
+        a {
+          color: #000;
+          font-size: 15px;
+          text-transform: uppercase;
+          font-weight: 700;
+          &:hover, &:focus {
+            color: #000;
+            text-decoration: none;
+
+          }
+        }
+      }
+    }
+    h4 {
+      &.area-name {
+        font-size: 12px;
+        font-weight: 400;
+        margin: 0;
+        padding: 0;
+        a {
+
+        }
+      }
+    }
+    .listing-excerpt {
+      .listingExcerptBox {
+        .location {
+          font-size: 15px;
+        }
+        p {
+          margin-bottom: 0;
+          line-height: 20px;
+        }
+        ul, li {
+          list-style: none;
+          margin: 0;
+          padding: 0;
+        }
+        ul {
+          margin: 5px 0 0;
+        }
+      }
+      .miniRateHolder {
+        text-align: center;
+        span {
+          margin: 0 10px 0 0;
+
+          @media (min-width: 767px) {
+            width: 100%;
+            float: left;
+            margin-bottom: 5px;
+          }
+
+          &.rate-from-title {
+            text-transform: uppercase;
+            font-size: 17px;
+          }
+          &.rate-from {
+            font-size: 32px;
+            color: $orange;
+            padding: 15px 0;
+          }
+          &.rate-from-structure {
+            margin-bottom: 10px;
+            font-size: 10px;
+          }
+        }
+      }
+    }
+
+  }
+
+  &.List {
+    .list-item {
+      width: 100%;
+      .thumbnail {
+        display: inline-block;
+        figure {
+          width: 25%;
+          float: left;
+        }
+        .caption {
+          padding: 0;
+        }
+      }
+    }
+  }
+
+  .thumbnail {
+    padding: 0;
+    @include border-radius(0);
+    figure {
+      margin: 0;
+      padding: 0;
+    }
+    .caption {
+      h4 {
+        margin: 0 0 3px;
+        font-size: 14px;
+        font-family: 'Open Sans', sans-serif;
+        color: #4D4D4D;
+      }
+    }
+  }
+}

@@ -1,0 +1,39 @@
+.PageSharing {
+    margin: 10px 0;
+    .PageSharingLabel {
+        display: inline-block;
+        font-weight: 700;
+
+    }
+    .PageSharingButtons {
+        display: inline-block;
+    }
+}
+
+.socialize-me {
+    margin: 10px 0;
+    @include float-full;
+    .socialize-icon {
+        a {
+            height: 22px;
+            display: inline-block;
+            padding: 0;
+            margin-right: 2px;
+            background: url(../images/socialize-icon.png) top left;
+            &.pin-it {
+                background-position: 0 0;
+                width: 62px;
+            }
+            &.tweet-share {
+                background-position: -142px 0;
+                width: 68px;
+            }
+            &.fb-share {
+                background-position: -69px 0;
+                width: 66px;
+
+            }
+        }
+
+    }
+}

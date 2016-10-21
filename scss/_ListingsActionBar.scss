@@ -1,0 +1,22 @@
+.ListingsActionBar {
+  margin: 10px 0;
+  background: #ccc;
+  padding: 5px;
+  ul {
+    margin: 0;
+    padding: 0;
+    li {
+      margin: 0;
+      padding: 0;
+    }
+  }
+
+  .action-item {
+    display: inline-block;
+    a {
+      &:hover {
+        border: none;
+      }
+    }
+  }
+}

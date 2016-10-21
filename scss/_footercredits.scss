@@ -1,0 +1,15 @@
+#FooterLiner {
+  @include float-full;
+  background: #007fb9;
+  min-height: 50px;
+  line-height: 50px;
+  color: #fff;
+  font-size: 0.8em;
+  a {
+    color: #fff;
+    text-decoration: none;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
