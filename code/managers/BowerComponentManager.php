@@ -12,6 +12,7 @@ class BowerComponentManager extends Object
         $aRequirements["JS"] = array_merge($aRequirements["JS"], [
             JQUERY_UI_DIR . '/jquery-ui.min.js',
             JQUERY_FORM_DIR . '/jquery.form.js',
+            INSITE_COMMON_DIR . "/js/js.cookie.js",
             UNDERSCORE_DIR . '/underscore.js',
             MOMENT_DIR . '/moment.js',
             MASONRY_DIR . '/dist/masonry.pkgd.min.js',

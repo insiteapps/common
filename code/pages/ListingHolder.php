@@ -59,7 +59,7 @@ class ListingHolder_Controller extends Page_Controller
         Requirements::javascript(INSITE_COMMON_DIR . '/js/ListingManager.js');
         Requirements::javascript(INSITE_COMMON_DIR . '/js/imagesloaded.pkgd.min.js');
         Requirements::javascript(INSITE_COMMON_DIR . '/js/PluginManager.js');
-        Requirements::javascript(INSITE_COMMON_DIR . "/js/js.cookie.js");
+      
 
 
     }

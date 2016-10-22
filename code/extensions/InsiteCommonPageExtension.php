@@ -35,8 +35,8 @@ class InsiteCommonPageControllerExtension extends DataExtension
     {
         Requirements::css(INSITE_COMMON_DIR . "/css/common.css");
 
-        Requirements::javascript(INSITE_COMMON_DIR . "/js/js.cookie.js");
-        
+  
+
     }
 
     function SocialGroup($name)
