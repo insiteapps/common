@@ -5,6 +5,10 @@
  */
 class InsiteAppsListingManager extends InsiteAppsCommonManager
 {
+    /**
+     * @param $field
+     * @return array
+     */
     public static function getPropertyMinMax($field)
     {
         $oProperties = PropertyPage::get();
@@ -18,6 +22,11 @@ class InsiteAppsListingManager extends InsiteAppsCommonManager
     }
 
 
+    /**
+     * @param $className
+     * @param string $key
+     * @return array
+     */
     public static function get_listing_object_map($className, $key = "ID")
     {
         $oObj = $className::get();
