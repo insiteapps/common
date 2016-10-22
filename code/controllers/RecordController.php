@@ -6,7 +6,7 @@ class RecordController extends Controller
     private static $allowed_actions = array(
         'logout',
         'mapmarkers',
-        'resend_contact_email' =>"ADMIN"
+        'resend_contact_email' => "ADMIN"
     );
 
     function Link($action = null)
@@ -21,10 +21,11 @@ class RecordController extends Controller
     }
 
 
-    function resend_contact_email(){
+    function resend_contact_email()
+    {
         $pages = ContactPage::get();
         foreach ($pages as $page) {
-            $form_items = DataObject::get("SubmittedForm","ParentID = ".$page->ID);
+            $form_items = DataObject::get("SubmittedForm", "ParentID = " . $page->ID);
             foreach ($form_items as $form_item) {
                 $form_item_fields = $form_item->Values();
                 $form_item_fields_values = $form_item_fields->column("Value");
@@ -37,14 +38,14 @@ class RecordController extends Controller
                 if (count($recipients)) {
                     foreach ($recipients as $recipient) {
                         $Subject = $recipient->EmailSubject;
-                        $data["Subject"] =$Subject;
+                        $data["Subject"] = $Subject;
                         $From = $data['Email'];
 
                         $To = $recipient->EmailAddress;
                         $email = new Email($From, $To, $Subject);
                         $email->setTemplate('SendContactSubmission');
                         $email->populateTemplate($data);
-                        if($To !== "submissions@insitesolutions.co.za" ){
+                        if ($To !== "submissions@insitesolutions.co.za") {
                             $email->send();
                             debug::show("Email sent");
                         }
@@ -94,5 +95,29 @@ class RecordController extends Controller
     {
         return Convert::raw2sql($this->urlParams['ID']);
     }
-    
+
+    /**
+     *
+     * @param array $request
+     * @param array $Unset
+     * @return array
+     */
+    public static function cleanREQUEST(array $request, array $Unset = array())
+    {
+        $request = Convert::raw2sql($request);
+        $aUnset = array('url', 'SecurityID');
+        $arrUnset = array_merge($aUnset, $Unset);
+        foreach ($arrUnset as $value) {
+            unset($request[$value]);
+        }
+        return $request;
+    }
+
+    static public function AddProtocol($url)
+    {
+        if (strtolower(substr($url, 0, 8)) !== 'https://' && strtolower(substr($url, 0, 7)) !== 'http://') {
+            return 'http://' . $url;
+        }
+        return $url;
+    }
 }
