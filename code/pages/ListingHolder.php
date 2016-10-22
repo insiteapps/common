@@ -29,7 +29,7 @@ class ListingHolder extends Page
         $gridFieldConfig->addComponent(new GridFieldSortableRows('SortOrder'));
 
         $f->addFieldsToTab('Root.Settings', [
-            new GridField('FilterComponents', 'FilterComponents', $this->FilterComponents(), $gridFieldConfig),
+            //new GridField('FilterComponents', 'FilterComponents', $this->FilterComponents(), $gridFieldConfig),
             GridField::create('Areas', 'Areas', $this->Areas(), GridFieldConfig_RecordEditor::create()),
             GridField::create('Locations', 'Locations', $this->Locations(), GridFieldConfig_RecordEditor::create()),
             new GridField('Types', 'Types', $this->Types(), GridFieldConfig_RecordEditor::create()),
