@@ -9,7 +9,7 @@
 
 input[type=checkbox] {
   + label {
-    background: url(../images/nice_checkbox.png) 0 0 no-repeat;
+    background: url(../images/nice_checkbox.png) 0 2px no-repeat;
     display: inline-block;
     height: 16px;
     margin-bottom: -2px;
@@ -17,7 +17,7 @@ input[type=checkbox] {
 
   }
   &:checked + label {
-    background-position: 0 -140px;
+    background-position: 0 -138px;
   }
 }
 
