@@ -17,7 +17,7 @@ class InsiteCommonPageExtension extends DataExtension
                     "ShowOnAncestry" => "ShowOnAncestry",
                     "HideOnAncestry" => "HideOnAncestry",
                     "HideOnChildPages" => "HideOnChildPages"
-                ], $oComponentsValues->SliderSetup)->setEmptyString("--select--"),
+                ])->setEmptyString("--select--"),
                 DropdownField::create("SidebarPosition", "Sidebar position")->setSource(["none" => "none", "left" => "left", "right" => "right"])
             ])
         );
@@ -35,7 +35,7 @@ class InsiteCommonPageControllerExtension extends DataExtension
     {
         Requirements::css(INSITE_COMMON_DIR . "/css/common.css");
 
-  
+
 
     }
 
