@@ -46,6 +46,7 @@
     "bootstrap": "~3",
     "mixitup": "*",
     "nouislider": "*",
+    "imagesloaded": "*",
     "bootstrap-social": "*"
   },
   "private": true,
