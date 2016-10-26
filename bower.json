@@ -47,6 +47,7 @@
     "mixitup": "*",
     "nouislider": "*",
     "imagesloaded": "*",
+    "jquery.nicescroll": "*",
     "bootstrap-social": "*"
   },
   "private": true,
