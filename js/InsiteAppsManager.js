@@ -43,6 +43,7 @@ var ua = navigator.userAgent.toLowerCase(),
         var InsiteAppsManagerInstance = new InsiteAppsManager();
     });
 
+
     var InsiteAppsManager = function () {
         var self = this;
         $.proxy(self.init, self);
