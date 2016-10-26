@@ -36,23 +36,27 @@ var ua = navigator.userAgent.toLowerCase(),
 
 
 (function ($) {
-    "use strict";
+    // "use strict";
     /*global jQuery, document, window*/
 
     jQuery(document).ready(function () {
         var InsiteAppsManagerInstance = new InsiteAppsManager();
     });
 
+    $window.on('resize', function () {
+        var InsiteAppsManagerInstance = new InsiteAppsManager();
 
+    });
     var InsiteAppsManager = function () {
         var self = this;
         $.proxy(self.init, self);
-    };
-
-    InsiteAppsManager.prototype.init = function () {
+        self.init();
         self.browserSize();
         self.browserSupport();
-        self.eventHandlers();
+
+    };
+    InsiteAppsManager.prototype.init = function () {
+
     };
 
     InsiteAppsManager.prototype.browserSize = function () {
@@ -71,30 +75,82 @@ var ua = navigator.userAgent.toLowerCase(),
             .addClass($.support.svg ? 'svg' : 'no-svg')
             .addClass(!!$.support.transform ? 'transform' : 'no-transform');
     }
-
-    InsiteAppsManager.prototype.eventHandlers = function () {
-        $window.on('debouncedresize', onResize);
-
-        $window.on('scroll', onScroll);
-
-        if (Modernizr.touchevents && isFilmstrip()) {
-            $('.site-content').on('scroll', onScroll);
+    function getSupportedTransform() {
+        var prefixes = ['transform', 'WebkitTransform', 'MozTransform', 'OTransform', 'msTransform'];
+        for (var i = 0; i < prefixes.length; i++) {
+            if (document.createElement('div').style[prefixes[i]] !== undefined) {
+                return prefixes[i];
+            }
         }
-
-        $window.on('mousemove', function (e) {
-            latestKnownMouseX = e.clientX;
-            latestKnownMouseY = e.clientY;
-        });
-
-        $window.on('deviceorientation', function (e) {
-            latestDeviceAlpha = e.originalEvent.alpha;
-            latestDeviceBeta = e.originalEvent.beta;
-            latestDeviceGamma = e.originalEvent.gamma;
-        });
-
-        if (windowWidth > 740) {
-            bindVertToHorScroll();
-        }
+        return false;
     }
+    /*
+
+     var Placeholder = (function() {
+     var $items;
+
+     function update($container, src) {
+
+     var $container = $container || $('body');
+
+     $items = $container.find('.insite-js-placeholder');
+
+     $items.each(function(i, item) {
+     var $item = $(item);
+     $item.data('actualHeight', $item.height());
+     });
+
+     $items.each(function(i, item) {
+     var $item = $(item).data('loaded', false),
+     width = $item.data('width'),
+     height = $item.data('height'),
+     newHeight = $item.height(),
+     newWidth = Math.round(newHeight * $item.data('width') / $item.data('height')),
+     $image = $(document.createElement('img')).css('opacity', 0);
+
+     $item.toggleClass('is--portrait', height > width);
+
+     $item.width(newWidth);
+     $item.data('image', $image);
+     });
+
+     $(window).on('DOMContentLoaded load resize scroll djaxLoad', bindImageLoad);
+     $('.portfolio-grid, .site-content').on('scroll', bindImageLoad);
+
+     bindImageLoad();
+
+     $(window).on('djaxClick', function() {
+     $(window).off('DOMContentLoaded load resize scroll djaxLoad', bindImageLoad);
+     $('.portfolio--grid, .site-content').off('scroll', bindImageLoad);
+     });
+     }
+
+
+
+     function onResize() {
+     $items.each(function(i, item) {
+     var $item = $(item),
+     width = $item.data('width'),
+     height = $item.data('height'),
+     newHeight = $item.height(),
+     newWidth = Math.round(newHeight * width / height);
+
+     $item.data('newWidth', newWidth);
+     });
+
+     $items.each(function(i, item) {
+     var $item = $(item);
+     $item.width($item.data('newWidth'));
+     });
+     }
+
+     return {
+     update: update,
+     resize: onResize
+     }
+
+     })();
+     */
+
 
 }(jQuery));
