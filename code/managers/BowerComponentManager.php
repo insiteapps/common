@@ -22,7 +22,8 @@ class BowerComponentManager extends Object
             BOWER_COMPONENTS_DIR . "/owl.carousel/dist/owl.carousel.min.js",
             BOWER_COMPONENTS_DIR . "/rrssb/js/rrssb.js",
             BOWER_COMPONENTS_DIR . "/nouislider/distribute/nouislider.min.js",
-            INSITE_COMMON_DIR . '/js/InsiteAppsPluginManager.js'
+            INSITE_COMMON_DIR . '/js/InsiteAppsPluginManager.js',
+            INSITE_COMMON_DIR . '/js/InsiteAppsManager.js',
         ]);
 
         $aRequirements["CSS"] = array_merge($aRequirements["CSS"], [
