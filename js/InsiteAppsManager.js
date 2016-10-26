@@ -52,6 +52,7 @@
     ThemeManager.prototype.init = function () {
         self.browserSize();
         self.browserSupport();
+        self.eventHandlers();
     };
 
     ThemeManager.prototype.browserSize = function () {
@@ -69,6 +70,31 @@
             .addClass($.support.touch ? 'touch' : 'no-touch')
             .addClass($.support.svg ? 'svg' : 'no-svg')
             .addClass(!!$.support.transform ? 'transform' : 'no-transform');
+    }
+
+    ThemeManager.prototype.eventHandlers = function () {
+        $window.on('debouncedresize', onResize);
+
+        $window.on('scroll', onScroll);
+
+        if (Modernizr.touchevents && isFilmstrip()) {
+            $('.site-content').on('scroll', onScroll);
+        }
+
+        $window.on('mousemove', function (e) {
+            latestKnownMouseX = e.clientX;
+            latestKnownMouseY = e.clientY;
+        });
+
+        $window.on('deviceorientation', function (e) {
+            latestDeviceAlpha = e.originalEvent.alpha;
+            latestDeviceBeta = e.originalEvent.beta;
+            latestDeviceGamma = e.originalEvent.gamma;
+        });
+
+        if (windowWidth > 740) {
+            bindVertToHorScroll();
+        }
     }
 
 }(jQuery));
