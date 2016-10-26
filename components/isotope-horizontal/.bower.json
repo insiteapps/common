@@ -1,0 +1,28 @@
+{
+  "name": "isotope-horizontal",
+  "main": "horizontal.js",
+  "authors": [
+    "Metafizzy"
+  ],
+  "description": "horizontal layout mode for Isotope",
+  "dependencies": {
+    "isotope": ">=2.1 <4.0"
+  },
+  "keywords": [
+    "isotope",
+    "layout",
+    "isotope-layout-mode",
+    "horizontal"
+  ],
+  "homepage": "https://github.com/metafizzy/isotope-horizontal",
+  "version": "2.0.0",
+  "_release": "2.0.0",
+  "_resolution": {
+    "type": "version",
+    "tag": "v2.0.0",
+    "commit": "fccec9e9bc9f5ecda998ebbf6b789ee77c042e8c"
+  },
+  "_source": "https://github.com/metafizzy/isotope-horizontal.git",
+  "_target": "*",
+  "_originalSource": "isotope-horizontal"
+}
