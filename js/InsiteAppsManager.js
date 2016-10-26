@@ -48,19 +48,19 @@
         $.proxy(self.init, self);
     };
 
-    ThemeManager.prototype.init = function () {
+    InsiteAppsManager.prototype.init = function () {
         self.browserSize();
         self.browserSupport();
         self.eventHandlers();
     };
 
-    ThemeManager.prototype.browserSize = function () {
+    InsiteAppsManager.prototype.browserSize = function () {
         window.windowHeight = $window.height();
         window.windowWidth = $window.width();
         window.documentHeight = $document.height();
         window.orientation = windowWidth > windowHeight ? 'portrait' : 'landscape';
     }
-    ThemeManager.prototype.browserSupport = function () {
+    InsiteAppsManager.prototype.browserSupport = function () {
         $.support.touch = Modernizr.touchevents;
         $.support.svg = (document.implementation.hasFeature("http://www.w3.org/TR/SVG11/feature#BasicStructure", "1.1")) ? true : false;
         $.support.transform = getSupportedTransform();
@@ -71,7 +71,7 @@
             .addClass(!!$.support.transform ? 'transform' : 'no-transform');
     }
 
-    ThemeManager.prototype.eventHandlers = function () {
+    InsiteAppsManager.prototype.eventHandlers = function () {
         $window.on('debouncedresize', onResize);
 
         $window.on('scroll', onScroll);
