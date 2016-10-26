@@ -17,6 +17,10 @@ class BowerComponentManager extends Object
             MOMENT_DIR . '/moment.js',
             MASONRY_DIR . '/dist/masonry.pkgd.min.js',
             ISOTOPE_DIR . '/dist/isotope.pkgd.min.js',
+
+            BOWER_COMPONENTS_DIR . '/isotope-horizontal/horizontal.js',
+            BOWER_COMPONENTS_DIR . '/isotope-masonry-horizontal/masonry-horizontal.js',
+
             BOWER_COMPONENTS_DIR . '/jquery.nicescroll/dist/jquery.nicescroll.min.js',
             BOWER_COMPONENTS_DIR . '/imagesloaded/imagesloaded.pkgd.min.js',
             BOWER_COMPONENTS_DIR . "/owl.carousel/dist/owl.carousel.min.js",
