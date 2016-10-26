@@ -36,11 +36,10 @@
         windowHeight = $window.height(),
         windowWidth = $window.width(),
         documentHeight = $document.height(),
-        orientation = windowWidth > windowHeight ? 'portrait' : 'landscape',
+        orientation = windowWidth > windowHeight ? 'portrait' : 'landscape';
 
 
-        jQuery
-    (document).ready(function () {
+    jQuery(document).ready(function () {
         var InsiteAppsManagerInstance = new InsiteAppsManager();
     });
 
