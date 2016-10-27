@@ -20,7 +20,7 @@ class BowerComponentManager extends Object
 
             BOWER_COMPONENTS_DIR . '/isotope-horizontal/horizontal.js',
             BOWER_COMPONENTS_DIR . '/isotope-masonry-horizontal/masonry-horizontal.js',
-
+            BOWER_COMPONENTS_DIR . '/jquery.lazyload/jquery.lazyload.js',
             BOWER_COMPONENTS_DIR . '/jquery.nicescroll/dist/jquery.nicescroll.min.js',
             BOWER_COMPONENTS_DIR . '/imagesloaded/imagesloaded.pkgd.min.js',
             BOWER_COMPONENTS_DIR . "/owl.carousel/dist/owl.carousel.min.js",

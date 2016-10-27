@@ -50,6 +50,7 @@
     "nouislider": "*",
     "imagesloaded": "*",
     "jquery.nicescroll": "*",
+    "jquery.lazyload": "*",
     "bootstrap-social": "*"
   },
   "private": true,
@@ -61,7 +62,6 @@
     "bootstrap": "~4"
   },
   "devDependencies": {
-    "tether": "~1.1.1",
-    "glyphicons-halflings": "*"
+    "tether": "~1.1.1"
   }
 }
