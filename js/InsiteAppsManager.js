@@ -5,8 +5,8 @@ var ua = navigator.userAgent.toLowerCase(),
     platform = navigator.platform.toLowerCase(),
     $window = $(window),
     $document = $(document),
-    $html = $('html'),
-    $body = $('body'),
+    $html,
+    $body,
 
     android_ancient = (ua.indexOf('mozilla/5.0') !== -1 && ua.indexOf('android') !== -1 && ua.indexOf('applewebKit') !== -1) && ua.indexOf('chrome') === -1,
     apple = ua.match(/(iPad|iPhone|iPod|Macintosh)/i),
@@ -33,7 +33,7 @@ var ua = navigator.userAgent.toLowerCase(),
     windowWidth = $window.width(),
     documentHeight = $document.height(),
     orientation = windowWidth > windowHeight ? 'portrait' : 'landscape';
-
+window.$html = $('html'), window.$body = $('body');
 
 (function ($) {
     // "use strict";
