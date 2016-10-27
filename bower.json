@@ -51,6 +51,7 @@
     "imagesloaded": "*",
     "jquery.nicescroll": "*",
     "jquery.lazyload": "*",
+    "gsap": "1.19.0",
     "bootstrap-social": "*"
   },
   "private": true,
