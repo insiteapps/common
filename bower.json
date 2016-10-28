@@ -52,6 +52,7 @@
     "jquery.nicescroll": "*",
     "jquery.lazyload": "*",
     "gsap": "1.19.0",
+    "snap.svg":"*",
     "bootstrap-social": "*"
   },
   "private": true,
