@@ -38,6 +38,7 @@ class BowerComponentManager extends Object
             BOWER_COMPONENTS_DIR . "/gsap/src/minified/plugins/ColorPropsPlugin.min.js",
 
             BOWER_COMPONENTS_DIR . "/snap.svg/dist/snap.svg-min.js",
+            BOWER_COMPONENTS_DIR . "/pace/pace.js",
 
             INSITE_COMMON_DIR . '/js/InsiteAppsPluginManager.js',
             INSITE_COMMON_DIR . '/js/InsiteAppsManager.js',
