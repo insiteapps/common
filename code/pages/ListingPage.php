@@ -23,6 +23,11 @@ class ListingPage extends Page
         "Types" => "ListingType",
     );
 
+    function getTemplateName()
+    {
+        return $this->Parent()->ChildrenTemplate . $this->ClassName;
+    }
+
     public function getCMSFields()
     {
         $fields = parent::getCMSFields();
