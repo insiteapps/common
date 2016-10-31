@@ -10,6 +10,19 @@ var colonial = $("#ListingOuterContainer").data('parent');
 (function ($) {
     "use strict";
     /*global jQuery, document, window*/
+
+    $(window).on('resize', function () {
+        var SameHeightBoxes = $('.SameHeightBoxes');
+        var InsiteAppsPluginManagerInstance = new InsiteAppsPluginManager();
+        if ($(window).width() > 767) {
+            InsiteAppsPluginManagerInstance.setSameSize('.SameHeightBoxes');
+        } else {
+            SameHeightBoxes.height("auto");
+        }
+
+    });
+
+
     jQuery(document).ready(function () {
         ListingManager.init();
         ListingManager.isotope();
@@ -51,17 +64,16 @@ var ListingManager = function () {
         },
         initializeLiveHandlers: function () {
             $(document).on('submit', 'form#FilterComponents', function (e) {
-               // e.preventDefault();
+                // e.preventDefault();
                 var $t = $(this);
 
                 var data = $t.closest('form').serialize();
                 console.log(data);
 
 
+                //  SubmitListingFilter
 
-              //  SubmitListingFilter
-
-               // return false;
+                // return false;
             });
 
 
