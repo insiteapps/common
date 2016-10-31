@@ -13,7 +13,7 @@ function InsiteAppsPluginManager() {
 
                 // we just came to a new row.  Set all the heights on the completed row
                 for (var currentDiv = 0; currentDiv < rowDivs.length; currentDiv++) {
-                    rowDivs[currentDiv].css({'min-height': currentTallest});
+                    rowDivs[currentDiv].css({'height': currentTallest});
                 }
 
                 // set the variables for the new row
