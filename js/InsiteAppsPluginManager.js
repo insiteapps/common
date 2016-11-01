@@ -31,7 +31,7 @@ function InsiteAppsPluginManager() {
             }
             // do the last row
             for (currentDiv = 0; currentDiv < rowDivs.length; currentDiv++) {
-                rowDivs[currentDiv].css({'min-height': currentTallest});
+                rowDivs[currentDiv].css({'height': currentTallest});
             }
 
         });
