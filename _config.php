@@ -15,4 +15,3 @@ define('ISOTOPE_DIR', BOWER_COMPONENTS_DIR . "/isotope");
 define('DATA_TABLES_DIR', BOWER_COMPONENTS_DIR . "/datatables");
 define('JQUERY_UI_DIR', BOWER_COMPONENTS_DIR . "/jquery-ui");
 
-define("GOOGLE_MAP_API_KEY","AIzaSyCgaHPSWpnyc8774yWyQwxll-2ZLTgLyNA");

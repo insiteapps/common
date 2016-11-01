@@ -175,6 +175,16 @@ class ListingPage extends Page
         return false;
     }
 
+    function ListingImage()
+    {
+        if (count($this->Images())) {
+            $image = $this->Images()->first();
+            return $image->Image();
+        }
+
+        return $this->Image();
+    }
+
 }
 
 class ListingPage_Controller extends Page_Controller
