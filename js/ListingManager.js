@@ -6,20 +6,13 @@
  *
  * ============================= */
 var colonial = $("#ListingOuterContainer").data('parent');
-
+var SameHeightBoxes = $('.SameHeightBoxes');
 (function ($) {
     "use strict";
     /*global jQuery, document, window*/
 
     $(window).on('resize', function () {
-        var SameHeightBoxes = $('.SameHeightBoxes');
-        var InsiteAppsPluginManagerInstance = new InsiteAppsPluginManager();
-        if ($(window).width() > 767) {
-            InsiteAppsPluginManagerInstance.setSameSize('.SameHeightBoxes');
-        } else {
-            SameHeightBoxes.height("auto");
-        }
-
+        ListingManager.OnResize();
     });
 
 
@@ -35,6 +28,7 @@ var ListingManager = function () {
     var ControllerURL = 'listing-manager/';
     var ItemsContainer = $("#ListItemsContainer");
 
+    var StageArea = $('#ListingOuterContainer');
     var insiteAppsPluginManager = new InsiteAppsPluginManager();
 
     function cleanArray(actual) {
@@ -47,14 +41,32 @@ var ListingManager = function () {
         return newArray;
     }
 
+    function initiateIsotope() {
+        //return;
+        var $grid = StageArea.imagesLoaded(function () {
+            if (ListingManager.OnResize()) {
+                $(".isotopeContainer").isotope('layout');
+            }
+        });
+    }
+
     function setLayoutView(layoutView) {
 
+        var ListingOuterContainer = $("#ListingOuterContainer");
         if (typeof layoutView === 'undefined') {
-            var layoutView = $("#ListingOuterContainer").data('view');
-        } else {
-            $("#LayoutView").removeClass('Grid List').addClass(layoutView);
+            var layoutView = ListingOuterContainer.data('view');
         }
+        ListingOuterContainer
+            .data('view', layoutView)
+            .removeClass('grid list')
+            .addClass(layoutView)
+
+        //$("#LayoutView").removeClass('grid list').addClass(layoutView);
+        $(".wp-block.list-item").removeClass('grid list').addClass(layoutView)
+        console.log("LayoutView_" + colonial);
+
         Cookies.set("LayoutView_" + colonial, layoutView, {expires: 365, path: '/'});
+        return initiateIsotope();
     }
 
     return {
@@ -83,6 +95,7 @@ var ListingManager = function () {
                 var layout = $t.data('rel');
                 $(".ListLayout a").removeClass('active');
                 $t.addClass('active');
+                SameHeightBoxes.height("auto");
                 setLayoutView(layout);
             });
 
@@ -118,6 +131,18 @@ var ListingManager = function () {
             insiteAppsPluginManager.initiateIsotope($container);
 
         },
+        OnResize: function () {
+
+            var InsiteAppsPluginManagerInstance = new InsiteAppsPluginManager();
+            if ($(window).width() > 767) {
+                InsiteAppsPluginManagerInstance.setSameSize('.SameHeightBoxes');
+            } else {
+                SameHeightBoxes.height("auto");
+            }
+
+            return true;
+
+        },
         loadAjaxStart: function (id, reverse) {
             var AjaxLoading = "<div class=\"AjaxLoading show-overlay\"></div>";
             var $container = $("#" + id);
@@ -132,3 +157,4 @@ var ListingManager = function () {
     }
 
 }();
+

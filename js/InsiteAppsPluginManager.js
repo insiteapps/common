@@ -58,7 +58,6 @@ function InsiteAppsPluginManager() {
             $container.imagesLoaded(function () {
                 $container.isotope('layout');
 
-
             });
         }
     }

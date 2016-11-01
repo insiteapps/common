@@ -17,7 +17,7 @@
                 <option>Property type</option>
             </select>
         </div>
-        <ul class="ListLayout hide list-unstyled list-inline">
+        <ul class="ListLayout list-unstyled list-inline">
             <li>
                 <a data-rel="grid" href="javascript:void(0);"
                    <% if $LayoutView = 'grid' %>class="active"<% end_if %>>
