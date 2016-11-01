@@ -41,6 +41,8 @@ window.$html = $('html'), window.$body = $('body');
 
     jQuery(document).ready(function () {
         InsiteAppsManager.init();
+        InsiteAppsManager.browserSize();
+        InsiteAppsManager.browserSupport();
     });
 
     $window.on('resize', function () {
@@ -56,10 +58,9 @@ var InsiteAppsManager = function () {
 
     return {
         init: function () {
-            $.proxy(self.init, self);
-            self.init();
-            self.browserSize();
-            self.browserSupport();
+            //$.proxy(self.init, self);
+           // self.browserSize();
+           // self.browserSupport();
         }
     }
 
@@ -76,6 +77,9 @@ InsiteAppsManager.browserSize = function () {
 }
 InsiteAppsManager.browserSupport = function () {
     $.support.touch = Modernizr.touchevents;
+
+    console.log($.support.touch);
+
     $.support.svg = (document.implementation.hasFeature("http://www.w3.org/TR/SVG11/feature#BasicStructure", "1.1")) ? true : false;
     $.support.transform = getSupportedTransform();
 
@@ -83,6 +87,9 @@ InsiteAppsManager.browserSupport = function () {
         .addClass($.support.touch ? 'touch' : 'no-touch')
         .addClass($.support.svg ? 'svg' : 'no-svg')
         .addClass(!!$.support.transform ? 'transform' : 'no-transform');
+
+
+
 }
 function getSupportedTransform() {
     var prefixes = ['transform', 'WebkitTransform', 'MozTransform', 'OTransform', 'msTransform'];
