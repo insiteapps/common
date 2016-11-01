@@ -54,6 +54,7 @@
     "gsap": "1.19.0",
     "snap.svg":"*",
     "pace":"*",
+    "jquery-hammerjs":"*",
     "bootstrap-social": "*"
   },
   "private": true,
