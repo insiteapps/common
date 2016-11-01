@@ -42,6 +42,7 @@ window.$html = $('html'), window.$body = $('body');
     jQuery(document).ready(function () {
         InsiteAppsManager.init();
         InsiteAppsManager.browserSize();
+        InsiteAppsManager.platformDetect();
         InsiteAppsManager.browserSupport();
     });
 
@@ -68,7 +69,56 @@ var InsiteAppsManager = function () {
 InsiteAppsManager.init = function () {
 
 };
+InsiteAppsManager.platformDetect = function () {
+    var navUA = navigator.userAgent.toLowerCase(),
+        navPlat = navigator.platform.toLowerCase();
 
+    isiPhone = navPlat.indexOf("iphone");
+    isiPod = navPlat.indexOf("ipod");
+    isAndroidPhone = navPlat.indexOf("android");
+    isSafari = navUA.indexOf('safari') != -1 && navUA.indexOf('chrome') == -1;
+    isIE = typeof(is_ie) !== "undefined" || (!(window.ActiveXObject) && "ActiveXObject" in window);
+    isiele10 = ua.match(/msie (9|([1-9][0-9]))/i),
+        ieMobile = ua.match(/Windows Phone/i) ? true : false;
+    iOS = getIOSVersion();
+    android = getAndroidVersion();
+    isMac = navigator.platform.toUpperCase().indexOf('MAC') >= 0;
+    isWindows = navigator.platform.toUpperCase().indexOf('WIN') !== -1;
+
+    if (iOS && iOS < 8) {
+        $html.addClass('no-scroll-fx')
+    }
+
+    if (isIE) {
+        $html.addClass('is--ie');
+    }
+
+    if (isiele10) {
+        $html.addClass('is--ie-le10');
+    }
+
+    if (ieMobile) {
+        $html.addClass('is--ie-mobile')
+    }
+
+    var browser = {
+        isIe: function () {
+            return navigator.appVersion.indexOf("MSIE") != -1;
+        },
+        navigator: navigator.appVersion,
+        getVersion: function () {
+            var version = 999; // we assume a sane browser
+            if (navigator.appVersion.indexOf("MSIE") != -1)
+            // bah, IE again, lets downgrade version number
+                version = parseFloat(navigator.appVersion.split("MSIE")[1]);
+            return version;
+        }
+    };
+
+    if (browser.isIe() && browser.getVersion() == 9) {
+        $('html').addClass('is--ie9');
+    }
+}
 InsiteAppsManager.browserSize = function () {
     window.windowHeight = $window.height();
     window.windowWidth = $window.width();
