@@ -57,6 +57,7 @@
     "hammerjs": "*",
     "jquery-hammerjs": "*",
     "jquery-mousewheel": "*",
+    "platform.js": "*",
     "bootstrap-social": "*"
   },
   "private": true,

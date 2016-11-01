@@ -69,6 +69,7 @@ var InsiteAppsManager = function () {
 InsiteAppsManager.init = function () {
 
 };
+
 InsiteAppsManager.platformDetect = function () {
     var navUA = navigator.userAgent.toLowerCase(),
         navPlat = navigator.platform.toLowerCase();
@@ -84,6 +85,22 @@ InsiteAppsManager.platformDetect = function () {
     android = getAndroidVersion();
     isMac = navigator.platform.toUpperCase().indexOf('MAC') >= 0;
     isWindows = navigator.platform.toUpperCase().indexOf('WIN') !== -1;
+
+    // Platform Detection
+    function getIOSVersion(ua) {
+        ua = ua || navigator.userAgent;
+        return parseFloat(
+                ('' + (/CPU.*OS ([0-9_]{1,5})|(CPU like).*AppleWebKit.*Mobile/i.exec(ua) || [0, ''])[1])
+                    .replace('undefined', '3_2').replace('_', '.').replace('_', '')
+            ) || false;
+    }
+
+    function getAndroidVersion(ua) {
+        var matches;
+        ua = ua || navigator.userAgent;
+        matches = ua.match(/[A|a]ndroid\s([0-9\.]*)/);
+        return matches ? matches[1] : false;
+    }
 
     if (iOS && iOS < 8) {
         $html.addClass('no-scroll-fx')
