@@ -39,8 +39,10 @@ class BowerComponentManager extends Object
 
             BOWER_COMPONENTS_DIR . "/snap.svg/dist/snap.svg-min.js",
             BOWER_COMPONENTS_DIR . "/pace/pace.js",
-            BOWER_COMPONENTS_DIR . "/jquery-hammerjs/jquery.hammer.js",
+
             BOWER_COMPONENTS_DIR . "/hammerjs/hammer.js",
+            BOWER_COMPONENTS_DIR . "/jquery-hammerjs/jquery.hammer.js",
+
 
             INSITE_COMMON_DIR . '/js/InsiteAppsPluginManager.js',
             INSITE_COMMON_DIR . '/js/InsiteAppsManager.js',
