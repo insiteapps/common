@@ -188,3 +188,16 @@ ul.ListLayout {
     }
   }
 }
+
+#ListingOuterContainer {
+  &.list {
+    .list-item-block {
+      position: relative;
+      width: 100%;
+    }
+  }
+  .list-item-block {
+    margin-bottom: 15px;
+  }
+}
+

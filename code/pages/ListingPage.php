@@ -23,6 +23,11 @@ class ListingPage extends Page
         "Types" => "ListingType",
     );
 
+    function getTemplateName()
+    {
+        return $this->Parent()->ChildrenTemplate . $this->ClassName;
+    }
+
     public function getCMSFields()
     {
         $fields = parent::getCMSFields();
@@ -168,6 +173,16 @@ class ListingPage extends Page
             return $image->Image()->CroppedResize(520, $height);
         }
         return false;
+    }
+
+    function ListingImage()
+    {
+        if (count($this->Images())) {
+            $image = $this->Images()->first();
+            return $image->Image();
+        }
+
+        return $this->Image();
     }
 
 }

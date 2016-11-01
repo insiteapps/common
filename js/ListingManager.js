@@ -6,10 +6,17 @@
  *
  * ============================= */
 var colonial = $("#ListingOuterContainer").data('parent');
-
+var SameHeightBoxes = $('.SameHeightBoxes');
+var $container = $('.isotopeContainer');
 (function ($) {
     "use strict";
     /*global jQuery, document, window*/
+
+    $(window).on('resize', function () {
+        ListingManager.isotope();
+    });
+
+
     jQuery(document).ready(function () {
         ListingManager.init();
         ListingManager.isotope();
@@ -22,6 +29,7 @@ var ListingManager = function () {
     var ControllerURL = 'listing-manager/';
     var ItemsContainer = $("#ListItemsContainer");
 
+    var StageArea = $('#ListingOuterContainer');
     var insiteAppsPluginManager = new InsiteAppsPluginManager();
 
     function cleanArray(actual) {
@@ -34,14 +42,37 @@ var ListingManager = function () {
         return newArray;
     }
 
+    function initiateIsotope() {
+        //return;
+        var $grid = StageArea.imagesLoaded(function () {
+            $container.mixitup({
+
+                animation: {
+                    enable: false
+                },
+                listEffects: ['fade','rotateX'] // List of effects ONLY for list mode
+            });
+
+        });
+    }
+
     function setLayoutView(layoutView) {
 
+        var ListingOuterContainer = $("#ListingOuterContainer");
         if (typeof layoutView === 'undefined') {
-            var layoutView = $("#ListingOuterContainer").data('view');
-        } else {
-            $("#LayoutView").removeClass('Grid List').addClass(layoutView);
+            var layoutView = ListingOuterContainer.data('view');
         }
+        ListingOuterContainer
+            .data('view', layoutView)
+            .removeClass('grid list')
+            .addClass(layoutView)
+
+        //$("#LayoutView").removeClass('grid list').addClass(layoutView);
+        $(".wp-block.list-item").removeClass('grid list').addClass(layoutView)
+       // console.log("LayoutView_" + colonial);
+
         Cookies.set("LayoutView_" + colonial, layoutView, {expires: 365, path: '/'});
+        return initiateIsotope();
     }
 
     return {
@@ -51,17 +82,16 @@ var ListingManager = function () {
         },
         initializeLiveHandlers: function () {
             $(document).on('submit', 'form#FilterComponents', function (e) {
-               // e.preventDefault();
+                // e.preventDefault();
                 var $t = $(this);
 
                 var data = $t.closest('form').serialize();
                 console.log(data);
 
 
+                //  SubmitListingFilter
 
-              //  SubmitListingFilter
-
-               // return false;
+                // return false;
             });
 
 
@@ -71,6 +101,7 @@ var ListingManager = function () {
                 var layout = $t.data('rel');
                 $(".ListLayout a").removeClass('active');
                 $t.addClass('active');
+                SameHeightBoxes.height("auto");
                 setLayoutView(layout);
             });
 
@@ -102,8 +133,33 @@ var ListingManager = function () {
 
         },
         isotope: function () {
-            var $container = $('.isotopeContainer');
-            insiteAppsPluginManager.initiateIsotope($container);
+            var self = this;
+            var $grid = StageArea.imagesLoaded(function () {
+                if(self.OnResize()){
+                    $container.mixitup({
+
+                        animation: {
+                            enable: false
+                        },
+                        listEffects: ['fade','rotateX'] // List of effects ONLY for list mode
+                    });
+                }
+
+
+            });
+           // insiteAppsPluginManager.initiateIsotope($container);
+
+        },
+        OnResize: function () {
+
+            var InsiteAppsPluginManagerInstance = new InsiteAppsPluginManager();
+            if ($(window).width() > 767) {
+                InsiteAppsPluginManagerInstance.setSameSize('.SameHeightBoxes');
+            } else {
+                SameHeightBoxes.height("auto");
+            }
+           // console.log("sdsd");
+            return true;
 
         },
         loadAjaxStart: function (id, reverse) {
@@ -120,3 +176,4 @@ var ListingManager = function () {
     }
 
 }();
+

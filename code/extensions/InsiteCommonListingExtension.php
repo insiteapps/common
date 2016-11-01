@@ -33,7 +33,8 @@ class InsiteCommonListingExtension extends DataExtension
 
 
         );
-
+        $fields->push(DropdownField::create("Template")->setSource($this->owner->dbObject("Template")->enumValues()));
+        $fields->push(DropdownField::create("ChildrenTemplate", "Children template")->setSource($this->owner->dbObject("ChildrenTemplate")->enumValues()));
 
         return $fields;
     }
@@ -60,6 +61,8 @@ class InsiteCommonListingExtension extends DataExtension
         "RandomDisplayImage" => "Boolean",
         "ShowListImagesAsCarousel" => "Boolean",
         "ActionBarBackgroundColour" => "Varchar(255)",
+        "Template" => "Enum('Simple,Boomerang','Boomerang')",
+        "ChildrenTemplate" => "Enum('Simple,Boomerang','Boomerang')"
     );
     private static $defaults = array(
         "SidebarPosition" => "left",
@@ -76,11 +79,12 @@ class InsiteCommonListingExtension extends DataExtension
     public function updateCMSFields(FieldList $fields)
     {
         //$fields->addFieldToTab("Root.Manager", $compositeFields);
-        $setup = PageSetupBar::create('Setup', $this->getPageSetupFields());
+        $setup = PageSetupBar::create('Setup', $this->owner->getPageSetupFields());
         $fields->insertBefore($setup, 'Root');
         $fields->fieldByName('Root')->setTemplate('PageSetupBar');
 
     }
+
 
     function LayoutView()
     {
@@ -106,6 +110,9 @@ class InsiteCommonListingExtension extends DataExtension
         $Columns = ($c = $this->owner->Columns) ? $c : 3;
         return 12 / $Columns;
     }
+
+    
+
 }
 
 class InsiteCommonListingControllerExtension extends DataExtension
@@ -116,6 +123,7 @@ class InsiteCommonListingControllerExtension extends DataExtension
 
 
     }
+
 
 
 }
