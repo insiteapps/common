@@ -7,12 +7,13 @@
  * ============================= */
 var colonial = $("#ListingOuterContainer").data('parent');
 var SameHeightBoxes = $('.SameHeightBoxes');
+var $container = $('.isotopeContainer');
 (function ($) {
     "use strict";
     /*global jQuery, document, window*/
 
     $(window).on('resize', function () {
-        ListingManager.OnResize();
+        ListingManager.isotope();
     });
 
 
@@ -44,9 +45,14 @@ var ListingManager = function () {
     function initiateIsotope() {
         //return;
         var $grid = StageArea.imagesLoaded(function () {
-            if (ListingManager.OnResize()) {
-                $(".isotopeContainer").isotope('layout');
-            }
+            $container.mixitup({
+
+                animation: {
+                    enable: false
+                },
+                listEffects: ['fade','rotateX'] // List of effects ONLY for list mode
+            });
+
         });
     }
 
@@ -63,7 +69,7 @@ var ListingManager = function () {
 
         //$("#LayoutView").removeClass('grid list').addClass(layoutView);
         $(".wp-block.list-item").removeClass('grid list').addClass(layoutView)
-        console.log("LayoutView_" + colonial);
+       // console.log("LayoutView_" + colonial);
 
         Cookies.set("LayoutView_" + colonial, layoutView, {expires: 365, path: '/'});
         return initiateIsotope();
@@ -127,8 +133,21 @@ var ListingManager = function () {
 
         },
         isotope: function () {
-            var $container = $('.isotopeContainer');
-            insiteAppsPluginManager.initiateIsotope($container);
+            var self = this;
+            var $grid = StageArea.imagesLoaded(function () {
+                if(self.OnResize()){
+                    $container.mixitup({
+
+                        animation: {
+                            enable: false
+                        },
+                        listEffects: ['fade','rotateX'] // List of effects ONLY for list mode
+                    });
+                }
+
+
+            });
+           // insiteAppsPluginManager.initiateIsotope($container);
 
         },
         OnResize: function () {
@@ -139,7 +158,7 @@ var ListingManager = function () {
             } else {
                 SameHeightBoxes.height("auto");
             }
-
+           // console.log("sdsd");
             return true;
 
         },
