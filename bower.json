@@ -24,6 +24,7 @@
   ],
   "dependencies": {
     "jquery": "*",
+    "jquery-migrate": "*",
     "font-awesome": "4.7.0",
     "bootstrap-sass": "*",
     "fullcalendar": "*",
