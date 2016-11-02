@@ -215,7 +215,7 @@ var Loader = (function () {
             var img = svg.image(src, -75, 0, 300, 300).toPattern();
 
             img.attr({
-                width: 300,
+                width: 500,
                 height: 300,
                 viewBox: '0 0 300 300'
             });
