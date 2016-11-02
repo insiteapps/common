@@ -47,7 +47,7 @@ window.$html = $('html'), window.$body = $('body');
     });
 
     $window.on('resize', function () {
-        //var InsiteAppsManagerInstance = new InsiteAppsManager();
+        InsiteAppsManager.browserSize();
 
     });
 }(jQuery));
@@ -164,6 +164,3 @@ function getSupportedTransform() {
     }
     return false;
 }
-
-
-
