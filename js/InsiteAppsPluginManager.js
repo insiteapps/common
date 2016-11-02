@@ -38,7 +38,7 @@ function InsiteAppsPluginManager() {
     }
     this.initiateIsotope = function ($container) {
         var SameHeightBoxes = $('.SameHeightBoxes');
-        var  Manager = this;
+        var Manager = this;
         if ($container.length) {
             var $resize = $container.attr('id');
             $container.isotope();
@@ -108,9 +108,9 @@ function InsiteAppsPluginManager() {
 }
 
 
-(function($) {
+(function ($) {
     $.fn.extend({
-        getColumnsWidth: function() {
+        getColumnsWidth: function () {
 
             // append an empty <span>
             $this = $(this).append('<span></span>');
@@ -154,24 +154,24 @@ function InsiteAppsPluginManager() {
  * This saved you an hour of work?
  * Send me music http://www.amazon.co.uk/wishlist/HNTU0468LQON
  */
-(function($) {
+(function ($) {
 
     var $event = $.event,
         $special,
         resizeTimeout;
 
     $special = $event.special.debouncedresize = {
-        setup: function() {
+        setup: function () {
             $(this).on("resize", $special.handler);
         },
-        teardown: function() {
+        teardown: function () {
             $(this).off("resize", $special.handler);
         },
-        handler: function(event, execAsap) {
+        handler: function (event, execAsap) {
             // Save the context
             var context = this,
                 args = arguments,
-                dispatch = function() {
+                dispatch = function () {
                     // set correct event type
                     event.type = "debouncedresize";
                     $event.dispatch.apply(context, args);
@@ -235,7 +235,7 @@ var Loader = (function () {
                 text.attr('fill', patterns[index]);
             });
             index = index + 1;
-        }, 300);
+        }, 500);
     }
 
     return {
@@ -243,3 +243,26 @@ var Loader = (function () {
     }
 
 })();
+
+
+Pace.on('done', function () {
+
+    $('.site-content__mask').animate({
+        percent: 1
+
+    }, {
+        step: function (a, p, c) {
+
+        },
+        progress: function (a, p, c) {
+            var opcty = 1 - ( 1 * p ).toFixed(1);
+            $('.site-content__mask').css('background', 'rgba(0, 0, 0, ' + opcty + ')');
+        },
+        duration: 1000,
+        complete: function () {
+            $('.site-content__mask').remove();
+        }
+
+    });
+
+});
