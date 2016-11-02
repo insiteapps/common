@@ -212,12 +212,12 @@ var Loader = (function () {
             index = 0;
 
         $.each(loaderRandomImages, function (i, src) {
-            var img = svg.image(src, -75, 0, 300, 300).toPattern();
+            var img = svg.image(src, -75, 0, 500, 300).toPattern();
 
             img.attr({
                 width: 500,
                 height: 300,
-                viewBox: '0 0 300 300'
+                viewBox: '0 0 500 300'
             });
             patterns.push(img);
         });
