@@ -12,20 +12,6 @@ var ua = navigator.userAgent.toLowerCase(),
     apple = ua.match(/(iPad|iPhone|iPod|Macintosh)/i),
     webkit = ua.indexOf('webkit') != -1,
 
-    isiPhone = false,
-    isiPod = false,
-    isAndroidPhone = false,
-    android = false,
-    iOS = false,
-    isIE = false,
-    ieMobile = false,
-    isSafari = false,
-    isMac = false,
-    isWindows = false,
-    isiele10 = false,
-
-    firefox = ua.indexOf('gecko') != -1,
-    safari = ua.indexOf('safari') != -1 && ua.indexOf('chrome') == -1,
 
     is_small = $('.js-nav-trigger').is(':visible'),
 
@@ -40,10 +26,10 @@ window.$html = $('html'), window.$body = $('body');
     /*global jQuery, document, window*/
 
     jQuery(document).ready(function () {
-        InsiteAppsManager.init();
-        InsiteAppsManager.browserSize();
-        InsiteAppsManager.platformDetect();
-        InsiteAppsManager.browserSupport();
+        //InsiteAppsManager.init();
+        //InsiteAppsManager.browserSize();
+        //InsiteAppsManager.platformDetect();
+        //InsiteAppsManager.browserSupport();
     });
 
     $window.on('resize', function () {
@@ -72,19 +58,33 @@ InsiteAppsManager.init = function () {
 
 InsiteAppsManager.platformDetect = function () {
     var navUA = navigator.userAgent.toLowerCase(),
-        navPlat = navigator.platform.toLowerCase();
+        navPlat = navigator.platform.toLowerCase(),
+        isiPhone = false,
+        isiPod = false,
+        isAndroidPhone = false,
+        android = false,
+        iOS = false,
+        isIE = false,
+        ieMobile = false,
+        isSafari = false,
+        isMac = false,
+        isWindows = false,
+        isiele10 = false,
 
-    isiPhone = navPlat.indexOf("iphone");
-    isiPod = navPlat.indexOf("ipod");
-    isAndroidPhone = navPlat.indexOf("android");
-    isSafari = navUA.indexOf('safari') != -1 && navUA.indexOf('chrome') == -1;
-    isIE = typeof(is_ie) !== "undefined" || (!(window.ActiveXObject) && "ActiveXObject" in window);
-    isiele10 = ua.match(/msie (9|([1-9][0-9]))/i),
+        firefox = ua.indexOf('gecko') != -1,
+        safari = ua.indexOf('safari') != -1 && ua.indexOf('chrome') == -1;
+
+    window.isiPhone = navPlat.indexOf("iphone");
+    window.isiPod = navPlat.indexOf("ipod");
+    window.isAndroidPhone = navPlat.indexOf("android");
+    window.isSafari = navUA.indexOf('safari') != -1 && navUA.indexOf('chrome') == -1;
+    window.isIE = typeof(is_ie) !== "undefined" || (!(window.ActiveXObject) && "ActiveXObject" in window);
+    window.isiele10 = ua.match(/msie (9|([1-9][0-9]))/i),
         ieMobile = ua.match(/Windows Phone/i) ? true : false;
-    iOS = getIOSVersion();
-    android = getAndroidVersion();
-    isMac = navigator.platform.toUpperCase().indexOf('MAC') >= 0;
-    isWindows = navigator.platform.toUpperCase().indexOf('WIN') !== -1;
+    window.iOS = getIOSVersion();
+    window.android = getAndroidVersion();
+    window.isMac = navigator.platform.toUpperCase().indexOf('MAC') >= 0;
+    window.isWindows = navigator.platform.toUpperCase().indexOf('WIN') !== -1;
 
     // Platform Detection
     function getIOSVersion(ua) {
