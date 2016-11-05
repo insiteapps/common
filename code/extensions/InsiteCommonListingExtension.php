@@ -20,7 +20,9 @@ class InsiteCommonListingExtension extends DataExtension
             ToggleCompositeField::create('ViewConfiguration', 'Display', [
                 CheckboxField::create("SameHeightBoxes", "Same height boxes on Grid"),
                 CheckboxField::create("RemoveReadMore"),
-                TextField::create("ReadMoreButtonText", "Button Text")
+                TextField::create("ReadMoreButtonText", "Button Text"),
+                NumericField::create('ListingsPerPage','Listings per page')
+
             ]),
             ToggleCompositeField::create('ImagesConfiguration', 'List Item', [
                 CheckboxField::create("RandomDisplayImage"),
@@ -62,11 +64,13 @@ class InsiteCommonListingExtension extends DataExtension
         "ShowListImagesAsCarousel" => "Boolean",
         "ActionBarBackgroundColour" => "Varchar(255)",
         "Template" => "Enum('Simple,Boomerang','Boomerang')",
-        "ChildrenTemplate" => "Enum('Simple,Boomerang','Boomerang')"
+        "ChildrenTemplate" => "Enum('Simple,Boomerang','Boomerang')",
+        'ListingsPerPage' => 'Int',
     );
     private static $defaults = array(
         "SidebarPosition" => "left",
         "View" => "list",
+        'ListingsPerPage' => 10,
     );
 
     public static function getColumnEnums()
