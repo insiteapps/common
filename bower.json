@@ -23,8 +23,8 @@
     "tests"
   ],
   "dependencies": {
-    "jquery": "*",
-    "jquery-migrate": "*",
+    "jquery": "3.1.1",
+    "jquery-migrate": "latest",
     "font-awesome": "4.7.0",
     "bootstrap-sass": "*",
     "fullcalendar": "*",
@@ -58,13 +58,15 @@
     "hammerjs": "*",
     "jquery-hammerjs": "*",
     "jquery-mousewheel": "*",
-    "platform.js": "*",
+    "platform.js": "https://github.com/bestiejs/platform.js",
+    "modernizr": "*",
     "bootstrap-social": "*"
   },
   "private": true,
   "resolutions": {
     "jquery": "~3",
     "d3": "~3.5.4",
+    "jquery": "3.1.1",
     "underscore": "1.8.3",
     "backbone": "^1.1.2",
     "font-awesome": "~4.7.0",
