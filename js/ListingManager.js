@@ -50,7 +50,7 @@ var ListingManager = function () {
                 animation: {
                     enable: false
                 },
-                listEffects: ['fade','rotateX'] // List of effects ONLY for list mode
+                listEffects: ['fade', 'rotateX'] // List of effects ONLY for list mode
             });
 
         });
@@ -69,7 +69,7 @@ var ListingManager = function () {
 
         //$("#LayoutView").removeClass('grid list').addClass(layoutView);
         $(".wp-block.list-item").removeClass('grid list').addClass(layoutView)
-       // console.log("LayoutView_" + colonial);
+        // console.log("LayoutView_" + colonial);
 
         Cookies.set("LayoutView_" + colonial, layoutView, {expires: 365, path: '/'});
         return initiateIsotope();
@@ -105,6 +105,10 @@ var ListingManager = function () {
                 setLayoutView(layout);
             });
 
+
+           
+
+
         },
         initSliders: function () {
             $("#PriceRangeSlider").slider({
@@ -135,19 +139,19 @@ var ListingManager = function () {
         isotope: function () {
             var self = this;
             var $grid = StageArea.imagesLoaded(function () {
-                if(self.OnResize()){
+                if (self.OnResize()) {
                     $container.mixitup({
 
                         animation: {
                             enable: false
                         },
-                        listEffects: ['fade','rotateX'] // List of effects ONLY for list mode
+                        listEffects: ['fade', 'rotateX'] // List of effects ONLY for list mode
                     });
                 }
 
 
             });
-           // insiteAppsPluginManager.initiateIsotope($container);
+            // insiteAppsPluginManager.initiateIsotope($container);
 
         },
         OnResize: function () {
@@ -158,7 +162,7 @@ var ListingManager = function () {
             } else {
                 SameHeightBoxes.height("auto");
             }
-           // console.log("sdsd");
+            // console.log("sdsd");
             return true;
 
         },

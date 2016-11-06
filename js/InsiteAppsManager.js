@@ -39,6 +39,10 @@ window.$html = $('html'), window.$body = $('body');
 }(jQuery));
 
 
+var debug = function (elem) {
+    return console.log(elem);
+}
+
 var InsiteAppsManager = function () {
     var self = this;
 

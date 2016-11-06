@@ -6,11 +6,12 @@
         <% end_with %>
 
         <div class="filter sort-filter pull-right">
-            <select class="form-control">
-                <option>sort by</option>
-                <option>Price low</option>
-                <option>Price high</option>
-                <option>Property type</option>
+            <select id="sort" class="form-control">
+                <option value="">sort by</option>
+                <option value="title;asc">Name asc</option>
+                <option value="title;desc">Name desc</option>
+                <option value="price;asc">Price low</option>
+                <option value="price;desc">Price high</option>
             </select>
         </div>
         <ul class="ListLayout list-unstyled list-inline">
