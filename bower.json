@@ -40,7 +40,7 @@
     "underscore": "*",
     "moment": "*",
     "eonasdan-bootstrap-datetimepicker": "4.17.37",
-    "jquery-migrate": "http://code.jquery.com/jquery-migrate-1.2.1.js",
+    "jquery-migrate": "*",
     "chosen": "https://github.com/harvesthq/chosen/releases/download/v1.3.0/chosen_v1.3.0.zip",
     "masonry": "*",
     "isotope": "*",
@@ -59,10 +59,13 @@
     "jquery-hammerjs": "*",
     "jquery-mousewheel": "*",
     "platform.js": "https://github.com/bestiejs/platform.js",
+    "modernizr": "*",
+    "pixeden-stroke-7-icon":"*",
     "bootstrap-social": "*"
   },
   "private": true,
   "resolutions": {
+    "jquery": "~3",
     "d3": "~3.5.4",
     "jquery": "3.1.1",
     "underscore": "1.8.3",

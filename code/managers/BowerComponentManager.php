@@ -19,6 +19,9 @@ class BowerComponentManager extends Object
             MASONRY_DIR . '/dist/masonry.pkgd.min.js',
             ISOTOPE_DIR . '/dist/isotope.pkgd.min.js',
 
+
+            //BOWER_COMPONENTS_DIR . '/modernizr/src/Modernizr.js',
+
             BOWER_COMPONENTS_DIR . '/isotope-horizontal/horizontal.js',
             BOWER_COMPONENTS_DIR . '/isotope-masonry-horizontal/masonry-horizontal.js',
             BOWER_COMPONENTS_DIR . '/jquery.lazyload/jquery.lazyload.js',
@@ -55,6 +58,7 @@ class BowerComponentManager extends Object
             BOWER_COMPONENTS_DIR . "/animate.css/animate.min.css",
             BOWER_COMPONENTS_DIR . "/owl.carousel/dist/assets/owl.carousel.css",
             BOWER_COMPONENTS_DIR . "/owl.carousel/dist/assets/owl.theme.css",
+            BOWER_COMPONENTS_DIR . '/pixeden-stroke-7-icon/pe-icon-7-stroke/dist/pe-icon-7-stroke.min.css',
         ]);
 
     }

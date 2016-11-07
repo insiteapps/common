@@ -26,10 +26,10 @@ window.$html = $('html'), window.$body = $('body');
     /*global jQuery, document, window*/
 
     jQuery(document).ready(function () {
-        //InsiteAppsManager.init();
-        //InsiteAppsManager.browserSize();
-        //InsiteAppsManager.platformDetect();
-        //InsiteAppsManager.browserSupport();
+        InsiteAppsManager.init();
+        InsiteAppsManager.browserSize();
+        InsiteAppsManager.platformDetect();
+        InsiteAppsManager.browserSupport();
     });
 
     $window.on('resize', function () {
@@ -39,15 +39,37 @@ window.$html = $('html'), window.$body = $('body');
 }(jQuery));
 
 
+var debug = function (elem) {
+    return console.log(elem);
+}
+
 var InsiteAppsManager = function () {
     var self = this;
 
 
     return {
         init: function () {
+            var niceScrollOptions = {
+                zindex: 3000,
+                smoothscroll: false // because it interferes with the hor to ver scroll script
+            }
+
+        //    console.log(isWindows);
+
+            if (isWindows) {
+                $html.niceScroll(niceScrollOptions);
+                $html.addClass('has--nicescroll');
+
+            }
+
+
             //$.proxy(self.init, self);
             // self.browserSize();
             // self.browserSupport();
+        },
+        getParameterByName: function (name) {
+            var match = RegExp('[?&]' + name + '=([^&]*)').exec(window.location.search);
+            return match && decodeURIComponent(match[1].replace(/\+/g, ' '));
         }
     }
 

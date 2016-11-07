@@ -1,20 +1,17 @@
 <% if $AllowViewChange %>
     <div class="wp-block default product-list-filters light-gray">
-        <ul class="pagination pagination pull-left">
-            <li><a href="#" hidefocus="true">«</a></li>
-            <li class="active"><a href="#" hidefocus="true">1</a></li>
-            <li><a href="#" hidefocus="true">2</a></li>
-            <li><a href="#" hidefocus="true">3</a></li>
-            <li><a href="#" hidefocus="true">4</a></li>
-            <li><a href="#" hidefocus="true">5</a></li>
-            <li><a href="#" hidefocus="true">»</a></li>
-        </ul>
+
+        <% with $ActiveListings %>
+            <% include ListingPagination %>
+        <% end_with %>
+
         <div class="filter sort-filter pull-right">
-            <select class="form-control">
-                <option>sort by</option>
-                <option>Price low</option>
-                <option>Price high</option>
-                <option>Property type</option>
+            <select id="sort" class="form-control">
+                <option value="">sort by</option>
+                <option value="title;asc">Name asc</option>
+                <option value="title;desc">Name desc</option>
+                <option value="price;asc">Price low</option>
+                <option value="price;desc">Price high</option>
             </select>
         </div>
         <ul class="ListLayout list-unstyled list-inline">
