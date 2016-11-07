@@ -26,10 +26,10 @@ window.$html = $('html'), window.$body = $('body');
     /*global jQuery, document, window*/
 
     jQuery(document).ready(function () {
-        //InsiteAppsManager.init();
-        //InsiteAppsManager.browserSize();
-        //InsiteAppsManager.platformDetect();
-        //InsiteAppsManager.browserSupport();
+        InsiteAppsManager.init();
+        InsiteAppsManager.browserSize();
+        InsiteAppsManager.platformDetect();
+        InsiteAppsManager.browserSupport();
     });
 
     $window.on('resize', function () {
@@ -49,6 +49,20 @@ var InsiteAppsManager = function () {
 
     return {
         init: function () {
+            var niceScrollOptions = {
+                zindex: 3000,
+                smoothscroll: false // because it interferes with the hor to ver scroll script
+            }
+
+            console.log(isWindows);
+
+            if (isWindows) {
+                $html.niceScroll(niceScrollOptions);
+                $html.addClass('has--nicescroll');
+
+            }
+
+
             //$.proxy(self.init, self);
             // self.browserSize();
             // self.browserSupport();
