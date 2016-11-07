@@ -149,7 +149,7 @@ InsiteAppsManager.browserSupport = function () {
     $.support.transform = getSupportedTransform();
 
     $html
-        //.addClass($.support.touch ? 'touch' : 'no-touch')
+        .addClass($.support.touch ? 'touch' : 'no-touch')
         .addClass($.support.svg ? 'svg' : 'no-svg')
         .addClass(!!$.support.transform ? 'transform' : 'no-transform');
 
