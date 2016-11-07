@@ -54,7 +54,7 @@ var InsiteAppsManager = function () {
                 smoothscroll: false // because it interferes with the hor to ver scroll script
             }
 
-            console.log(isWindows);
+        //    console.log(isWindows);
 
             if (isWindows) {
                 $html.niceScroll(niceScrollOptions);
