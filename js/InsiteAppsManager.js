@@ -49,11 +49,7 @@ var InsiteAppsManager = function () {
 
     return {
         init: function () {
-            if(Modernizr.cssanimations) {
-                var wow = new WOW();
-                wow.init();
-            }
-           
+          
 
             //$.proxy(self.init, self);
             // self.browserSize();
