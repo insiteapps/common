@@ -36,7 +36,6 @@ class InsiteCommonPageControllerExtension extends DataExtension
         Requirements::css(INSITE_COMMON_DIR . "/css/common.css");
 
 
-
     }
 
     function SocialGroup($name)
@@ -74,6 +73,11 @@ class InsiteCommonPageControllerExtension extends DataExtension
                 break;
         }
         return $href;
+    }
+
+    function CommonDir()
+    {
+        return INSITE_COMMON_DIR;
     }
 
 }
