@@ -60,7 +60,8 @@
     "jquery-mousewheel": "*",
     "platform.js": "https://github.com/bestiejs/platform.js",
     "modernizr": "*",
-    "pixeden-stroke-7-icon":"*",
+    "pixeden-stroke-7-icon": "*",
+    "wow": "*",
     "bootstrap-social": "*"
   },
   "private": true,

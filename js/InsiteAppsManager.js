@@ -25,7 +25,7 @@ window.$html = $('html'), window.$body = $('body');
     // "use strict";
     /*global jQuery, document, window*/
 
-    jQuery(document).ready(function () {
+    $(document).ready(function () {
         InsiteAppsManager.init();
         InsiteAppsManager.browserSize();
         InsiteAppsManager.platformDetect();
@@ -49,19 +49,11 @@ var InsiteAppsManager = function () {
 
     return {
         init: function () {
-            var niceScrollOptions = {
-                zindex: 3000,
-                smoothscroll: false // because it interferes with the hor to ver scroll script
+            if(Modernizr.cssanimations) {
+                var wow = new WOW();
+                wow.init();
             }
-
-        //    console.log(isWindows);
-
-            if (isWindows) {
-                $html.niceScroll(niceScrollOptions);
-                $html.addClass('has--nicescroll');
-
-            }
-
+           
 
             //$.proxy(self.init, self);
             // self.browserSize();

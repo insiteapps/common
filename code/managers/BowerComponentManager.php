@@ -19,8 +19,7 @@ class BowerComponentManager extends Object
             MASONRY_DIR . '/dist/masonry.pkgd.min.js',
             ISOTOPE_DIR . '/dist/isotope.pkgd.min.js',
 
-
-            //BOWER_COMPONENTS_DIR . '/modernizr/src/Modernizr.js',
+            BOWER_COMPONENTS_DIR . '/wow/dist/wow.min.js',
 
             BOWER_COMPONENTS_DIR . '/isotope-horizontal/horizontal.js',
             BOWER_COMPONENTS_DIR . '/isotope-masonry-horizontal/masonry-horizontal.js',
