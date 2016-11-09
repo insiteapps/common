@@ -21,6 +21,8 @@ class BowerComponentManager extends Object
 
             BOWER_COMPONENTS_DIR . '/wow/dist/wow.min.js',
 
+            BOWER_COMPONENTS_DIR . '/modernizr/src/Modernizr.js',
+
             BOWER_COMPONENTS_DIR . '/isotope-horizontal/horizontal.js',
             BOWER_COMPONENTS_DIR . '/isotope-masonry-horizontal/masonry-horizontal.js',
             BOWER_COMPONENTS_DIR . '/jquery.lazyload/jquery.lazyload.js',
