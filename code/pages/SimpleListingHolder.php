@@ -39,9 +39,10 @@ class SimpleListingHolder extends Page
     public function getCMSFields()
     {
         $f = parent::getCMSFields();
+        $f->removeByName(["SidebarPosition"]);
         $setup = PageSetupBar::create('Setup', $this->getPageSetupFields());
-        $fields->insertBefore($setup, 'Root');
-        $fields->fieldByName('Root')->setTemplate('PageSetupBar');
+        $f->insertBefore($setup, 'Root');
+        $f->fieldByName('Root')->setTemplate('PageSetupBar');
         return $f;
     }
 
@@ -80,6 +81,7 @@ class SimpleListingHolder extends Page
     {
         $fields = CompositeField::create(
             ToggleCompositeField::create('ViewConfiguration', 'Display', [
+                DropdownField::create("SidebarPosition", "Sidebar position")->setSource(["none" => "none", "left" => "left", "right" => "right"]),
                 CheckboxField::create("AllowViewChange"),
                 DropdownField::create("View")->setSource($this->dbObject("View")->enumValues()),
                 DropdownField::create("Columns")->setSource(self::getColumnEnums()),
@@ -99,9 +101,9 @@ class SimpleListingHolder extends Page
             ])
 
         );
-        $fields->push(DropdownField::create("Template")->setSource($this->dbObject("Template")->enumValues()));
-        $fields->push(DropdownField::create("ChildrenTemplate", "Children template")->setSource($this->dbObject("ChildrenTemplate")->enumValues()));
-
+        $fields->push(DropdownField::create("Template")->setSource($this->getTemplateList()));
+        $fields->push(DropdownField::create("ChildrenTemplate", "Children template")
+            ->setSource($this->getTemplateList()));
         return $fields;
     }
 
