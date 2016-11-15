@@ -51,6 +51,9 @@ class BowerComponentManager extends Object
 
             INSITE_COMMON_DIR . '/js/InsiteAppsPluginManager.js',
             INSITE_COMMON_DIR . '/js/InsiteAppsManager.js',
+
+
+
         ]);
 
         $aRequirements["CSS"] = array_merge($aRequirements["CSS"], [

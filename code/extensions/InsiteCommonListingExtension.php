@@ -21,7 +21,7 @@ class InsiteCommonListingExtension extends DataExtension
                 CheckboxField::create("SameHeightBoxes", "Same height boxes on Grid"),
                 CheckboxField::create("RemoveReadMore"),
                 TextField::create("ReadMoreButtonText", "Button Text"),
-                NumericField::create('ListingsPerPage','Listings per page')
+                NumericField::create('ListingsPerPage', 'Listings per page')
 
             ]),
             ToggleCompositeField::create('ImagesConfiguration', 'List Item', [
@@ -115,7 +115,6 @@ class InsiteCommonListingExtension extends DataExtension
         return 12 / $Columns;
     }
 
-    
 
 }
 
@@ -125,9 +124,6 @@ class InsiteCommonListingControllerExtension extends DataExtension
     public function onAfterInit()
     {
 
-
     }
-
-
 
 }
