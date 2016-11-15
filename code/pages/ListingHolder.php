@@ -3,7 +3,7 @@
 class ListingHolder extends Page
 {
 
-    private static $allowed_children = array("ListingPage");
+    //private static $allowed_children = array("ListingPage");
     private static $default_child = "ListingPage";
     private static $db = array(
       
