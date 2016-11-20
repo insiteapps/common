@@ -1,6 +1,6 @@
 <?php
 
-class RecordController extends Controller
+class RecordController extends InsiteMainController
 {
 
     private static $allowed_actions = array(
@@ -88,20 +88,7 @@ class RecordController extends Controller
         return $this->customise($data)->renderWith(array("SelectMarkerPosition"));
     }
 
-    function generate_page_controller($title = "Page")
-    {
-        $tmpPage = new Page();
-        $tmpPage->Title = $title;
-        $tmpPage->URLSegment = strtolower(str_replace(' ', '-', $title));
-        // Disable ID-based caching  of the log-in page by making it a random number
-        $tmpPage->ID = -1 * rand(1, 10000000);
 
-        $controller = Page_Controller::create($tmpPage);
-        //$controller->setDataModel($this->model);
-        $controller->init();
-
-        return $controller;
-    }
 
     function urlParamsID()
     {
@@ -114,22 +101,7 @@ class RecordController extends Controller
         return Convert::raw2sql($this->urlParams);
     }
 
-    /**
-     *
-     * @param array $request
-     * @param array $Unset
-     * @return array
-     */
-    public static function cleanREQUEST(array $request, array $Unset = array())
-    {
-        $request = Convert::raw2sql($request);
-        $aUnset = array('url', 'SecurityID');
-        $arrUnset = array_merge($aUnset, $Unset);
-        foreach ($arrUnset as $value) {
-            unset($request[$value]);
-        }
-        return $request;
-    }
+
 
     static public function AddProtocol($url)
     {

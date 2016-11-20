@@ -33,4 +33,19 @@ class InsiteMainController extends Controller
         $d = DateTime::createFromFormat('Y-m-d', $date);
         return $d && $d->format('Y-m-d') === $date;
     }
+
+    function generate_page_controller($title = "Page")
+    {
+        $tmpPage = new Page();
+        $tmpPage->Title = $title;
+        $tmpPage->URLSegment = strtolower(str_replace(' ', '-', $title));
+        // Disable ID-based caching  of the log-in page by making it a random number
+        $tmpPage->ID = -1 * rand(1, 10000000);
+
+        $controller = Page_Controller::create($tmpPage);
+        //$controller->setDataModel($this->model);
+        $controller->init();
+
+        return $controller;
+    }
 }
