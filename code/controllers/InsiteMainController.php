@@ -48,4 +48,17 @@ class InsiteMainController extends Controller
 
         return $controller;
     }
+
+
+    function urlParamsID()
+    {
+        return Convert::raw2sql($this->urlParams['ID']);
+    }
+
+
+    function urlParamsParts()
+    {
+        return Convert::raw2sql($this->urlParams);
+    }
+
 }

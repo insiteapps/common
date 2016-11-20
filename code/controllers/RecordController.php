@@ -90,17 +90,6 @@ class RecordController extends InsiteMainController
 
 
 
-    function urlParamsID()
-    {
-        return Convert::raw2sql($this->urlParams['ID']);
-    }
-
-
-    function urlParamsParts()
-    {
-        return Convert::raw2sql($this->urlParams);
-    }
-
 
 
     static public function AddProtocol($url)
