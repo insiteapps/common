@@ -6,6 +6,7 @@ class RecordController extends Controller
     private static $allowed_actions = array(
         'logout',
         'mapmarkers',
+        'loadVideoModal',
         'resend_contact_email' => "ADMIN"
     );
 
@@ -20,6 +21,17 @@ class RecordController extends Controller
         return self::Link($action);
     }
 
+    function loadVideoModal()
+    {
+        $params = $this->urlParamsParts();
+        $Id = $params['ID'];
+        $gallery = GalleryImage::get()->byID($Id);
+        $data = array();
+        $data['VideoCode'] = $gallery->VideoCode;
+        $data['Title'] = $gallery->Name;
+
+        return $this->customise($data)->renderWith(array('VideoModalContent'));
+    }
 
     function resend_contact_email()
     {
@@ -94,6 +106,12 @@ class RecordController extends Controller
     function urlParamsID()
     {
         return Convert::raw2sql($this->urlParams['ID']);
+    }
+
+
+    function urlParamsParts()
+    {
+        return Convert::raw2sql($this->urlParams);
     }
 
     /**
