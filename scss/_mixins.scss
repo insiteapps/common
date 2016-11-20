@@ -1,5 +1,3 @@
-
-
 $red: #900;
 $white: #ffffff;
 $blue: #3FA3CF;
@@ -11,9 +9,8 @@ $black: #000;
 $yellow: #f7d200;
 $orange: #F68740;
 $green: #8cbf5a;
-$trans-green:rgba(55, 124, 35, 0.7);
+$trans-green: rgba(55, 124, 35, 0.7);
 $OpenSans: 'Open Sans', sans-serif;
-
 
 @mixin bp-xlarge {
   @media only screen and (min-width: 992px) {
@@ -39,9 +36,14 @@ $OpenSans: 'Open Sans', sans-serif;
   }
 }
 
-
 @mixin bp-small {
   @media only screen and (max-width: 767px) {
+    @content;
+  }
+}
+
+@mixin bp-smaller {
+  @media only screen and (max-width: 480px) {
     @content;
   }
 }
@@ -133,8 +135,6 @@ $OpenSans: 'Open Sans', sans-serif;
   filter: alpha(opacity=$opacity-ie); //IE8
 }
 
-
-
 /* @include center-block;*/
 @mixin center-block {
   display: block;
@@ -209,11 +209,11 @@ $OpenSans: 'Open Sans', sans-serif;
 }
 
 @mixin transform( $value ) {
-  @include prefix( transform, $value );
+  @include prefix(transform, $value);
 }
 
 @mixin transform-origin( $value ) {
-  @include prefix( transform-origin, $value );
+  @include prefix(transform-origin, $value);
 }
 
 @mixin buttonColor( $name, $color ) {
@@ -221,7 +221,7 @@ $OpenSans: 'Open Sans', sans-serif;
     background: $color;
 
     &:hover {
-      background-color: lighten( $color, 5% );
+      background-color: lighten($color, 5%);
     }
   }
 }
@@ -284,7 +284,6 @@ $OpenSans: 'Open Sans', sans-serif;
   transition-duration: $time;
 }
 
-
 @mixin transform($prop) {
   -webkit-transform: $prop;
   -moz-transform: $prop;
@@ -292,7 +291,6 @@ $OpenSans: 'Open Sans', sans-serif;
   -o-transform: $prop;
   transform: $prop;
 }
-
 
 @mixin animation($animation) {
   -webkit-animation: $animation;
