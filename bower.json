@@ -62,7 +62,15 @@
     "modernizr": "*",
     "pixeden-stroke-7-icon": "*",
     "wow": "*",
-    "bootstrap-social": "*"
+    "bootstrap-social": "*",
+    "datatables.net": "*",
+    "datatables.net-bs": "*",
+    "datatables.net-buttons": "*",
+    "datatables.net-buttons-bs": "*",
+    "datatables.net-responsive": "*",
+    "datatables.net-responsive-bs": "*",
+    "pdfmake": "*",
+    "Stuk/jszip": "*"
   },
   "private": true,
   "resolutions": {
