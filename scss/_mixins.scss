@@ -42,11 +42,13 @@ $OpenSans: 'Open Sans', sans-serif;
   }
 }
 
+
 @mixin bp-smaller {
   @media only screen and (max-width: 480px) {
     @content;
   }
 }
+
 
 @mixin border-radius($radius) {
   -webkit-border-radius: $radius;
