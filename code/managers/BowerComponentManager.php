@@ -49,6 +49,8 @@ class BowerComponentManager extends Object
             BOWER_COMPONENTS_DIR . "/jquery-hammerjs/jquery.hammer.js",
             BOWER_COMPONENTS_DIR . "/jquery-mousewheel/jquery.mousewheel.js",
 
+            BOWER_COMPONENTS_DIR . "/mediaelement/build/mediaelement-and-player.min.js",
+
             CHOSEN_DIR . '/chosen.jquery.min.js',
             INSITE_COMMON_DIR . '/js/chosen.jquery_init.js',
 
@@ -67,6 +69,7 @@ class BowerComponentManager extends Object
             BOWER_COMPONENTS_DIR . "/owl.carousel/dist/assets/owl.theme.css",
             BOWER_COMPONENTS_DIR . '/pixeden-stroke-7-icon/pe-icon-7-stroke/dist/pe-icon-7-stroke.min.css',
             CHOSEN_DIR . '/chosen.css',
+            BOWER_COMPONENTS_DIR . "/mediaelement/build/mediaelementplayer.min.css",
         ]);
 
     }
