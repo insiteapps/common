@@ -55,7 +55,9 @@ class ImageResource extends DataObject
     private static $summary_fields = array(
         'Thumbnail',
         'Name',
-        'Description'
+        'Description',
+        "VideoLink",
+
     );
 
     function getThumbnail()
