@@ -8,6 +8,8 @@ class ImageResource extends DataObject
 
     private static $default_sort = 'SortOrder';
     private static $db = array(
+        'VideoLink' => 'Varchar(255)',
+        'VideoType' => 'Enum("Youtube,Vimeo","Vimeo")',
         'Name' => 'Varchar(255)',
         'Description' => 'Text',
         'Easing' => 'Enum("easeOutBack,easeInBack,Power4.easeOut","easeOutBack")',
@@ -42,6 +44,10 @@ class ImageResource extends DataObject
         $ImageField->setFolderName('Uploads/Image/' . $URLSegment);
         $f->addFieldToTab('Root.Images', $ImageField);
 
+        $f->addFieldsToTab('Root.Video', [
+            DropdownField::create("VideoType")->setSource($this->dbObject("VideoType")->enumValues()),
+            TextField::create("VideoLink")->setRightTitle('Please paste the embed code only'),
+        ]);
 
         return $f;
     }
@@ -60,4 +66,39 @@ class ImageResource extends DataObject
         }
     }
 
+    function LinkingClass()
+    {
+        return strtolower($this->VideoType);
+
+
+        /*
+        $url = $this->VideoLink;
+        if (strpos($url, 'youtube') > 0) {
+            $player = 'youtube';
+        } elseif (strpos($url, 'vimeo') > 0) {
+            $player = 'vimeo';
+        }
+
+        return $player;
+        */
+
+
+    }
+
+    function IsVideo()
+    {
+        if ($this->VideoLink) {
+
+            return true;
+        }
+        return false;
+    }
+
+    function IsVideoClass()
+    {
+        if ($this->IsVideo()) {
+            return "HasVideo";
+        }
+        return false;
+    }
 }
