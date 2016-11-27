@@ -5,13 +5,23 @@ $.fn.getInputType = function () {
     return this[0].tagName == "INPUT" ? this[0].type.toLowerCase() : this[0].tagName.toLowerCase();
 }
 
-var AjaxFormMainValidator = function () {
+var AjaxValidateSubmit = function () {
 
     return {
-        validate: function (form, aRequiredFields, prefix, submit) {
+        init: function (form, aRequiredFields, submit, prefix) {
+            if (typeof submit === 'undefined') {
+                submit = false;
+            }
+
+            if (typeof prefix === 'undefined') {
+                prefix = null;
+            }
+
             var valid = AjaxValidator.IsValid(form, aRequiredFields, prefix);
-            if (valid) {
-                AjaxFormMainValidator.submit(form);
+            if (submit) {
+                if (valid) {
+                    AjaxValidateSubmit.submit(form);
+                }
             }
         },
         submit: function (form) {

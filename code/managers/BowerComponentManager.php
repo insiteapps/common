@@ -51,14 +51,18 @@ class BowerComponentManager extends Object
 
             BOWER_COMPONENTS_DIR . "/mediaelement/build/mediaelement-and-player.min.js",
 
+
             CHOSEN_DIR . '/chosen.jquery.min.js',
             INSITE_COMMON_DIR . '/js/chosen.jquery_init.js',
+            INSITE_COMMON_DIR . '/js/bootstrap-table.js',
+
 
             INSITE_COMMON_DIR . '/js/InsiteAppsPluginManager.js',
             INSITE_COMMON_DIR . '/js/InsiteAppsManager.js',
 
-
-
+            INSITE_COMMON_DIR . '/js/AjaxValidator.js',
+            INSITE_COMMON_DIR . '/js/AjaxValidateSubmit.js',
+            INSITE_COMMON_DIR . '/js/AjaxFormMainValidator.js',
         ]);
 
         $aRequirements["CSS"] = array_merge($aRequirements["CSS"], [
@@ -70,6 +74,9 @@ class BowerComponentManager extends Object
             BOWER_COMPONENTS_DIR . '/pixeden-stroke-7-icon/pe-icon-7-stroke/dist/pe-icon-7-stroke.min.css',
             CHOSEN_DIR . '/chosen.css',
             BOWER_COMPONENTS_DIR . "/mediaelement/build/mediaelementplayer.min.css",
+
+            //INSITE_COMMON_DIR . '/css/fresh-bootstrap-table.css',
+
         ]);
 
     }
