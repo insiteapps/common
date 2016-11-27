@@ -20,9 +20,11 @@ var AjaxValidateSubmit = function () {
             var valid = AjaxValidator.IsValid(form, aRequiredFields, prefix);
             if (submit) {
                 if (valid) {
-                    AjaxValidateSubmit.submit(form);
+                    return AjaxValidateSubmit.submit(form);
                 }
             }
+
+            return valid;
         },
         submit: function (form) {
 
