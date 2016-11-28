@@ -56,6 +56,7 @@ class BowerComponentManager extends Object
             INSITE_COMMON_DIR . '/js/chosen.jquery_init.js',
             INSITE_COMMON_DIR . '/js/bootstrap-table.js',
 
+            INSITE_COMMON_DIR . '/js/AjaxRequestHandler.js',
 
             INSITE_COMMON_DIR . '/js/InsiteAppsPluginManager.js',
             INSITE_COMMON_DIR . '/js/InsiteAppsManager.js',
