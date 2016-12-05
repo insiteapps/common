@@ -149,18 +149,7 @@ class ListingPage extends Page
         return $html;
 
     }
-
-    function canView($member = null)
-    {
-        $member = Member::currentUser();
-        if ($member) {
-            return true;
-        }
-        if ($this->Status === 'Active') {
-            return true;
-        }
-        return false;
-    }
+    
 
     function Image()
     {

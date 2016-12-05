@@ -11,7 +11,7 @@ class InsiteAppsCurlManager extends InsiteAppsCommonManager
      * @param null $postFields
      * @return mixed
      */
-    public function processCurl($url, $postFields = null)
+    public function processCurl($url, $postFields = null,array $aHeaders = array())
     {
         ob_start();
         $ch = curl_init();
@@ -19,6 +19,7 @@ class InsiteAppsCurlManager extends InsiteAppsCommonManager
         curl_setopt($ch, CURLOPT_POST, true);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $postFields);
         curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 30);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $aHeaders);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
         $results = json_decode(curl_exec($ch), true);
         curl_close($ch);
