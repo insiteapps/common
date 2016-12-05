@@ -69,6 +69,8 @@ class ListingPage extends Page
             TextField::create('Reference'),
         ]);
 
+
+        /*
         $gridFieldConfig = GridFieldConfig_RecordEditor::create();
         $gridFieldConfig->addComponent(new GridFieldBulkUpload());
         $folder = 'Uploads/listings/' . $this->Parent()->URLSegment . '/' . $this->URLSegment;
@@ -76,6 +78,7 @@ class ListingPage extends Page
         $gridFieldConfig->addComponent(new GridFieldSortableRows('SortOrder'));
         $ImageGridfield = new GridField('Images', 'Images', $this->ListingImages(), $gridFieldConfig);
         $fields->addFieldToTab('Root.Images', $ImageGridfield);
+        */
 
 
         $oListingArea = ListingArea::get();
