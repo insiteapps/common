@@ -16,6 +16,11 @@ class SecurePage extends Page
             $vault->write();
             DB::alteration_message(' Vault created', 'created');
         }
+
+        if ($vault->CanViewType != "LoggedInUsers") {
+            $vault->CanViewType = "LoggedInUsers";
+            $vault->write();
+        }
     }
 }
 
