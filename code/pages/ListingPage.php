@@ -13,8 +13,7 @@ class ListingPage extends Page
         "Reference" => "Varchar(100)",
         "Summary" => "HTMLText",
     );
-    private static $has_many = array(
-        "ListingImages" => "ImageResource"
+    private static $has_many = array(//"ListingImages" => "ImageResource"
     );
     private static $many_many = array(
         "Areas" => "ListingArea",
@@ -151,7 +150,7 @@ class ListingPage extends Page
     }
 
 
-    function Image()
+    function Image_()
     {
         $sort = ($this->Parent()->RandomDisplayImage) ? "Rand()" : null;
         $height = ($ImageMaxHeight = $this->Parent()->ImageMaxHeight) ? str_ireplace(["px", "PX"], "", $ImageMaxHeight) : "520";
@@ -159,8 +158,15 @@ class ListingPage extends Page
             $image = $this->ListingImages()
                 ->sort($sort)
                 ->first();
+
+
+        }
+
+
+        if (count($image)) {
             return $image->Image()->CroppedResize(520, $height);
         }
+
         return false;
     }
 
