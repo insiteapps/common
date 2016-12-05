@@ -76,7 +76,7 @@ class ListingPage extends Page
         $gridFieldConfig->getComponentByType('GridFieldBulkUpload')->setUfSetup('setFolderName', $folder);
         $gridFieldConfig->addComponent(new GridFieldSortableRows('SortOrder'));
         $ImageGridfield = new GridField('Images', 'Images', $this->ListingImages(), $gridFieldConfig);
-        $fields->addFieldToTab('Root.Components', $ImageGridfield);
+        $fields->addFieldToTab('Root.Images', $ImageGridfield);
 
 
         $oListingArea = ListingArea::get();
@@ -149,7 +149,7 @@ class ListingPage extends Page
         return $html;
 
     }
-    
+
 
     function Image()
     {
