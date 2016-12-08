@@ -89,9 +89,6 @@ class RecordController extends InsiteMainController
     }
 
 
-
-
-
     static public function AddProtocol($url)
     {
         if (strtolower(substr($url, 0, 8)) !== 'https://' && strtolower(substr($url, 0, 7)) !== 'http://') {
@@ -99,4 +96,18 @@ class RecordController extends InsiteMainController
         }
         return $url;
     }
+
+    public static function find_or_make_customers_group() {
+        $group = DataObject::get_one("Group", "Code='customers'");
+        if (!$group) {
+            $group = new Group();
+            $group->Code = 'customers';
+            $group->Title = 'Customers';
+            $group->write();
+            Permission::grant($group->ID, 'SITE_CUSTOMER');
+        }
+        return $group;
+    }
+
+
 }

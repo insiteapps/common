@@ -3,6 +3,11 @@
 class InsiteMainController extends Controller
 {
 
+    function Member()
+    {
+        return Member::currentUser();
+    }
+
     static public function AddProtocol($url)
     {
         if (strtolower(substr($url, 0, 8)) !== 'https://' && strtolower(substr($url, 0, 7)) !== 'http://') {
