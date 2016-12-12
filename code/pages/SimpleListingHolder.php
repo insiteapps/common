@@ -96,7 +96,7 @@ class SimpleListingHolder extends Page
                 TextField::create("ImageMaxHeight", "Image max height")->setDescription('height in px against width of 520px'),
                 CheckboxField::create("RemoveChildLinking"),
                 CheckboxField::create("RemoveOverlay", "Remove image overlay"),
-                CheckboxField::create("ShowListImagesAsCarousel"),
+                CheckboxField::create("ShowListImagesAsCarousel")
 
             ])
 
