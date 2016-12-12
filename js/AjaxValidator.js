@@ -7,46 +7,30 @@ $.fn.getInputType = function () {
 
 var AjaxValidator = function () {
     return {
-        IsValid: function (form, aRequiredFields) {
+        IsValid: function (form, aRequiredFields, prefix) {
 
 
             if (aRequiredFields.length && (typeof aRequiredFields !== 'undefined')) {
                 //Validate required fields
                 for (var i = 0; i < aRequiredFields.length; i++) {
-                    var input = $('#' + aRequiredFields[i]);
-
+                    var input = $('#' + prefix + aRequiredFields[i]);
                     var isSelect = (input.getInputType() === 'select') ? true : false;
-
                     var inputVal = input.val();
-
                     var inputLabel = input.closest('div.field').find('label').text();
                     var inputName = (input.attr('placeholder')) ? input.attr('placeholder') : input.attr('name');
-
                     var inputTitle = inputLabel ? inputLabel : inputName;
-
                     var fieldErrorMsg = '"' + $.trim(inputTitle) + '" is required';
-
                     if ((!inputVal) || (inputVal === fieldErrorMsg)) {
                         input.addClass("needsfilled");
                         if (isSelect) {
                             //console.log(aRequiredFields[i] + " - " + isSelect);
                             var errSpan = '<span class="message required">' + fieldErrorMsg + '</span>';
-                            var SelectHolder =  input.closest('div.field');
-                            if(!SelectHolder.hasClass("needsfilled")){
+                            var SelectHolder = input.closest('div.field');
+                            if (!SelectHolder.hasClass("needsfilled")) {
                                 SelectHolder.addClass("needsfilled");
                                 SelectHolder.append(errSpan);
                             }
 
-
-                            /*
-
-
-                             input.closest('div').find('.chosen-container-single').addClass("needsfilled");
-                             input.find('option').removeAttr('selected').trigger("chosen:updated");
-                             var optionNeedsfilled = "<option class=\"needsfilled\" value=\"\" disabled selected='selected'>" + fieldErrorMsg + "</option>";
-                             input.prepend(optionNeedsfilled);
-                             input.trigger("chosen:updated");
-                             */
                         } else {
                             input.val(fieldErrorMsg);
                         }

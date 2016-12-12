@@ -70,7 +70,8 @@
     "datatables.net-responsive": "*",
     "datatables.net-responsive-bs": "*",
     "pdfmake": "*",
-    "mediaelement":"*",
+    "html2canvas": "*",
+    "mediaelement": "*",
     "Stuk/jszip": "*"
   },
   "private": true,
@@ -81,6 +82,7 @@
     "underscore": "1.8.3",
     "backbone": "^1.1.2",
     "font-awesome": "~4.7.0",
+    "animate.css": "~3.5.0",
     "bootstrap": "~3"
   },
   "devDependencies": {

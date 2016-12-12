@@ -106,7 +106,7 @@ class InsiteCommonListingExtension extends DataExtension
      */
     function getReadMoreText()
     {
-        return ($txt = $this->owner->ReadMoreButtonText) ? $txt : "More";
+        return ($txt = $this->owner->ReadMoreButtonText) ? $txt : "Read More";
     }
 
     function ColumnsSpanWidth()

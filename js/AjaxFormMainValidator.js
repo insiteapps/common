@@ -8,9 +8,6 @@ $.fn.getInputType = function () {
 var AjaxFormMainValidator = function () {
 
     return {
-        init: function () {
-
-        },
         validate: function (form, aRequiredFields, prefix, submit) {
             var valid = AjaxValidator.IsValid(form, aRequiredFields, prefix);
             if (valid) {
