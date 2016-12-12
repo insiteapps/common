@@ -101,7 +101,7 @@ class SimpleListingHolder extends Page
             ])
 
         );
-        $fields->push(DropdownField::create("Template")->setSource($this->getTemplateList()));
+        //$fields->push(DropdownField::create("Template")->setSource($this->getTemplateList()));
         $fields->push(DropdownField::create("ChildrenTemplate", "Children template")
             ->setSource($this->getTemplateList()));
         return $fields;
