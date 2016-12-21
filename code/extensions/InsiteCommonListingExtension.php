@@ -43,7 +43,7 @@ class InsiteCommonListingExtension extends DataExtension
 
     function MakeSameHeight()
     {
-        if ($this->owner->View === 'grid' && $this->owner->SameHeightBoxes) {
+        if ($this->owner->LayoutView() === 'grid' && $this->owner->SameHeightBoxes) {
             return "SameHeightBoxes";
         }
         return false;

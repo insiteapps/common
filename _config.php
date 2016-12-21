@@ -15,4 +15,9 @@ define('ISOTOPE_DIR', BOWER_COMPONENTS_DIR . "/isotope");
 define('DATA_TABLES_DIR', BOWER_COMPONENTS_DIR . "/datatables");
 define('JQUERY_UI_DIR', BOWER_COMPONENTS_DIR . "/jquery-ui");
 
+<<<<<<< HEAD
 CMSMenu::remove_menu_item('InsiteModelAdmin');
+=======
+
+define('INSITE_COMMON_PLUGING_DIR', INSITE_COMMON_DIR."/plugins");
+>>>>>>> 7ef8811bb9585ba6886a054dcb71bc00464f0aa0
