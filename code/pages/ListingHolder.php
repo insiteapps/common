@@ -5,9 +5,7 @@ class ListingHolder extends Page
 
     //private static $allowed_children = array("ListingPage");
     private static $default_child = "ListingPage";
-    private static $db = array(
-      
-    );
+    private static $db = array();
 
     private static $has_one = array();
     private static $has_many = array(
@@ -44,6 +42,21 @@ class ListingHolder extends Page
     public function requireDefaultRecords()
     {
         parent::requireDefaultRecords();
+
+    }
+
+    function ActiveListings()
+    {
+
+        $oListings = new PaginatedList($this->Children());
+        return $oListings;
+    }
+    function MakeSameHeight()
+    {
+        if ($this->owner->LayoutView() === 'grid' && $this->owner->SameHeightBoxes) {
+            return "SameHeightBoxes";
+        }
+        return false;
 
     }
 }
