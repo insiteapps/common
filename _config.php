@@ -15,3 +15,5 @@ define('ISOTOPE_DIR', BOWER_COMPONENTS_DIR . "/isotope");
 define('DATA_TABLES_DIR', BOWER_COMPONENTS_DIR . "/datatables");
 define('JQUERY_UI_DIR', BOWER_COMPONENTS_DIR . "/jquery-ui");
 
+
+define('INSITE_COMMON_PLUGING_DIR', INSITE_COMMON_DIR."/plugins");
