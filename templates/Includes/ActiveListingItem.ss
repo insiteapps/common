@@ -1,5 +1,5 @@
 <article
-        class="list-item isotopeitem {$filterCategories} {$Parent.MakeSameHeight}  <% if $Parent.RemoveChildLinking %>normalIcon<% end_if %> col-sm-{$P.ColumnsSpanWidth}"
+        class="list-item isotopeitem {$filterCategories} {$Parent.MakeSameHeight}  <% if $Parent.RemoveChildLinking %>normalIcon<% end_if %> col-sm-{$Parent.ColumnsSpanWidth}"
         itemtype="https://schema.org/LodgingBusiness">
     <div class="row">
 
