@@ -4,7 +4,8 @@ class InsiteCommonPageExtension extends DataExtension
 {
     private static $db = array(
         "SliderSetup" => "Enum('ShowOnAncestry,HideOnAncestry,HideOnChildPages','ShowOnAncestry')",
-        "SidebarPosition" => "Enum('none,left,right','none')"
+        "SidebarPosition" => "Enum('none,left,right','none')",
+        "ShowSidebar" => "Boolean",
     );
     private static $many_many = array();
 
@@ -18,6 +19,7 @@ class InsiteCommonPageExtension extends DataExtension
                     "HideOnAncestry" => "HideOnAncestry",
                     "HideOnChildPages" => "HideOnChildPages"
                 ])->setEmptyString("--select--"),
+                CheckboxField::create("ShowSidebar"),
                 DropdownField::create("SidebarPosition", "Sidebar position")->setSource(["none" => "none", "left" => "left", "right" => "right"])
             ])
         );
