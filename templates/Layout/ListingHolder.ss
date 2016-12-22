@@ -5,7 +5,7 @@
 <% end_if %>
 
 <div class="row">
-    <% if $SidebarPosition = 'left' %>
+    <% if $SidebarPosition = 'left' && $ShowSidebar %>
         <% include ListingSidebar %>
     <% end_if %>
     <div class="col-sm-9">
@@ -17,7 +17,7 @@
 
         </section>
     </div>
-    <% if $SidebarPosition = 'right' %>
+    <% if $SidebarPosition = 'right' && $ShowSidebar %>
         <% include ListingSidebar %>
     <% end_if %>
 </div>

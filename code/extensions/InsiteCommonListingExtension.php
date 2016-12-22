@@ -17,10 +17,20 @@ class InsiteCommonListingExtension extends DataExtension
                 //TextField::create("ActionBarButtonColour")->addExtraClass('colorpicker'),
                 //TextField::create("ActionBarButtonActiveStateColour")->addExtraClass('colorpicker')
             ]),
+            ToggleCompositeField::create('DefaultConfiguration', 'Default', [
+                DropdownField::create("SliderSetup", "Slider Setup", [
+                    "ShowOnAncestry" => "ShowOnAncestry",
+                    "HideOnAncestry" => "HideOnAncestry",
+                    "HideOnChildPages" => "HideOnChildPages"
+                ])->setEmptyString("--select--"),
+                CheckboxField::create("ShowSidebar"),
+                DropdownField::create("SidebarPosition", "Sidebar position")->setSource(["none" => "none", "left" => "left", "right" => "right"])
+            ]),
             ToggleCompositeField::create('ViewConfiguration', 'Display', [
                 CheckboxField::create("SameHeightBoxes", "Same height boxes on Grid"),
                 CheckboxField::create("RemoveReadMore"),
                 TextField::create("ReadMoreButtonText", "Button Text"),
+                DropdownField::create("ReadMoreButtonClass")->setSource($this->owner->dbObject("ReadMoreButtonClass")->enumValues()),
                 NumericField::create('ListingsPerPage', 'Listings per page')
 
             ]),
@@ -55,6 +65,7 @@ class InsiteCommonListingExtension extends DataExtension
         "AllowViewChange" => "Boolean",
         "Columns" => "Int",
         "RemoveReadMore" => "Boolean",
+        "ReadMoreButtonClass" => "Enum('default,primary,warning,danger,info','default')",
         "SameHeightBoxes" => "Boolean",
         "ReadMoreButtonText" => "Varchar(255)",
         "ImageMaxHeight" => "Varchar(255)",
@@ -113,6 +124,11 @@ class InsiteCommonListingExtension extends DataExtension
     {
         $Columns = ($c = $this->owner->Columns) ? $c : 3;
         return 12 / $Columns;
+    }
+
+
+    function LayoutWidth(){
+        return 12;
     }
 
 

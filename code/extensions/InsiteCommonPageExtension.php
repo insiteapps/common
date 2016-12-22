@@ -4,24 +4,15 @@ class InsiteCommonPageExtension extends DataExtension
 {
     private static $db = array(
         "SliderSetup" => "Enum('ShowOnAncestry,HideOnAncestry,HideOnChildPages','ShowOnAncestry')",
-        "SidebarPosition" => "Enum('none,left,right','none')"
+        "SidebarPosition" => "Enum('none,left,right','none')",
+        "ShowSidebar" => "Boolean",
+
     );
     private static $many_many = array();
 
     public function updateCMSFields(FieldList $fields)
     {
-        $compositeFields = CompositeField::create(
 
-            ToggleCompositeField::create('DefaultConfiguration', 'Default', [
-                DropdownField::create("SliderSetup", "Slider Setup", [
-                    "ShowOnAncestry" => "ShowOnAncestry",
-                    "HideOnAncestry" => "HideOnAncestry",
-                    "HideOnChildPages" => "HideOnChildPages"
-                ])->setEmptyString("--select--"),
-                DropdownField::create("SidebarPosition", "Sidebar position")->setSource(["none" => "none", "left" => "left", "right" => "right"])
-            ])
-        );
-        $fields->addFieldToTab("Root.Manager", $compositeFields);
 
     }
 
