@@ -2,7 +2,7 @@
 
 define('INSITE_COMMON_DIR', basename(dirname(__FILE__)));
 
-define('BOWER_COMPONENTS_DIR', INSITE_COMMON_DIR."/components");
+define('BOWER_COMPONENTS_DIR', INSITE_COMMON_DIR . "/components");
 define('BOOTSTRAP_DIR', BOWER_COMPONENTS_DIR . "/bootstrap/dist");
 define('JQUERY_DIR', BOWER_COMPONENTS_DIR . "/jquery/dist");
 define('JQUERY_FORM_DIR', BOWER_COMPONENTS_DIR . "/jquery-form");
@@ -15,5 +15,5 @@ define('ISOTOPE_DIR', BOWER_COMPONENTS_DIR . "/isotope");
 define('DATA_TABLES_DIR', BOWER_COMPONENTS_DIR . "/datatables");
 define('JQUERY_UI_DIR', BOWER_COMPONENTS_DIR . "/jquery-ui");
 
-
-define('INSITE_COMMON_PLUGING_DIR', INSITE_COMMON_DIR."/plugins");
+CMSMenu::remove_menu_item('InsiteModelAdmin');
+define('INSITE_COMMON_PLUGING_DIR', INSITE_COMMON_DIR . "/plugins");
