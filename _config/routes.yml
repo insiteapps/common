@@ -2,3 +2,4 @@ Director:
   rules:
     'records//$Action/$ID/$OtherID': 'RecordController',
     'fullcontent//$Action/$ID/$OtherID': 'InsiteContentManager'
+    'markers//$Action/$ID/$OtherID': 'MapMarkersXML'

@@ -1,6 +1,12 @@
 <?php
 
-class MapMarkersXML extends InsiteContentManager {
+class MapMarkersXML extends InsiteContentManager
+{
+
+    function Link($action = null)
+    {
+        return "markers/$action";
+    }
 
     static $allowed_actions = array(
         'xml',
@@ -8,10 +14,11 @@ class MapMarkersXML extends InsiteContentManager {
     );
     static $skip = array('url');
 
-    function xml() {
+    function xml()
+    {
         $this->getResponse()->addHeader("Content-type", "text/xml");
         $pageId = Convert::raw2xml($this->urlParams['ID']);
-       // $page = SiteTree::get()->byID($pageId);
+        // $page = SiteTree::get()->byID($pageId);
         $places = Place::get();
         $tag = "<marker name=\"%s\" address=\"%s\" lat=\"%s\" lng=\"%s\" class=\"%s\"  />\n";
         $xml = "<markers>\n";
@@ -25,7 +32,8 @@ class MapMarkersXML extends InsiteContentManager {
         return $xml;
     }
 
-    function sitetreexml() {
+    function sitetreexml()
+    {
         $this->getResponse()->addHeader("Content-type", "text/xml");
         $pageId = Convert::raw2xml($this->urlParams['ID']);
         $page = SiteTree::get()->byID($pageId);
