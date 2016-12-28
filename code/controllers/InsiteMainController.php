@@ -1,6 +1,6 @@
 <?php
 
-class InsiteMainController extends Controller
+class InsiteMainController extends Page_Controller
 {
 
     function Member()

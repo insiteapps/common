@@ -12,6 +12,7 @@ class ListingPage extends Page
         'Status' => "Enum('Active,Approved,Pending,Suspended','Pending')",
         "Reference" => "Varchar(100)",
         "Summary" => "HTMLText",
+        'LastViewedDate' => 'SS_Datetime',
     );
     private static $has_many = array(//"ListingImages" => "ImageResource"
     );
@@ -183,6 +184,7 @@ class ListingPage extends Page
         return $this->Image();
     }
 
+
 }
 
 class ListingPage_Controller extends Page_Controller
@@ -191,6 +193,21 @@ class ListingPage_Controller extends Page_Controller
     public function init()
     {
         parent:: init();
+        Requirements::customScript(sprintf("var REF = '%s';", base64_encode($this->ID)));
+        $this->setLastViewedDateValue();
+
+    }
+
+    public function setLastViewedDateValue()
+    {
+        //$LastViewedDate = SS_Datetime::now()->getValue();
+        $now = SS_Datetime::now()->Rfc2822();
+        $oObj = Page::get()->byID($this->ID);
+        $oObj->LastViewedDate = $now;
+        $oObj->write();
+
+        //debug::show($this->record['LastViewedDate']);
+
     }
 
     public function SlideShow()
