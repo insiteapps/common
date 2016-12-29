@@ -26,20 +26,22 @@
     "gulpfile.js",
     "webpack.config.js",
     "README.md",
-    "bootstrap",
     "bower.json",
     "examples",
     "node_modules",
     "package.json",
     "src",
-    "tests"
+    "tests",
+    "yarn.lock",
+    "composer.json",
+    ".travis.yml"
   ],
-  "version": "0.1.20",
-  "_release": "0.1.20",
+  "version": "0.1.23",
+  "_release": "0.1.23",
   "_resolution": {
     "type": "version",
-    "tag": "0.1.20",
-    "commit": "ce8a2609986a3bf6e3c83f61741d4c56ca0b4ca0"
+    "tag": "0.1.23",
+    "commit": "e213ca3f9a475d5a74a90e71224059be7f082781"
   },
   "_source": "https://github.com/bpampuch/pdfmake.git",
   "_target": "*",

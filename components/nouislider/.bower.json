@@ -18,17 +18,17 @@
     "**/.*",
     "**/*.json"
   ],
-  "license": "http://www.wtfpl.net/about/",
+  "license": "WTFPL",
   "homepage": "http://refreshless.com/nouislider/",
   "author": {
     "name": "Leon Gersen"
   },
-  "version": "9.0.0",
-  "_release": "9.0.0",
+  "version": "9.1.0",
+  "_release": "9.1.0",
   "_resolution": {
     "type": "version",
-    "tag": "9.0.0",
-    "commit": "a8497aa391a880c6148a3fddaed9b404b5a26d30"
+    "tag": "9.1.0",
+    "commit": "58525cb9272dd15d424ca78148722a470145e790"
   },
   "_source": "https://github.com/leongersen/noUiSlider.git",
   "_target": "*",
