@@ -1,9 +1,7 @@
 <?php
 
 
-/**
- * Class InsiteAppsManager
- */
+
 
 namespace InsiteApps\Common;
 
@@ -12,6 +10,10 @@ use InsiteApps;
 use DateTime;
 use DateTimeZone;
 
+/**
+ * Class Manager
+ * @package InsiteApps\Common
+ */
 class Manager extends InsiteApps\Common
 {
 
@@ -29,4 +31,16 @@ class Manager extends InsiteApps\Common
         return $arrValues;
     }
 
+    /**
+     * Get list of all members you have the "Full administrative right" permission
+     * @return \DataList
+     */
+    public static function get_admin_list()
+    {
+        $oMembers = \Member::get()
+            ->leftJoin("Group_Members", "Group_Members.MemberID = Member.ID")
+            ->leftJoin("Permission", "Permission.GroupID = Group_Members.GroupID")
+            ->filter(["Permission.Code" => 'RECEIVE_NOTIFICATION']);
+        return $oMembers;
+    }
 }
