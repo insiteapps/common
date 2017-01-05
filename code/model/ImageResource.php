@@ -13,7 +13,7 @@ class ImageResource extends DataObject
         'Name' => 'Varchar(255)',
         'Description' => 'Text',
         'Easing' => 'Enum("easeOutBack,easeInBack,Power4.easeOut","easeOutBack")',
-        'Transition' => 'Enum("fade,boxfade,slideleft,zoomout,papercut,slidedown,slotfade-horizontal","fade")',
+        'Transition' => 'Enum("fade,boxfade,slideleft,zoomout,papercut,slidedown,slotfade-horizontal,slideoverhorizontal","fade")',
         'SortOrder' => 'Int',
     );
     private static $has_one = array(
