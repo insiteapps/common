@@ -12,7 +12,7 @@ class ImageResource extends DataObject
         'VideoType' => 'Enum("Youtube,Vimeo","Vimeo")',
         'Name' => 'Varchar(255)',
         'Description' => 'Text',
-        'Easing' => 'Enum("easeOutBack,easeInBack,Power4.easeOut","easeOutBack")',
+        'Easing' => 'Enum("default,easeOutBack,easeInBack,Power4.easeOut","default")',
         'Transition' => 'Enum("fade,boxfade,slideleft,zoomout,papercut,slidedown,slotfade-horizontal,slideoverhorizontal","fade")',
         'SortOrder' => 'Int',
     );
