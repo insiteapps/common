@@ -194,17 +194,17 @@ class ListingPage_Controller extends Page_Controller
     {
         parent:: init();
         Requirements::customScript(sprintf("var REF = '%s';", base64_encode($this->ID)));
-        $this->setLastViewedDateValue();
+        //$this->setLastViewedDateValue();
 
     }
 
     public function setLastViewedDateValue()
     {
-        //$LastViewedDate = SS_Datetime::now()->getValue();
         $now = SS_Datetime::now()->Rfc2822();
         $oObj = Page::get()->byID($this->ID);
         $oObj->LastViewedDate = $now;
         $oObj->write();
+        $oObj->doRestoreToStage();
 
         //debug::show($this->record['LastViewedDate']);
 
