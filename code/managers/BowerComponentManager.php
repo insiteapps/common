@@ -33,7 +33,8 @@ class BowerComponentManager extends Object
             BOWER_COMPONENTS_DIR . "/rrssb/js/rrssb.js",
             BOWER_COMPONENTS_DIR . "/nouislider/distribute/nouislider.min.js",
 
-            BOWER_COMPONENTS_DIR . "/mixitup/src/jquery.mixitup.js",
+            BOWER_COMPONENTS_DIR . "/mixitup/dist/mixitup.min.js",
+
             BOWER_COMPONENTS_DIR . "/gsap/src/minified/TweenMax.min.js",
             BOWER_COMPONENTS_DIR . "/gsap/src/minified/utils/Draggable.min.js",
             BOWER_COMPONENTS_DIR . "/gsap/src/minified/jquery.gsap.min.js",

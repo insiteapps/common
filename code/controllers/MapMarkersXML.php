@@ -14,8 +14,7 @@ class MapMarkersXML extends InsiteContentManager
     );
     static $skip = array('url');
 
-    function xml()
-    {
+    function xml() {
         $this->getResponse()->addHeader("Content-type", "text/xml");
         $pageId = Convert::raw2xml($this->urlParams['ID']);
         // $page = SiteTree::get()->byID($pageId);
