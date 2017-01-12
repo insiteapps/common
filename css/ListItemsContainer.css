@@ -1,2 +1,81 @@
-.img-mask-effect{display:block;position:relative !important;overflow:hidden !important}.img-mask-effect .mask{display:block !important;position:absolute !important;top:0 !important;left:0 !important;width:100% !important;height:100% !important;z-index:10 !important;margin:0 !important;padding:0 !important;background:#fd1c36;background:rgba(253,28,54,0.7)}.img-mask-effect .mask .glyphicon,.img-mask-effect .mask .fa{display:block;position:absolute;width:20px;height:20px;top:50%;left:50%;margin-left:-10px;margin-top:-10px;font-size:1.5em;line-height:20px;color:#fff !important;text-align:center}.img-mask-effect .mask .glyphicon.medium,.img-mask-effect .mask .fa.medium{width:30px;height:30px;margin-left:-15px;margin-top:-15px;font-size:1.85em;line-height:30px}.img-mask-effect.fade{opacity:1;-webkit-transition:none;transition:none}.img-mask-effect.fade .mask{opacity:0;filter:alpha(opacity=0);-webkit-transition:all 0.4s ease-in-out;transition:all 0.4s ease-in-out}.img-mask-effect.fade:hover .mask{opacity:1;filter:alpha(opacity=100)}.img-mask-effect>img{opacity:1 !important;filter:alpha(opacity=100) !important}#ListItemsContainer{margin:20px 0 0}#ListItemsContainer .list-item{background:#fff;position:relative;display:inline-block;margin-bottom:15px}#ListItemsContainer .list-item h3.listing-title{font-weight:400;margin:0}#ListItemsContainer .list-item h3.listing-title a{color:#000;font-size:15px;text-transform:uppercase;font-weight:700}#ListItemsContainer .list-item h3.listing-title a:hover,#ListItemsContainer .list-item h3.listing-title a:focus{color:#000;text-decoration:none}#ListItemsContainer .list-item .listing-excerpt .listingExcerptBox .location{font-size:15px}#ListItemsContainer .list-item .listing-excerpt .listingExcerptBox p{margin-bottom:0;line-height:20px}#ListItemsContainer .list-item .listing-excerpt .listingExcerptBox ul,#ListItemsContainer .list-item .listing-excerpt .listingExcerptBox li{list-style:none;margin:0;padding:0}#ListItemsContainer .list-item .listing-excerpt .listingExcerptBox ul{margin:5px 0 0}#ListItemsContainer .List .list-item{width:100% !important}#ListItemsContainer .List .list-item .figure-container{padding:0}#ListItemsContainer .List .list-item .listing-details{padding:0}#ListItemsContainer .List .list-item .listing-details h3.listing-title{margin:0;line-height:1}#ListItemsContainer .List .list-item .listing-details .content-summary p{margin-bottom:0}#ListItemsContainer .Grid{margin-right:-15px;margin-left:-15px}#ListItemsContainer .Grid .list-item{background:none}#ListItemsContainer .Grid .list-item .list-item-grid-container .list-item-details,#ListItemsContainer .Grid .list-item .list-item-grid-container .figure-container{width:100%}#ListItemsContainer .Grid .list-item .list-item-grid-container .list-item-details .listing-details{padding:10px 0;background:none}#ListItemsContainer .Grid .list-item .list-item-grid-container .list-item-details .listing-details p{margin-bottom:0}#ListItemsContainer .Grid .list-item .list-item-grid-container .list-item-details .listing-desc{width:100%}
-/*# sourceMappingURL=ListItemsContainer.css.map */
+/*
+Error: Undefined variable: "$white".
+        on line 7 of ListItemsContainer.scss
+
+2: 
+3: #ListItemsContainer {
+4:   margin: 20px 0 0;
+5: 
+6:   .list-item {
+7:     background: $white;
+8:     position: relative;
+9:     display: inline-block;
+10:     margin-bottom: 15px;
+11: 
+12:     h3 {
+
+Backtrace:
+ListItemsContainer.scss:7
+C:/Ruby22/lib/ruby/gems/2.2.0/gems/sass-3.4.18/lib/sass/script/tree/variable.rb:49:in `_perform'
+C:/Ruby22/lib/ruby/gems/2.2.0/gems/sass-3.4.18/lib/sass/script/tree/node.rb:50:in `perform'
+C:/Ruby22/lib/ruby/gems/2.2.0/gems/sass-3.4.18/lib/sass/tree/visitors/perform.rb:395:in `visit_prop'
+C:/Ruby22/lib/ruby/gems/2.2.0/gems/sass-3.4.18/lib/sass/tree/visitors/base.rb:36:in `visit'
+C:/Ruby22/lib/ruby/gems/2.2.0/gems/sass-3.4.18/lib/sass/tree/visitors/perform.rb:158:in `block in visit'
+C:/Ruby22/lib/ruby/gems/2.2.0/gems/sass-3.4.18/lib/sass/stack.rb:79:in `block in with_base'
+C:/Ruby22/lib/ruby/gems/2.2.0/gems/sass-3.4.18/lib/sass/stack.rb:115:in `with_frame'
+C:/Ruby22/lib/ruby/gems/2.2.0/gems/sass-3.4.18/lib/sass/stack.rb:79:in `with_base'
+C:/Ruby22/lib/ruby/gems/2.2.0/gems/sass-3.4.18/lib/sass/tree/visitors/perform.rb:158:in `visit'
+C:/Ruby22/lib/ruby/gems/2.2.0/gems/sass-3.4.18/lib/sass/tree/visitors/perform.rb:431:in `block (2 levels) in visit_rule'
+C:/Ruby22/lib/ruby/gems/2.2.0/gems/sass-3.4.18/lib/sass/tree/visitors/perform.rb:431:in `map'
+C:/Ruby22/lib/ruby/gems/2.2.0/gems/sass-3.4.18/lib/sass/tree/visitors/perform.rb:431:in `block in visit_rule'
+C:/Ruby22/lib/ruby/gems/2.2.0/gems/sass-3.4.18/lib/sass/tree/visitors/perform.rb:179:in `with_environment'
+C:/Ruby22/lib/ruby/gems/2.2.0/gems/sass-3.4.18/lib/sass/tree/visitors/perform.rb:429:in `visit_rule'
+C:/Ruby22/lib/ruby/gems/2.2.0/gems/sass-3.4.18/lib/sass/tree/visitors/base.rb:36:in `visit'
+C:/Ruby22/lib/ruby/gems/2.2.0/gems/sass-3.4.18/lib/sass/tree/visitors/perform.rb:158:in `block in visit'
+C:/Ruby22/lib/ruby/gems/2.2.0/gems/sass-3.4.18/lib/sass/stack.rb:79:in `block in with_base'
+C:/Ruby22/lib/ruby/gems/2.2.0/gems/sass-3.4.18/lib/sass/stack.rb:115:in `with_frame'
+C:/Ruby22/lib/ruby/gems/2.2.0/gems/sass-3.4.18/lib/sass/stack.rb:79:in `with_base'
+C:/Ruby22/lib/ruby/gems/2.2.0/gems/sass-3.4.18/lib/sass/tree/visitors/perform.rb:158:in `visit'
+C:/Ruby22/lib/ruby/gems/2.2.0/gems/sass-3.4.18/lib/sass/tree/visitors/perform.rb:431:in `block (2 levels) in visit_rule'
+C:/Ruby22/lib/ruby/gems/2.2.0/gems/sass-3.4.18/lib/sass/tree/visitors/perform.rb:431:in `map'
+C:/Ruby22/lib/ruby/gems/2.2.0/gems/sass-3.4.18/lib/sass/tree/visitors/perform.rb:431:in `block in visit_rule'
+C:/Ruby22/lib/ruby/gems/2.2.0/gems/sass-3.4.18/lib/sass/tree/visitors/perform.rb:179:in `with_environment'
+C:/Ruby22/lib/ruby/gems/2.2.0/gems/sass-3.4.18/lib/sass/tree/visitors/perform.rb:429:in `visit_rule'
+C:/Ruby22/lib/ruby/gems/2.2.0/gems/sass-3.4.18/lib/sass/tree/visitors/base.rb:36:in `visit'
+C:/Ruby22/lib/ruby/gems/2.2.0/gems/sass-3.4.18/lib/sass/tree/visitors/perform.rb:158:in `block in visit'
+C:/Ruby22/lib/ruby/gems/2.2.0/gems/sass-3.4.18/lib/sass/stack.rb:79:in `block in with_base'
+C:/Ruby22/lib/ruby/gems/2.2.0/gems/sass-3.4.18/lib/sass/stack.rb:115:in `with_frame'
+C:/Ruby22/lib/ruby/gems/2.2.0/gems/sass-3.4.18/lib/sass/stack.rb:79:in `with_base'
+C:/Ruby22/lib/ruby/gems/2.2.0/gems/sass-3.4.18/lib/sass/tree/visitors/perform.rb:158:in `visit'
+C:/Ruby22/lib/ruby/gems/2.2.0/gems/sass-3.4.18/lib/sass/tree/visitors/base.rb:52:in `block in visit_children'
+C:/Ruby22/lib/ruby/gems/2.2.0/gems/sass-3.4.18/lib/sass/tree/visitors/base.rb:52:in `map'
+C:/Ruby22/lib/ruby/gems/2.2.0/gems/sass-3.4.18/lib/sass/tree/visitors/base.rb:52:in `visit_children'
+C:/Ruby22/lib/ruby/gems/2.2.0/gems/sass-3.4.18/lib/sass/tree/visitors/perform.rb:167:in `block in visit_children'
+C:/Ruby22/lib/ruby/gems/2.2.0/gems/sass-3.4.18/lib/sass/tree/visitors/perform.rb:179:in `with_environment'
+C:/Ruby22/lib/ruby/gems/2.2.0/gems/sass-3.4.18/lib/sass/tree/visitors/perform.rb:166:in `visit_children'
+C:/Ruby22/lib/ruby/gems/2.2.0/gems/sass-3.4.18/lib/sass/tree/visitors/base.rb:36:in `block in visit'
+C:/Ruby22/lib/ruby/gems/2.2.0/gems/sass-3.4.18/lib/sass/tree/visitors/perform.rb:186:in `visit_root'
+C:/Ruby22/lib/ruby/gems/2.2.0/gems/sass-3.4.18/lib/sass/tree/visitors/base.rb:36:in `visit'
+C:/Ruby22/lib/ruby/gems/2.2.0/gems/sass-3.4.18/lib/sass/tree/visitors/perform.rb:157:in `visit'
+C:/Ruby22/lib/ruby/gems/2.2.0/gems/sass-3.4.18/lib/sass/tree/visitors/perform.rb:8:in `visit'
+C:/Ruby22/lib/ruby/gems/2.2.0/gems/sass-3.4.18/lib/sass/tree/root_node.rb:36:in `css_tree'
+C:/Ruby22/lib/ruby/gems/2.2.0/gems/sass-3.4.18/lib/sass/tree/root_node.rb:29:in `render_with_sourcemap'
+C:/Ruby22/lib/ruby/gems/2.2.0/gems/sass-3.4.18/lib/sass/engine.rb:378:in `_render_with_sourcemap'
+C:/Ruby22/lib/ruby/gems/2.2.0/gems/sass-3.4.18/lib/sass/engine.rb:295:in `render_with_sourcemap'
+C:/Ruby22/lib/ruby/gems/2.2.0/gems/sass-3.4.18/lib/sass/plugin/compiler.rb:490:in `update_stylesheet'
+C:/Ruby22/lib/ruby/gems/2.2.0/gems/sass-3.4.18/lib/sass/plugin/compiler.rb:215:in `block in update_stylesheets'
+C:/Ruby22/lib/ruby/gems/2.2.0/gems/sass-3.4.18/lib/sass/plugin/compiler.rb:209:in `each'
+C:/Ruby22/lib/ruby/gems/2.2.0/gems/sass-3.4.18/lib/sass/plugin/compiler.rb:209:in `update_stylesheets'
+C:/Ruby22/lib/ruby/gems/2.2.0/gems/sass-3.4.18/lib/sass/plugin.rb:82:in `update_stylesheets'
+C:/Ruby22/lib/ruby/gems/2.2.0/gems/sass-3.4.18/lib/sass/exec/sass_scss.rb:364:in `watch_or_update'
+C:/Ruby22/lib/ruby/gems/2.2.0/gems/sass-3.4.18/lib/sass/exec/sass_scss.rb:51:in `process_result'
+C:/Ruby22/lib/ruby/gems/2.2.0/gems/sass-3.4.18/lib/sass/exec/base.rb:52:in `parse'
+C:/Ruby22/lib/ruby/gems/2.2.0/gems/sass-3.4.18/lib/sass/exec/base.rb:19:in `parse!'
+C:/Ruby22/lib/ruby/gems/2.2.0/gems/sass-3.4.18/bin/scss:13:in `<top (required)>'
+C:/Ruby22/bin/scss:23:in `load'
+C:/Ruby22/bin/scss:23:in `<main>'
+*/
+body:before {
+  white-space: pre;
+  font-family: monospace;
+  content: "Error: Undefined variable: \"$white\".\A         on line 7 of ListItemsContainer.scss\A \A 2: \A 3: #ListItemsContainer {\A 4:   margin: 20px 0 0;\A 5: \A 6:   .list-item {\A 7:     background: $white;\A 8:     position: relative;\A 9:     display: inline-block;\A 10:     margin-bottom: 15px;\A 11: \A 12:     h3 {"; }
