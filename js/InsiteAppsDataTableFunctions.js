@@ -1,6 +1,6 @@
 var unsortableColumns = [];
 var datatable = $("#datatable-table");
-
+var otable;
 // Reloads data for provided DataTable
 function ReloadDataTable(table) {
     if (typeof table === 'undefined' || table == null) {
@@ -131,6 +131,7 @@ function ReloadDataTable(table) {
             }
         });
 
+     
         /*
          $(".dataTables_length select").selectpicker({
          width: 'auto'
