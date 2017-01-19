@@ -45,12 +45,14 @@ class ListingHolder extends Page
 
     }
 
-    function ActiveListings()
+    function ActiveListings($limit = 50)
     {
-
-        $oListings = new PaginatedList($this->Children());
+        $oPages = $this->Children();
+        $oListings = new PaginatedList($oPages);
+        $oListings->setPageLength($limit);
         return $oListings;
     }
+
     function MakeSameHeight()
     {
         if ($this->owner->LayoutView() === 'grid' && $this->owner->SameHeightBoxes) {
