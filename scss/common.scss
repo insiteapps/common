@@ -7,6 +7,24 @@
   }
 }
 
+.bGreen {
+  background-color: $lGreen;
+}
+.bLightGreen {
+  background-color: $lLightGreen;
+}
+.bYellow {
+  background-color: $lYellow;
+
+}
+.bOrange {
+  background-color: $lOrange;
+
+}
+.bRed {
+  background-color: $lRed;
+}
+
 input[type=checkbox] {
   + label {
     background: url(../images/nice_checkbox.png) 0 2px no-repeat;
