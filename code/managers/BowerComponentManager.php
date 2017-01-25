@@ -68,6 +68,7 @@ class BowerComponentManager extends Object
         ]);
 
         $aRequirements["CSS"] = array_merge($aRequirements["CSS"], [
+            INSITE_COMMON_DIR . '/css/common.css',
             BOWER_COMPONENTS_DIR . '/font-awesome/css/font-awesome.min.css',
             JQUERY_UI_DIR . '/themes/smoothness/jquery-ui.min.css',
             BOWER_COMPONENTS_DIR . "/animate.css/animate.min.css",
