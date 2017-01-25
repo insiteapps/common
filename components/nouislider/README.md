@@ -14,8 +14,22 @@ Documentation
 -------
 An extensive documentation, including **examples**, **options** and **configuration details**, is available here: [noUiSlider documentation](https://refreshless.com/nouislider/).
 
+Bower
+-----
+`bower install nouislider --save`
+
+npm [(package)](https://www.npmjs.com/package/nouislider)
+---
+`npm install nouislider --save`
+
 Changelog
 ---------
+
+### 9.2.0 (*2017-01-17*)
+- Added: Version number to exceptions;
+- Added: `noUiSlider.version` holds current version number;
+- Added: Throw exception on invalid `pips` configuration (#721);
+- Added: Merged pull request that uses less preprocessor to generate CSS (#735);
 
 ### 9.1.0 (*2016-12-10*)
 - Fixed: Slider not properly handling multitouch (#700, #704);
@@ -36,7 +50,7 @@ Changelog
 - Change: `updateOptions` now **modifies the original options** object. The reference in `slider.noUiSlider.options` remains up to date (#678);
 - Change: more events fire when using various `behaviour` options (#664);
 - Change: on `rtl` sliders, handles are now visually positioned from the sliders `right`/`bottom` edge;
-- Change: events for `rtl` sliders now fire in the same order has for `ltr` sliders (with incremental handleNumbers);
+- Change: events for `rtl` sliders now fire in the same order as for `ltr` sliders (with incremental handleNumbers);
 - Change: internal `Spectrum` component is no longer `direction` aware;
 - Change: `limit` and `margin` must be divisible by `step` (if set);
 - Removed: `.noUi-stacking` class. Handles now stack themselves;
@@ -46,7 +60,7 @@ Changelog
 - Fixed: default tooltip color (#687);
 - Fixed: `margin` and `limit` calculated improperly after calling `updateOptions` with a new `range` option;
 - Fixed: `range` option was required in update, even when not updating it (#682);
-- Fixed: Cursor styling is now consistent for disable handles and sliders (#644);
+- Fixed: Cursor styling is now consistent for disabled handles and sliders (#644);
 - Fixed: Sliders now ignore touches when the screen is touched multiple times (#649, #663, #668);
 
 Devices
@@ -58,6 +72,9 @@ Devices/browsers tested:
 - Moto E (Android 5.1, Chrome)
 - Lumia 930 (WP8.1, IE10 mobile)
 - Lumia 930 (WM10, Edge)
+- OnePlus 3 (Android 6)
+	+ Chrome
+	+ Firefox
 - Asus S400C (Windows 10, Touch + mouse)
 	+ Chrome
 	+ Firefox
@@ -65,10 +82,6 @@ Devices/browsers tested:
 	+ IE11
 	+ IE10 (Emulated)
 	+ IE9 (Emulated)
-
-Bower
------
-Bower users can install all compiled and minified files easily using `bower install nouislider --save`. Supporting bower unfortunately means keeping all compiled and minified versions in the repository.
 
 Browserify
 ----------
@@ -102,8 +115,3 @@ You can use [polyfill.io](https://cdn.polyfill.io/v2/docs/) to easily do so:
 <script src="https://cdn.polyfill.io/v2/polyfill.min.js"></script>
 <![endif]-->
 ```
-
-Version numbering
-------------------------------
-Version numbering follows the 'Semantic versioning' style.
-You'll find an excellent documentation at [Semver.org](http://semver.org/).

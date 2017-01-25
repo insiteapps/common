@@ -23,7 +23,7 @@
     "tests"
   ],
   "dependencies": {
-    "jquery": "3.1.1",
+    "jquery": "latest",
     "jquery-migrate": "latest",
     "font-awesome": "4.7.0",
     "bootstrap-sass": "*",
@@ -40,7 +40,6 @@
     "underscore": "*",
     "moment": "*",
     "eonasdan-bootstrap-datetimepicker": "4.17.37",
-    "jquery-migrate": "*",
     "chosen": "https://github.com/harvesthq/chosen/releases/download/v1.3.0/chosen_v1.3.0.zip",
     "masonry": "*",
     "isotope": "*",

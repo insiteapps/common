@@ -1,9 +1,9 @@
 /**!
- * MixItUp v3.1.2
+ * MixItUp v3.1.5
  * A high-performance, dependency-free library for animated filtering, sorting and more
- * Build 8db25e3d-698e-4c92-9857-72cb05b80ed1
+ * Build 8e050b2e-5ae0-443c-b990-d2c1d27c2bc1
  *
- * @copyright Copyright 2014-2016 KunkaLabs Limited.
+ * @copyright Copyright 2014-2017 KunkaLabs Limited.
  * @author    KunkaLabs Limited.
  * @link      https://www.kunkalabs.com/mixitup/
  *
@@ -17,9 +17,9 @@
 (function(window) {
     'use strict';
 
-    var mixitup         = null,
-        h               = null,
-        jq              = null;
+    var mixitup = null,
+        h       = null,
+        jq      = null;
 
     (function() {
         var VENDORS = ['webkit', 'moz', 'o', 'ms'],
@@ -430,6 +430,8 @@
      */
 
     mixitup.use = function(extension) {
+        mixitup.Base.prototype.callActions.call(mixitup, 'beforeUse', arguments);
+
         // Call the extension's factory function, passing
         // the mixitup factory as a paramater
 
@@ -450,6 +452,8 @@
 
             mixitup.registerJqPlugin(extension);
         }
+
+        mixitup.Base.prototype.callActions.call(mixitup, 'afterUse', arguments);
     };
 
     /**
@@ -3570,7 +3574,8 @@
         this.callActions('beforeConstruct');
 
         /**
-         * A function returning an HTML string representing a target element.
+         * A function returning an HTML string representing a target element, or a reference to a
+         * single DOM element.
          *
          * The function is invoked as part of the `.dataset()` API, whenever a new item is added
          * to the dataset, or an item in the dataset changes (if `dataset.dirtyCheck` is enabled).
@@ -3582,9 +3587,11 @@
          * var mixer = mixitup(containerEl, {
          *     render: {
          *         target: function(item) {
-         *             return '&lt;div class="mix"&gt;' +
-         *                 '&lt;h2&gt;' + item.title + '&lt;/h2&gt;' +
-         *             '&lt;/div&gt;';
+         *             return (
+         *                 '&lt;div class="mix"&gt;' +
+         *                     '&lt;h2&gt;' + item.title + '&lt;/h2&gt;' +
+         *                 '&lt;/div&gt;'
+         *             );
          *         }
          *     }
          * });
@@ -3594,9 +3601,11 @@
          * var mixer = mixitup(containerEl, {
          *     render: {
          *         target: function(item) {
-         *             return `&lt;div class="mix"&gt;
-         *                 &lt;h2&gt;${item.title}&lt;/h2&gt;
-         *             &lt;/div&gt;`;
+         *             return (
+         *                 `&lt;div class="mix"&gt;
+         *                     &lt;h2&gt;${item.title}&lt;/h2&gt;
+         *                  &lt;/div&gt;`
+         *             );
          *         }
          *     }
          * });
@@ -3608,6 +3617,20 @@
          * var mixer = mixitup(containerEl, {
          *     render: {
          *         target: targetTemplate
+         *     }
+         * });
+         *
+         * @example <caption>Example 4: Returning a DOM element</caption>
+         *
+         * var mixer = mixitup(containerEl, {
+         *     render: {
+         *         target: function(item) {
+         *              // Create a single element using your framework's built-in renderer
+         *
+         *              var el = ...
+         *
+         *              return el;
+         *         }
          *     }
          * });
          *
@@ -4968,7 +4991,9 @@
                 self.config.debug.showWarnings = false;
             }
 
-            if (self.config.load.dataset) {
+            if (self.config.data.uidKey) {
+                // If the dataset API is in use, force disable controls
+
                 self.config.controls.enable = false;
             }
 
@@ -4995,6 +5020,13 @@
 
             self.callActions('afterAttach', arguments);
         },
+
+        /**
+         * @private
+         * @instance
+         * @since 3.0.0
+         * @return {void}
+         */
 
         sanitizeConfig: function() {
             var self = this;
@@ -6862,8 +6894,6 @@
 
             if (operation.willSort) {
                 self.printSort(false, operation);
-
-                self.targets = operation.newOrder;
             }
 
             // Remove any styles applied to the parent container
@@ -6889,7 +6919,11 @@
                             h.removeWhitespace(whitespaceBefore);
                         }
 
-                        self.dom.parent.removeChild(target.dom.el);
+                        if (!operation.willSort) {
+                            // NB: Sorting will remove targets as a bi-product of `printSort()`
+
+                            self.dom.parent.removeChild(target.dom.el);
+                        }
 
                         self.targets.splice(i, 1);
 
@@ -6902,6 +6936,10 @@
                 // Since targets have been removed, the original order must be updated
 
                 self.origOrder = self.targets;
+            }
+
+            if (operation.willSort) {
+                self.targets = operation.newOrder;
             }
 
             self.state = operation.newState;
@@ -7471,12 +7509,12 @@
 
             operation.id            = h.randomHex();
             operation.startState    = self.state;
-            operation.startOrder    = self.targets;
             operation.startDataset  = startDataset;
             operation.newDataset    = newDataset.slice();
 
             self.diffDatasets(operation);
 
+            operation.startOrder = self.targets;
             operation.newOrder = operation.show;
 
             if (self.config.animation.enable) {
@@ -7522,6 +7560,7 @@
             var self                = this,
                 persistantStartIds  = [],
                 persistantNewIds    = [],
+                insertedTargets     = [],
                 data                = null,
                 target              = null,
                 el                  = null,
@@ -7529,7 +7568,7 @@
                 nextEl              = null,
                 uids                = {},
                 id                  = '',
-                i                   = 0;
+                i                   = -1;
 
             self.callActions('beforeDiffDatasets', arguments);
 
@@ -7554,28 +7593,40 @@
                     if (self.config.data.dirtyCheck && !h.deepEquals(data, target.data)) {
                         // change detected
 
-                        el = self.renderTarget(data);
+                        el = target.render(data);
 
                         target.data = data;
 
-                        target.unbindEvents();
+                        if (el !== target.dom.el) {
+                            // Update target element reference
 
-                        self.dom.parent.replaceChild(el, target.dom.el);
+                            if (target.isInDom) {
+                                target.unbindEvents();
 
-                        target.dom.el = el;
+                                self.dom.parent.replaceChild(el, target.dom.el);
+                            }
 
-                        target.bindEvents();
+                            if (!target.isShown) {
+                                el.style.display = 'none';
+                            }
+
+                            target.dom.el = el;
+
+                            if (target.isInDom) {
+                                target.bindEvents();
+                            }
+                        }
                     }
 
                     el = target.dom.el;
                 } else {
                     // New target
 
-                    el = el = self.renderTarget(data);
-
                     target = new mixitup.Target();
 
-                    target.init(el, self, data);
+                    target.init(null, self, data);
+
+                    target.hide();
                 }
 
                 if (!target.isInDom) {
@@ -7591,11 +7642,17 @@
                         frag.appendChild(self.dom.document.createTextNode(' '));
                     }
 
-                    frag.appendChild(el);
+                    frag.appendChild(target.dom.el);
 
                     target.isInDom = true;
 
+                    target.unbindEvents();
+                    target.bindEvents();
+                    target.hide();
+
                     operation.toShow.push(target);
+
+                    insertedTargets.push(target);
                 } else {
                     // Already in DOM
 
@@ -7604,13 +7661,13 @@
                     persistantNewIds.push(id);
 
                     if (frag) {
-                        // Close and insert frag
+                        // Close and insert previously opened frag
 
                         if (frag.lastElementChild) {
                             frag.appendChild(self.dom.document.createTextNode(' '));
                         }
 
-                        self.dom.parent.insertBefore(frag, target.dom.el);
+                        self.insertDatasetFrag(frag, target.dom.el, self.targets.indexOf(target), insertedTargets);
 
                         frag = null;
                     }
@@ -7628,7 +7685,7 @@
                     frag.appendChild(self.dom.document.createTextNode(' '));
                 }
 
-                self.dom.parent.insertBefore(frag, nextEl);
+                self.insertDatasetFrag(frag, nextEl, self.dom.targets.length, insertedTargets);
             }
 
             for (i = 0; data = operation.startDataset[i]; i++) {
@@ -7657,31 +7714,24 @@
         /**
          * @private
          * @instance
-         * @since   3.0.0
-         * @param   {object} data
+         * @since   3.1.5
+         * @param   {DocumentFragment}          frag
+         * @param   {(HTMLElement|null)}        nextEl
+         * @param   {number}                    insertionIndex
+         * @param   {Array.<mixitup.Target>}    targets
          * @return  {void}
          */
 
-        renderTarget: function(data) {
-            var self    = this,
-                render  = null,
-                el      = null,
-                temp    = document.createElement('div'),
-                html    = '';
+        insertDatasetFrag: function(frag, nextEl, insertionIndex, targets) {
+            var self = this;
 
-            self.callActions('beforeRenderTarget', arguments);
+            self.dom.parent.insertBefore(frag, nextEl);
 
-            if (typeof (render = self.config.render.target) !== 'function') {
-                throw new TypeError(mixitup.messages.errorDatasetRendererNotSet());
+            while (targets.length) {
+                self.targets.splice(insertionIndex, 0, targets.shift());
+
+                insertionIndex++;
             }
-
-            html = render(data);
-
-            temp.innerHTML = html;
-
-            el = temp.firstElementChild;
-
-            return self.callFilters('elRenderTarget', el, arguments);
         },
 
         /**
@@ -9138,9 +9188,9 @@
          * @private
          * @instance
          * @since   3.0.0
-         * @param   {Element}   el
-         * @param   {object}    mixer
-         * @param   {object}    [data]
+         * @param   {(Element|null)}    el
+         * @param   {object}            mixer
+         * @param   {object}            [data]
          * @return  {void}
          */
 
@@ -9151,6 +9201,12 @@
             self.callActions('beforeInit', arguments);
 
             self.mixer = mixer;
+
+            if (!el) {
+                // If no element is provided, render it
+
+                el = self.render(data);
+            }
 
             self.cacheDom(el);
 
@@ -9174,6 +9230,45 @@
             }
 
             self.callActions('afterInit', arguments);
+        },
+
+        /**
+         * Renders the target element using a user-defined renderer function.
+         *
+         * @private
+         * @instance
+         * @since   3.1.4
+         * @param   {object} data
+         * @return  {void}
+         */
+
+        render: function(data) {
+            var self    = this,
+                render  = null,
+                el      = null,
+                temp    = null,
+                output  = '';
+
+            self.callActions('beforeRender', arguments);
+
+            render = self.callFilters('renderRender', self.mixer.config.render.target, arguments);
+
+            if (typeof render !== 'function') {
+                throw new TypeError(mixitup.messages.errorDatasetRendererNotSet());
+            }
+
+            output = render(data);
+
+            if (output && typeof output === 'object' && h.isElement(output)) {
+                el = output;
+            } else if (typeof output === 'string') {
+                temp = document.createElement('div');
+                temp.innerHTML = output;
+
+                el = temp.firstElementChild;
+            }
+
+            return self.callFilters('elRender', el, arguments);
         },
 
         /**
@@ -10331,6 +10426,8 @@
         this.show               = mixer.show.bind(mixer);
         this.hide               = mixer.hide.bind(mixer);
         this.filter             = mixer.filter.bind(mixer);
+        this.toggleOn           = mixer.toggleOn.bind(mixer);
+        this.toggleOff          = mixer.toggleOff.bind(mixer);
         this.sort               = mixer.sort.bind(mixer);
         this.changeLayout       = mixer.changeLayout.bind(mixer);
         this.multimix           = mixer.multimix.bind(mixer);
@@ -10375,6 +10472,8 @@
     if ((jq = window.$ || window.jQuery) && jq.fn.jquery) {
         mixitup.registerJqPlugin(jq);
     }
+    mixitup.BaseStatic.call(mixitup.constructor);
+
     mixitup.NAME = 'mixitup';
-    mixitup.CORE_VERSION = '3.1.2';
+    mixitup.CORE_VERSION = '3.1.5';
 })(window);
