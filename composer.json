@@ -10,6 +10,10 @@
       "email": "patrick@chitosystems.com"
     }
   ],
+  "require": {
+    "silverstripe/framework": "^4.0@dev",
+    "silverstripe/cms": "^4.0@dev"
+  },
   "extra": {
     "installer-name": "insiteapps-common"
   }
