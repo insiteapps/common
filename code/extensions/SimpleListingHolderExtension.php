@@ -1,5 +1,13 @@
 <?php
 
+use SilverStripe\ORM\DataExtension;
+use SilverStripe\Control\Cookie;
+use SilverStripe\Forms\CompositeField;
+use SilverStripe\Forms\DropdownField;
+use SilverStripe\Forms\TextField;
+use SilverStripe\Forms\NumericField;
+use SilverStripe\Forms\CheckboxField;
+
 class SimpleListingHolderExtension extends DataExtension
 {
 

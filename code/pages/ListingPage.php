@@ -1,5 +1,11 @@
 <?php
 
+use SilverStripe\View\Requirements;
+use SilverStripe\Forms\ToggleCompositeField;
+use SilverStripe\Forms\HTMLEditor\HTMLEditorField;
+use SilverStripe\Forms\TextField;
+use SilverStripe\Forms\ListboxField;
+
 /**
  * Class ListPage
  * @author Patrick Chitovoro
@@ -44,7 +50,7 @@ class ListingPage extends Page
             //'URLSegment',
         ));
 
-        $summary = HtmlEditorField::create('Summary', false);
+        $summary = HTMLEditorField::create('Summary', false);
         $summary->setRows(5);
         $summary->setDescription(_t(
             'BlogPost.SUMMARY_DESCRIPTION',
@@ -187,7 +193,7 @@ class ListingPage extends Page
 
 }
 
-class ListingPage_Controller extends Page_Controller
+class ListingPageController extends PageController
 {
 
     public function init()

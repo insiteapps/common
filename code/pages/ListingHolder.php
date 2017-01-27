@@ -1,5 +1,10 @@
 <?php
 
+use SilverStripe\View\Requirements;
+use SilverStripe\ORM\PaginatedList;
+use SilverStripe\Forms\GridField\GridField;
+use SilverStripe\Forms\GridField\GridFieldConfig_RecordEditor;
+
 class ListingHolder extends Page
 {
 
@@ -63,7 +68,7 @@ class ListingHolder extends Page
     }
 }
 
-class ListingHolder_Controller extends Page_Controller
+class ListingHolderController extends PageController
 {
 
     public function init()

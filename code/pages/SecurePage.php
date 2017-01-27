@@ -1,5 +1,12 @@
 <?php
 
+use SilverStripe\Security\PermissionProvider;
+use SilverStripe\Security\Security;
+use SilverStripe\Security\Member;
+use SilverStripe\ORM\DB;
+use SilverStripe\ORM\DataObject;
+use SilverStripe\Assets\Folder;
+
 class SecurePage extends Page
 {
 
@@ -24,7 +31,7 @@ class SecurePage extends Page
     }
 }
 
-class SecurePage_Controller extends Page_Controller implements PermissionProvider
+class SecurePageController extends PageController implements PermissionProvider
 {
     /**
      * @var Array Codes which are required from the current user to view this controller.

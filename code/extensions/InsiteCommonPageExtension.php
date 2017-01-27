@@ -1,5 +1,10 @@
 <?php
 
+use SilverStripe\ORM\DataExtension;
+use SilverStripe\Forms\FieldList;
+use SilverStripe\View\Requirements;
+use SilverStripe\Control\Controller;
+
 class InsiteCommonPageExtension extends DataExtension
 {
     private static $db = array(
@@ -18,7 +23,7 @@ class InsiteCommonPageExtension extends DataExtension
 
     function isMobile()
     {
-        $detect = new Mobile_Detect;
+        $detect = new Mobile_Detect();
         if ($detect->isMobile()) {
             return true;
         }

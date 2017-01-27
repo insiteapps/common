@@ -1,5 +1,15 @@
 <?php
 
+use SilverStripe\ORM\DataExtension;
+use SilverStripe\Forms\CompositeField;
+use SilverStripe\Forms\ToggleCompositeField;
+use SilverStripe\Forms\DropdownField;
+use SilverStripe\Forms\TextField;
+use SilverStripe\Forms\CheckboxField;
+use SilverStripe\Forms\NumericField;
+use SilverStripe\Forms\FieldList;
+use SilverStripe\Control\Cookie;
+
 class InsiteCommonListingExtension extends DataExtension
 {
     function getPageSetupFields()

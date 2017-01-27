@@ -1,5 +1,10 @@
 <?php
 
+use SilverStripe\ORM\DataExtension;
+use SilverStripe\Forms\CheckboxField;
+use SilverStripe\Forms\TreeDropdownField;
+use SilverStripe\Forms\FieldList;
+
 class GroupDecorator extends DataExtension
 {
 

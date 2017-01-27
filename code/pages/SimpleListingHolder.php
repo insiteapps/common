@@ -1,5 +1,13 @@
 <?php
 
+use SilverStripe\Control\Cookie;
+use SilverStripe\Forms\CompositeField;
+use SilverStripe\Forms\ToggleCompositeField;
+use SilverStripe\Forms\DropdownField;
+use SilverStripe\Forms\CheckboxField;
+use SilverStripe\Forms\TextField;
+use SilverStripe\Forms\NumericField;
+
 class SimpleListingHolder extends Page
 {
 
@@ -117,7 +125,7 @@ class SimpleListingHolder extends Page
     }
 }
 
-class SimpleListingHolder_Controller extends Page_Controller
+class SimpleListingHolderController extends PageController
 {
 
     public function init()
