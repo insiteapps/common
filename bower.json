@@ -77,7 +77,6 @@
   "resolutions": {
     "jquery": "~3",
     "d3": "~3.5.4",
-    "jquery": "3.1.1",
     "underscore": "1.8.3",
     "backbone": "^1.1.2",
     "font-awesome": "~4.7.0",
