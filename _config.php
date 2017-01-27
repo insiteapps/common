@@ -1,5 +1,7 @@
 <?php
 
+use SilverStripe\Admin\CMSMenu;
+
 define('INSITE_COMMON_DIR', basename(dirname(__FILE__)));
 
 define('BOWER_COMPONENTS_DIR', INSITE_COMMON_DIR . "/components");
