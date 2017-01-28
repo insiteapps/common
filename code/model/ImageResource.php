@@ -1,4 +1,20 @@
 <?php
+/**
+ *
+ * Copyright (c) 2017 Insite Apps - http://www.insiteapps.co.za
+ * All rights reserved.
+ * @package insiteapps
+ * @author Patrick Chitovoro  <patrick@insiteapps.co.za>
+ * Redistribution and use in source and binary forms, with or without modification, are NOT permitted at all.
+ * There is no freedom to share or change it this file.
+ *
+ *
+ */
+
+use SilverStripe\ORM\DataObject;
+use SilverStripe\Forms\DropdownField;
+use SilverStripe\Forms\UploadField;
+use SilverStripe\Forms\TextField;
 
 /**
  * Class ImageResource
@@ -71,19 +87,6 @@ class ImageResource extends DataObject
     function LinkingClass()
     {
         return strtolower($this->VideoType);
-
-
-        /*
-        $url = $this->VideoLink;
-        if (strpos($url, 'youtube') > 0) {
-            $player = 'youtube';
-        } elseif (strpos($url, 'vimeo') > 0) {
-            $player = 'vimeo';
-        }
-
-        return $player;
-        */
-
 
     }
 

@@ -2,7 +2,7 @@ Page:
   extensions:
     - InsiteCommonPageExtension
 
-Page_Controller:
+PageController:
   extensions:
     - InsiteCommonPageControllerExtension
 
@@ -10,6 +10,6 @@ ListingHolder:
   extensions:
     - InsiteCommonListingExtension
 
-ListingHolder_Controller:
+ListingHolderController:
   extensions:
     - InsiteCommonListingControllerExtension
