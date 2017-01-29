@@ -112,7 +112,7 @@ class RecordController extends InsiteMainController
         return $url;
     }
 
-    public static function find_or_make_customers_group() {
+    public static function find_or_make_customers_groupp() {
         $group = DataObject::get_one("Group", "Code='customers'");
         if (!$group) {
             $group = new Group();

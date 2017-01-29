@@ -28,7 +28,7 @@ class SecurePage extends Page
 
         $vault = DataObject::get_one('Folder', "Title = 'Vault'");
         if (!$vault) {
-            $vault = Folder::find_or_make($path);
+            $vault = SilverStripe\Assets\Folder::find_or_make($path);
             $vault->ParentID = "0";
             $vault->CanViewType = "LoggedInUsers";
             $vault->write();
