@@ -21,7 +21,7 @@ use SilverStripe\Assets\Folder;
 class SecurePage extends Page
 {
 
-    public function requireDefaultRecords()
+    public function requireDefaultRecords_()
     {
         parent::requireDefaultRecords();
         $path = "Vault";
@@ -32,7 +32,7 @@ class SecurePage extends Page
             $vault->ParentID = "0";
             $vault->CanViewType = "LoggedInUsers";
             $vault->write();
-            DB::alteration_message(' Vault created', 'created');
+            SilverStripe\ORM\DB::alteration_message(' Vault created', 'created');
         }
 
         if ($vault->CanViewType != "LoggedInUsers") {
