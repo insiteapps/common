@@ -101,7 +101,7 @@ class SimpleListingHolderExtension extends DataExtension
 
             ])
 
-        );
+        ));
         $fields->push(DropdownField::create("Template")->setSource($this->getTemplateList()));
         $fields->push(DropdownField::create("ChildrenTemplate", "Children template")
             ->setSource($this->getTemplateList()));

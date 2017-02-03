@@ -45,7 +45,7 @@ class InsiteCommonListingExtension extends DataExtension
             ])
 
 
-        );
+        ));
         $fields->push(DropdownField::create("Template")->setSource($this->owner->dbObject("Template")->enumValues()));
         $fields->push(DropdownField::create("ChildrenTemplate", "Children template")->setSource($this->owner->dbObject("ChildrenTemplate")->enumValues()));
 
