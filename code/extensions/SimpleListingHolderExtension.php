@@ -79,7 +79,8 @@ class SimpleListingHolderExtension extends DataExtension
 
     function getPageSetupFields()
     {
-        $fields = CompositeField::create(
+        $fields = Page::getDefaultPageSetupFields();
+        $fields->push(CompositeField::create(
             ToggleCompositeField::create('ViewConfiguration', 'Display', [
                 DropdownField::create("SidebarPosition", "Sidebar position")->setSource(["none" => "none", "left" => "left", "right" => "right"]),
                 CheckboxField::create("AllowViewChange"),

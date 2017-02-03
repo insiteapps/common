@@ -40,9 +40,7 @@ class SimpleListingHolder extends Page
     {
         $f = parent::getCMSFields();
         $f->removeByName(["SidebarPosition"]);
-        $setup = PageSetupBar::create('Setup', $this->getPageSetupFields());
-        $f->insertBefore($setup, 'Root');
-        $f->fieldByName('Root')->setTemplate('PageSetupBar');
+    
         return $f;
     }
 
@@ -79,7 +77,8 @@ class SimpleListingHolder extends Page
 
     function getPageSetupFields()
     {
-        $fields = CompositeField::create(
+        $fields = Page::getDefaultPageSetupFields();
+        $fields->push(CompositeField::create(
             ToggleCompositeField::create('ViewConfiguration', 'Display', [
                 DropdownField::create("SidebarPosition", "Sidebar position")->setSource(["none" => "none", "left" => "left", "right" => "right"]),
                 CheckboxField::create("AllowViewChange"),

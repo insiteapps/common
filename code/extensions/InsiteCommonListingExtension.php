@@ -4,7 +4,8 @@ class InsiteCommonListingExtension extends DataExtension
 {
     function getPageSetupFields()
     {
-        $fields = CompositeField::create(
+        $fields = Page::getDefaultPageSetupFields();
+        $fields->push(CompositeField::create(
 
             ToggleCompositeField::create('ViewConfiguration', 'View', [
                 DropdownField::create("View")->setSource($this->owner->dbObject("View")->enumValues()),
