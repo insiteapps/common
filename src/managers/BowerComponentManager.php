@@ -111,7 +111,7 @@ class BowerComponentManager extends Object
 
         $aRequirements["CSS"] = array_merge($aRequirements["CSS"], [
             BOOTSTRAP_DIR . "/css/bootstrap.min.css",
-            BOOTSTRAP_DIR . "/css/bootstrap-theme.min.css",
+            //BOOTSTRAP_DIR . "/css/bootstrap-theme.min.css",
 
         ]);
 

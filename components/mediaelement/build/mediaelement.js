@@ -878,7 +878,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var mejs = {};
 
 // version number
-mejs.version = '3.0.1';
+mejs.version = '3.1.1';
 
 // Basic HTML5 settings
 mejs.html5media = {
@@ -890,10 +890,11 @@ mejs.html5media = {
 	'volume', 'src', 'currentTime', 'muted',
 
 	// GET only
-	'duration', 'paused', 'ended',
+	'duration', 'paused', 'ended', 'buffered', 'error', 'networkState', 'readyState', 'seeking', 'seekable',
 
 	// OTHERS
-	'error', 'currentSrc', 'networkState', 'preload', 'buffered', 'bufferedBytes', 'bufferedTime', 'readyState', 'seeking', 'initialTime', 'startOffsetTime', 'defaultPlaybackRate', 'playbackRate', 'played', 'seekable', 'autoplay', 'loop', 'controls'],
+	'currentSrc', 'preload', 'bufferedBytes', 'bufferedTime', 'initialTime', 'startOffsetTime', 'defaultPlaybackRate', 'playbackRate', 'played', 'autoplay', 'loop', 'controls'],
+	readOnlyProperties: ['duration', 'paused', 'ended', 'buffered', 'error', 'networkState', 'readyState', 'seeking', 'seekable'],
 	/**
   * @type {String[]}
   */
@@ -1358,6 +1359,7 @@ var DailyMotionIframeRenderer = {
 		    dmPlayer = null,
 		    dmIframe = null,
 		    events = void 0,
+		    readyState = 4,
 		    i = void 0,
 		    il = void 0;
 
@@ -1425,6 +1427,11 @@ var DailyMotionIframeRenderer = {
 								return {
 									v: mediaElement.originalNode.getAttribute('src')
 								};
+
+							case 'readyState':
+								return {
+									v: readyState
+								};
 						}
 					}();
 
@@ -1468,6 +1475,11 @@ var DailyMotionIframeRenderer = {
 								var event = (0, _dom.createEvent)('volumechange', dm);
 								mediaElement.dispatchEvent(event);
 							}, 50);
+							break;
+
+						case 'readyState':
+							var event = (0, _dom.createEvent)('canplay', vimeo);
+							mediaElement.dispatchEvent(event);
 							break;
 
 						default:
@@ -1866,20 +1878,22 @@ var DashNativeRenderer = {
 			};
 
 			node['set' + capName] = function (value) {
-				if (dashPlayer !== null) {
-					if (propName === 'src') {
+				if (!_mejs2.default.html5media.readOnlyProperties.includes(propName)) {
+					if (dashPlayer !== null) {
+						if (propName === 'src') {
 
-						dashPlayer.attachSource(value);
+							dashPlayer.attachSource(value);
 
-						if (node.getAttribute('autoplay')) {
-							node.play();
+							if (node.getAttribute('autoplay')) {
+								node.play();
+							}
 						}
-					}
 
-					node[propName] = value;
-				} else {
-					// store for after "READY" event fires
-					stack.push({ type: 'set', propName: propName, value: value });
+						node[propName] = value;
+					} else {
+						// store for after "READY" event fires
+						stack.push({ type: 'set', propName: propName, value: value });
+					}
 				}
 			};
 		};
@@ -2092,6 +2106,7 @@ var FacebookRenderer = {
 		    hasStartedPlaying = false,
 		    src = '',
 		    eventHandler = {},
+		    readyState = 4,
 		    i = void 0,
 		    il = void 0;
 
@@ -2143,6 +2158,9 @@ var FacebookRenderer = {
 							};
 						case 'src':
 							return src;
+
+						case 'readyState':
+							return readyState;
 					}
 
 					return value;
@@ -2192,6 +2210,11 @@ var FacebookRenderer = {
 								var event = (0, _dom.createEvent)('volumechange', fbWrapper);
 								mediaElement.dispatchEvent(event);
 							}, 50);
+							break;
+
+						case 'readyState':
+							var event = (0, _dom.createEvent)('canplay', vimeo);
+							mediaElement.dispatchEvent(event);
 							break;
 
 						default:
@@ -2753,7 +2776,7 @@ var FlashMediaElementRenderer = {
 
 		mediaElement.appendChild(flash.flashWrapper);
 
-		if (isVideo && mediaElement.originalNode !== null) {
+		if (mediaElement.originalNode !== null) {
 			mediaElement.originalNode.style.display = 'none';
 		}
 
@@ -2807,9 +2830,13 @@ var FlashMediaElementRenderer = {
 			flash.flashNode.style.width = width + 'px';
 			flash.flashNode.style.height = height + 'px';
 
-			if (flash.flashApi !== null) {
+			if (flash.flashApi !== null && typeof flash.flashApi.fire_setSize === 'function') {
 				flash.flashApi.fire_setSize(width, height);
 			}
+		};
+
+		flash.destroy = function () {
+			flash.flashNode.parentNode.removeChild(flash.flashNode);
 		};
 
 		if (mediaFiles && mediaFiles.length > 0) {
@@ -3168,17 +3195,19 @@ var FlvNativeRenderer = {
 			};
 
 			node['set' + capName] = function (value) {
-				if (flvPlayer !== null) {
-					node[propName] = value;
+				if (!_mejs2.default.html5media.readOnlyProperties.includes(propName)) {
+					if (flvPlayer !== null) {
+						node[propName] = value;
 
-					if (propName === 'src') {
-						flvPlayer.detachMediaElement();
-						flvPlayer.attachMediaElement(node);
-						flvPlayer.load();
+						if (propName === 'src') {
+							flvPlayer.detachMediaElement();
+							flvPlayer.attachMediaElement(node);
+							flvPlayer.load();
+						}
+					} else {
+						// store for after "READY" event fires
+						stack.push({ type: 'set', propName: propName, value: value });
 					}
-				} else {
-					// store for after "READY" event fires
-					stack.push({ type: 'set', propName: propName, value: value });
 				}
 			};
 		};
@@ -3522,26 +3551,28 @@ var HlsNativeRenderer = {
 			};
 
 			node['set' + capName] = function (value) {
-				if (hlsPlayer !== null) {
-					node[propName] = value;
+				if (!_mejs2.default.html5media.readOnlyProperties.includes(propName)) {
+					if (hlsPlayer !== null) {
+						node[propName] = value;
 
-					if (propName === 'src') {
+						if (propName === 'src') {
 
-						hlsPlayer.destroy();
-						hlsPlayer = null;
-						hlsPlayer = NativeHls.createInstance({
-							options: options.hls,
-							id: id
-						});
+							hlsPlayer.destroy();
+							hlsPlayer = null;
+							hlsPlayer = NativeHls.createInstance({
+								options: options.hls,
+								id: id
+							});
 
-						hlsPlayer.attachMedia(node);
-						hlsPlayer.on(Hls.Events.MEDIA_ATTACHED, function () {
-							hlsPlayer.loadSource(value);
-						});
+							hlsPlayer.attachMedia(node);
+							hlsPlayer.on(Hls.Events.MEDIA_ATTACHED, function () {
+								hlsPlayer.loadSource(value);
+							});
+						}
+					} else {
+						// store for after "READY" event fires
+						stack.push({ type: 'set', propName: propName, value: value });
 					}
-				} else {
-					// store for after "READY" event fires
-					stack.push({ type: 'set', propName: propName, value: value });
 				}
 			};
 		};
@@ -3802,7 +3833,9 @@ var HtmlMediaElement = {
 			};
 
 			node['set' + capName] = function (value) {
-				node[propName] = value;
+				if (!_mejs2.default.html5media.readOnlyProperties.includes(propName)) {
+					node[propName] = value;
+				}
 			};
 		};
 
@@ -4030,6 +4063,7 @@ var SoundCloudIframeRenderer = {
 		    volume = 1,
 		    muted = false,
 		    ended = false,
+		    readyState = 4,
 		    i = void 0,
 		    il = void 0;
 
@@ -4077,6 +4111,9 @@ var SoundCloudIframeRenderer = {
 							};
 						case 'src':
 							return scIframe ? scIframe.src : '';
+
+						case 'readyState':
+							return readyState;
 					}
 
 					return value;
@@ -4120,6 +4157,11 @@ var SoundCloudIframeRenderer = {
 								var event = (0, _dom.createEvent)('volumechange', sc);
 								mediaElement.dispatchEvent(event);
 							}, 50);
+							break;
+
+						case 'readyState':
+							var event = (0, _dom.createEvent)('canplay', vimeo);
+							mediaElement.dispatchEvent(event);
 							break;
 
 						default:
@@ -4500,6 +4542,7 @@ var vimeoIframeRenderer = {
 		    ended = false,
 		    duration = 0,
 		    url = "",
+		    readyState = 4,
 		    i = void 0,
 		    il = void 0;
 
@@ -4530,7 +4573,6 @@ var vimeoIframeRenderer = {
 							return volume === 0;
 						case 'paused':
 							return paused;
-
 						case 'ended':
 							return ended;
 
@@ -4550,6 +4592,8 @@ var vimeoIframeRenderer = {
 								},
 								length: 1
 							};
+						case 'readyState':
+							return readyState;
 					}
 
 					return value;
@@ -4631,6 +4675,10 @@ var vimeoIframeRenderer = {
 								});
 							}
 							break;
+						case 'readyState':
+							var event = (0, _dom.createEvent)('canplay', vimeo);
+							mediaElement.dispatchEvent(event);
+							break;
 						default:
 							
 					}
@@ -4648,8 +4696,6 @@ var vimeoIframeRenderer = {
 		// add wrappers for native methods
 		var methods = _mejs2.default.html5media.methods,
 		    assignMethods = function assignMethods(methodName) {
-
-			// run the method on the Soundcloud API
 			vimeo[methodName] = function () {
 
 				if (vimeoPlayer !== null) {
@@ -4657,8 +4703,10 @@ var vimeoIframeRenderer = {
 					// DO method
 					switch (methodName) {
 						case 'play':
+							paused = false;
 							return vimeoPlayer.play();
 						case 'pause':
+							paused = true;
 							return vimeoPlayer.pause();
 						case 'load':
 							return null;
@@ -4732,9 +4780,6 @@ var vimeoIframeRenderer = {
 			});
 
 			vimeoPlayer.on('progress', function () {
-
-				paused = vimeo.mediaElement.getPaused();
-
 				vimeoPlayer.getDuration().then(function (loadProgress) {
 
 					duration = loadProgress;
@@ -4750,10 +4795,6 @@ var vimeoIframeRenderer = {
 				});
 			});
 			vimeoPlayer.on('timeupdate', function () {
-
-				paused = vimeo.mediaElement.getPaused();
-				ended = false;
-
 				vimeoPlayer.getCurrentTime().then(function (seconds) {
 					currentTime = seconds;
 				});
@@ -4764,21 +4805,15 @@ var vimeoIframeRenderer = {
 			vimeoPlayer.on('play', function () {
 				paused = false;
 				ended = false;
-
-				vimeoPlayer.play()['catch'](function (error) {
-					vimeoApi.errorHandler(error, vimeo);
-				});
-
 				var event = (0, _dom.createEvent)('play', vimeo);
+				mediaElement.dispatchEvent(event);
+
+				event = (0, _dom.createEvent)('playing', vimeo);
 				mediaElement.dispatchEvent(event);
 			});
 			vimeoPlayer.on('pause', function () {
 				paused = true;
 				ended = false;
-
-				vimeoPlayer.pause()['catch'](function (error) {
-					vimeoApi.errorHandler(error, vimeo);
-				});
 
 				var event = (0, _dom.createEvent)('pause', vimeo);
 				mediaElement.dispatchEvent(event);
@@ -4803,14 +4838,15 @@ var vimeoIframeRenderer = {
 		var height = mediaElement.originalNode.height,
 		    width = mediaElement.originalNode.width,
 		    vimeoContainer = _document2.default.createElement('iframe'),
-		    standardUrl = '//player.vimeo.com/video/' + vimeoApi.getVimeoId(mediaFiles[0].src);
+		    standardUrl = '//player.vimeo.com/video/' + vimeoApi.getVimeoId(mediaFiles[0].src),
+		    queryArgs = mediaFiles[0].src.includes('?') ? '?' + mediaFiles[0].src.slice(mediaFiles[0].src.indexOf('?') + 1) : '';
 
 		// Create Vimeo <iframe> markup
 		vimeoContainer.setAttribute('id', vimeo.id);
 		vimeoContainer.setAttribute('width', width);
 		vimeoContainer.setAttribute('height', height);
 		vimeoContainer.setAttribute('frameBorder', '0');
-		vimeoContainer.setAttribute('src', standardUrl);
+		vimeoContainer.setAttribute('src', '' + standardUrl + queryArgs);
 		vimeoContainer.setAttribute('webkitallowfullscreen', '');
 		vimeoContainer.setAttribute('mozallowfullscreen', '');
 		vimeoContainer.setAttribute('allowfullscreen', '');
@@ -5106,6 +5142,8 @@ var YouTubeIframeRenderer = {
 		    paused = true,
 		    ended = false,
 		    youTubeIframe = null,
+		    volume = 1,
+		    readyState = 4,
 		    i = void 0,
 		    il = void 0;
 
@@ -5136,8 +5174,9 @@ var YouTubeIframeRenderer = {
 								};
 
 							case 'volume':
+								volume = youTubeApi.getVolume() / 100;
 								return {
-									v: youTubeApi.getVolume()
+									v: volume
 								};
 
 							case 'paused':
@@ -5153,7 +5192,7 @@ var YouTubeIframeRenderer = {
 							case 'muted':
 								return {
 									v: youTubeApi.isMuted()
-								}; // ?
+								};
 
 							case 'buffered':
 								var percentLoaded = youTubeApi.getVideoLoadedFraction(),
@@ -5172,6 +5211,11 @@ var YouTubeIframeRenderer = {
 							case 'src':
 								return {
 									v: youTubeApi.getVideoUrl()
+								};
+
+							case 'readyState':
+								return {
+									v: readyState
 								};
 						}
 					}();
@@ -5207,9 +5251,9 @@ var YouTubeIframeRenderer = {
 
 						case 'muted':
 							if (value) {
-								youTubeApi.mute(); // ?
+								youTubeApi.mute();
 							} else {
-								youTubeApi.unMute(); // ?
+								youTubeApi.unMute();
 							}
 							setTimeout(function () {
 								var event = (0, _dom.createEvent)('volumechange', youtube);
@@ -5218,11 +5262,16 @@ var YouTubeIframeRenderer = {
 							break;
 
 						case 'volume':
-							youTubeApi.setVolume(value);
+							volume = value;
+							youTubeApi.setVolume(value * 100);
 							setTimeout(function () {
 								var event = (0, _dom.createEvent)('volumechange', youtube);
 								mediaElement.dispatchEvent(event);
 							}, 50);
+							break;
+						case 'readyState':
+							var event = (0, _dom.createEvent)('canplay', vimeo);
+							mediaElement.dispatchEvent(event);
 							break;
 
 						default:
@@ -5280,8 +5329,9 @@ var YouTubeIframeRenderer = {
 		mediaElement.originalNode.parentNode.insertBefore(youtubeContainer, mediaElement.originalNode);
 		mediaElement.originalNode.style.display = 'none';
 
-		var height = mediaElement.originalNode.height,
-		    width = mediaElement.originalNode.width,
+		var isAudio = mediaElement.originalNode.tagName.toLowerCase() === 'audio',
+		    height = isAudio ? '0' : mediaElement.originalNode.height,
+		    width = isAudio ? '0' : mediaElement.originalNode.width,
 		    videoId = YouTubeApi.getYouTubeId(mediaFiles[0].src),
 		    youtubeSettings = {
 			id: youtube.id,
@@ -5415,6 +5465,11 @@ var YouTubeIframeRenderer = {
 				}
 			}
 		};
+
+		// The following will prevent that in mobile devices, YouTube is displayed in fullscreen when using audio
+		if (isAudio) {
+			youtubeSettings.playerVars.playsinline = 1;
+		}
 
 		// send it off for async loading and creation
 		YouTubeApi.enqueueIframe(youtubeSettings);

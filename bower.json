@@ -24,6 +24,7 @@
   ],
   "dependencies": {
     "jquery": "latest",
+    "bootstrap": "~4",
     "jquery-migrate": "latest",
     "font-awesome": "4.7.0",
     "bootstrap-sass": "*",
@@ -45,7 +46,6 @@
     "isotope": "*",
     "isotope-horizontal": "*",
     "isotope-masonry-horizontal": "*",
-    "bootstrap": "~3",
     "mixitup": "*",
     "nouislider": "*",
     "imagesloaded": "*",
@@ -81,9 +81,9 @@
     "backbone": "^1.1.2",
     "font-awesome": "~4.7.0",
     "animate.css": "~3.5.0",
-    "bootstrap": "~3"
+    "bootstrap": "~4"
   },
   "devDependencies": {
-    "tether": "~1.1.1"
+    "tether": "~1.4"
   }
 }
