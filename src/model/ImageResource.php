@@ -28,7 +28,7 @@ class ImageResource extends DataObject
         'VideoType' => 'Enum("Youtube,Vimeo","Vimeo")',
         'Name' => 'Varchar(255)',
         'Description' => 'Text',
-        'Easing' => 'Enum("default,easeOutBack,easeInBack,Power4.easeOut","default")',
+        'Easing' => 'Varchar',
         'Transition' => 'Enum("fade,boxfade,slideleft,zoomout,papercut,slidedown,slotfade-horizontal,slideoverhorizontal","fade")',
         'SortOrder' => 'Int',
     );
@@ -42,16 +42,21 @@ class ImageResource extends DataObject
         $f = parent::getCMSFields();
         $f->removeByName('SortOrder');
         $f->removeByName('PageID');
-        $f->addFieldsToTab("Root.Settings", array(
-            DropdownField::create("Easing")->setSource($this->dbObject("Easing")->enumValues()),
-            DropdownField::create("Transition")->setSource($this->dbObject("Transition")->enumValues()),
-        ));
+        $f->addFieldsToTab("Root.Settings", [
+            DropdownField::create("Easing")
+                ->setSource([
+                    "default" => "default",
+                    "easeOutBack" => "easeOutBack",
+                    "easeInBack" => "easeInBack",
+                    "Power4.easeOut" => "Power4.easeOut"
+                ]),
+            DropdownField::create("Transition")
+                ->setSource($this->dbObject("Transition")->enumValues()),
+        ]);
 
 
         $ImageField = new UploadField('Image', 'Please upload a Hero image <span>(max. 1 files)</span>');
-        $ImageField->setAllowedFileCategories('image');
-        $ImageField->setAllowedMaxFileNumber(1);
-        $ImageField->getValidator()->setAllowedExtensions(array('jpg', 'jpeg', 'png', 'gif'));
+        $ImageField->setAllowedFileCategories('image/supported');
         $ImageField->setConfig('allowedMaxFileNumber', 1);
         $URLSegment = null;
         if ($this->PageID) {

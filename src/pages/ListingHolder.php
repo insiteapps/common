@@ -15,6 +15,7 @@ use SilverStripe\View\Requirements;
 use SilverStripe\ORM\PaginatedList;
 use SilverStripe\Forms\GridField\GridField;
 use SilverStripe\Forms\GridField\GridFieldConfig_RecordEditor;
+use SilverStripe\GridFieldExtensions\GridFieldAddNewMultiClass;
 
 class ListingHolder extends Page
 {
@@ -42,9 +43,9 @@ class ListingHolder extends Page
         $gridFieldConfig = GridFieldConfig_RecordEditor::create();
         $gridFieldConfig->addComponent(new GridFieldAddNewMultiClass());
         $gridFieldConfig->removeComponentsByType('GridFieldAddNewButton');
-        $gridFieldConfig->addComponent(new GridFieldSortableRows('SortOrder'));
+       // $gridFieldConfig->addComponent(new GridFieldSortableRows('SortOrder'));
 
-        $f->addFieldsToTab('Root.Settings', [
+        $f->addFieldsToTab('Root.Manager', [
             //new GridField('FilterComponents', 'FilterComponents', $this->FilterComponents(), $gridFieldConfig),
             GridField::create('Areas', 'Areas', $this->Areas(), GridFieldConfig_RecordEditor::create()),
             GridField::create('Locations', 'Locations', $this->Locations(), GridFieldConfig_RecordEditor::create()),
