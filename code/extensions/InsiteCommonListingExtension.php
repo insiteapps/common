@@ -10,7 +10,6 @@ class InsiteCommonListingExtension extends DataExtension
             ToggleCompositeField::create('ViewConfiguration', 'View', [
                 DropdownField::create("View")->setSource($this->owner->dbObject("View")->enumValues()),
                 DropdownField::create("Columns")->setSource(self::getColumnEnums())
-
             ]),
             ToggleCompositeField::create('ActionBarConfiguration', 'ActionBar', [
                 CheckboxField::create("AllowViewChange"),
