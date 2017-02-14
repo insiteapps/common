@@ -1,17 +1,16 @@
-/**
- * Javascript-Template, needs to be evaluated by Requirements::javascriptTemplate
- */
-$.fn.getInputType = function () {
-    return this[0].tagName == "INPUT" ? this[0].type.toLowerCase() : this[0].tagName.toLowerCase();
-}
-
 var AjaxFormMainValidator = function () {
 
     return {
-        validate: function (form, aRequiredFields, prefix, submit) {
+        validate: function (form, aRequiredFields, prefix, canSubmit) {
+
             var valid = AjaxValidator.IsValid(form, aRequiredFields, prefix);
+            console.log(canSubmit);
             if (valid) {
-                AjaxFormMainValidator.submit(form);
+                if (canSubmit) {
+                    return AjaxFormMainValidator.submit(form);
+                } else {
+                    return 'Validate';
+                }
             }
         },
         submit: function (form) {
