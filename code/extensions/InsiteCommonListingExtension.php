@@ -2,9 +2,8 @@
 
 class InsiteCommonListingExtension extends DataExtension
 {
-    function getPageSetupFields()
+    function updatePageSetupFields($fields)
     {
-        $fields = Page::getDefaultPageSetupFields();
         $fields->push(CompositeField::create(
 
             ToggleCompositeField::create('ViewConfiguration', 'View', [
