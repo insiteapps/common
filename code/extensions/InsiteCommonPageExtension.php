@@ -18,7 +18,7 @@ class InsiteCommonPageExtension extends DataExtension
 
     function isMobile()
     {
-        $detect = new Mobile_Detect;
+        $detect = new Mobile_Detect();
         if ($detect->isMobile()) {
             return true;
         }
