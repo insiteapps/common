@@ -92,12 +92,6 @@ class InsiteCommonListingExtension extends DataExtension
 
     public function updateCMSFields(FieldList $fields)
     {
-        /*
-        //$fields->addFieldToTab("Root.Manager", $compositeFields);
-        $setup = PageSetupBar::create('Setup', $this->owner->getPageSetupFields());
-        $fields->insertBefore($setup, 'Root');
-        $fields->fieldByName('Root')->setTemplate('PageSetupBar');
-        */
 
     }
 
