@@ -1,6 +1,26 @@
 /**
  * Shared variables
  */
+
+
+var browser = {
+    isIe: function () {
+        return navigator.appVersion.indexOf("MSIE") != -1;
+    },
+    navigator: navigator.appVersion,
+    getVersion: function () {
+        var version = 999; // we assume a sane browser
+        if (navigator.appVersion.indexOf("MSIE") != -1)
+        // bah, IE again, lets downgrade version number
+            version = parseFloat(navigator.appVersion.split("MSIE")[1]);
+        return version;
+    }
+};
+
+function isInt(n) {
+    return n % 1 === 0;
+}
+
 var ua = navigator.userAgent.toLowerCase(),
     platform = navigator.platform.toLowerCase(),
     $window = $(window),
