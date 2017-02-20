@@ -2,9 +2,8 @@
 
 class InsiteCommonListingExtension extends DataExtension
 {
-    function getPageSetupFields()
+    function updatePageSetupFields($fields)
     {
-        $fields = Page::getDefaultPageSetupFields();
         $fields->push(CompositeField::create(
 
             ToggleCompositeField::create('ViewConfiguration', 'View', [
@@ -93,10 +92,6 @@ class InsiteCommonListingExtension extends DataExtension
 
     public function updateCMSFields(FieldList $fields)
     {
-        //$fields->addFieldToTab("Root.Manager", $compositeFields);
-        $setup = PageSetupBar::create('Setup', $this->owner->getPageSetupFields());
-        $fields->insertBefore($setup, 'Root');
-        $fields->fieldByName('Root')->setTemplate('PageSetupBar');
 
     }
 

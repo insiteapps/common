@@ -23,7 +23,7 @@ class ListingPage extends Page
         "Types" => "ListingType",
     );
 
-    function getTemplateName()
+    function getChosenTemplateName()
     {
         return $this->Parent()->ChildrenTemplate . $this->ClassName;
     }
