@@ -1,6 +1,14 @@
 Change Log
 ==========
 
+## 3.1.7
+
+- Fixed duplicate hook `beforeCacheDom` in `Target#cacheDom`. Now renamed to `afterCacheDom`.
+
+## 3.1.6
+
+- Added composer.json
+
 ## 3.1.5
 
 - Fixed several issues relating to the Dataset API and multimix-like operations (i.e. simultaneous insertion/removal/sorting/dirty-checking)

@@ -1,12 +1,12 @@
 {
   "name": "mixitup",
   "homepage": "https://github.com/barrel/mixitup",
-  "version": "3.1.5",
-  "_release": "3.1.5",
+  "version": "3.1.7",
+  "_release": "3.1.7",
   "_resolution": {
     "type": "version",
-    "tag": "v3.1.5",
-    "commit": "b9cc9eda32a9f5ea71bdb59f3df0c6b76e3aa373"
+    "tag": "v3.1.7",
+    "commit": "900ae5f193b778b2e426f6177acdcb0754cb7602"
   },
   "_source": "https://github.com/barrel/mixitup.git",
   "_target": "*",

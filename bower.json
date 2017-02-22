@@ -23,7 +23,7 @@
     "tests"
   ],
   "dependencies": {
-    "jquery": "latest",
+    "jquery": "~3",
     "jquery-migrate": "latest",
     "font-awesome": "4.7.0",
     "bootstrap-sass": "*",
@@ -54,6 +54,7 @@
     "gsap": "1.19.0",
     "snap.svg": "*",
     "pace": "*",
+    "noty": "*",
     "hammerjs": "*",
     "jquery-hammerjs": "*",
     "jquery-mousewheel": "*",
