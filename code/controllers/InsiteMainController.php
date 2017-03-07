@@ -3,16 +3,27 @@
 class InsiteMainController extends Page_Controller
 {
 
+    /**
+     * @var array
+     */
+    private static $aFontList = array();
+
     function Member()
     {
         return Member::currentUser();
     }
 
+    /**
+     * @param $url
+     *
+     * @return string
+     */
     static public function AddProtocol($url)
     {
         if (strtolower(substr($url, 0, 8)) !== 'https://' && strtolower(substr($url, 0, 7)) !== 'http://') {
             return 'http://' . $url;
         }
+
         return $url;
     }
 
@@ -20,6 +31,7 @@ class InsiteMainController extends Page_Controller
      *
      * @param array $request
      * @param array $Unset
+     *
      * @return array
      */
     public static function cleanREQUEST(array $request, array $Unset = array())
@@ -27,15 +39,17 @@ class InsiteMainController extends Page_Controller
         $request = Convert::raw2sql($request);
         $aUnset = array('url', 'SecurityID');
         $arrUnset = array_merge($aUnset, $Unset);
-        foreach ($arrUnset as $value) {
-            unset($request[$value]);
+        foreach ( $arrUnset as $value ) {
+            unset($request[ $value ]);
         }
+
         return $request;
     }
 
     public static function validateDate($date)
     {
         $d = DateTime::createFromFormat('Y-m-d', $date);
+
         return $d && $d->format('Y-m-d') === $date;
     }
 
@@ -54,16 +68,27 @@ class InsiteMainController extends Page_Controller
         return $controller;
     }
 
-
     function urlParamsID()
     {
         return Convert::raw2sql($this->urlParams['ID']);
     }
 
-
     function urlParamsParts()
     {
         return Convert::raw2sql($this->urlParams);
+    }
+
+    /**
+     * @return array|bool
+     */
+    public static function get_fonts_library_names()
+    {
+        $url = "http://cdn.insiteapps.co.za/fonts/names/";
+        $oManager = new  InsiteAppsCurlManager();
+        $results = $oManager->processCurlWithHeaders($url);
+
+        return $results;
+
     }
 
 }
