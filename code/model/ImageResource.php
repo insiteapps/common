@@ -32,16 +32,15 @@ class ImageResource extends DataObject
         ));
 
 
-        $ImageField = new UploadField('Image', 'Please upload a Hero image <span>(max. 1 files)</span>');
-        $ImageField->setAllowedFileCategories('image');
-        $ImageField->setAllowedMaxFileNumber(1);
-        $ImageField->getValidator()->setAllowedExtensions(array('jpg', 'jpeg', 'png', 'gif'));
-        $ImageField->setConfig('allowedMaxFileNumber', 1);
         $URLSegment = null;
         if ($this->PageID) {
             $URLSegment = $this->Page()->URLSegment;
         }
-        $ImageField->setFolderName('Uploads/Images/' . $URLSegment);
+        $ImageField = FileAttachmentField::create('Image')
+            ->imagesOnly()
+            ->setMaxFilesize(1)
+            ->setFolderName('Uploads/Images/' . $URLSegment);
+
         $f->addFieldToTab('Root.Images', $ImageField);
 
         $f->addFieldsToTab('Root.Video', [
