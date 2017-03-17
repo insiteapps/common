@@ -41,7 +41,7 @@ class ImageResource extends DataObject
         if ($this->PageID) {
             $URLSegment = $this->Page()->URLSegment;
         }
-        $ImageField->setFolderName('Uploads/Image/' . $URLSegment);
+        $ImageField->setFolderName('Uploads/Images/' . $URLSegment);
         $f->addFieldToTab('Root.Images', $ImageField);
 
         $f->addFieldsToTab('Root.Video', [
