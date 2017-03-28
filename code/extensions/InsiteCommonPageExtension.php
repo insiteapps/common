@@ -33,7 +33,7 @@ class InsiteCommonPageControllerExtension extends DataExtension
 
     public function onAfterInit()
     {
-        Requirements::css(INSITE_COMMON_DIR . "/css/common.css");
+        //Requirements::css(INSITE_COMMON_DIR . "/css/common.css");
 
 
     }
