@@ -37,7 +37,7 @@ class ListingPage extends Page
     public function getCMSFields()
     {
         $fields = parent::getCMSFields();
-        $fields->addFieldToTab('Root.Main', TextField::create("ExtraLink")->setRightText("<small>include http for external links</small>"), "Content");
+        $fields->addFieldToTab('Root.Main', TextField::create("ExtraLink")->setRightTitle("<small>include http for external links</small>"), "Content");
 
         //house keeping
         $fields->dataFieldByName('Content')->setRows(20);
