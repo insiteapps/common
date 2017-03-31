@@ -12,6 +12,7 @@ class ListingPage extends Page
         'Status' => "Enum('Active,Approved,Pending,Suspended','Pending')",
         "Reference" => "Varchar(100)",
         "Summary" => "HTMLText",
+
         'LastViewedDate' => 'SS_Datetime',
     );
     private static $has_many = array(//"ListingImages" => "ImageResource"
