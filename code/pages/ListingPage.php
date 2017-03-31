@@ -2,26 +2,31 @@
 
 /**
  * Class ListPage
+ *
  * @author Patrick Chitovoro
  */
 class ListingPage extends Page
 {
     private static $can_be_root = false;
-    private static $allowed_children = array();
-    private static $db = array(
-        'Status' => "Enum('Active,Approved,Pending,Suspended','Pending')",
-        "Reference" => "Varchar(100)",
-        "Summary" => "HTMLText",
 
+    private static $allowed_children = array();
+
+    private static $db = array(
+        'Status'         => "Enum('Active,Approved,Pending,Suspended','Pending')",
+        "Reference"      => "Varchar(100)",
+        "Summary"        => "HTMLText",
         'LastViewedDate' => 'SS_Datetime',
+        "ExtraLink"      => "Varchar(255)",
     );
+
     private static $has_many = array(//"ListingImages" => "ImageResource"
     );
+
     private static $many_many = array(
-        "Areas" => "ListingArea",
+        "Areas"       => "ListingArea",
         "Collections" => "ListingCollection",
-        "Locations" => "ListingLocation",
-        "Types" => "ListingType",
+        "Locations"   => "ListingLocation",
+        "Types"       => "ListingType",
     );
 
     function getChosenTemplateName()
@@ -32,7 +37,7 @@ class ListingPage extends Page
     public function getCMSFields()
     {
         $fields = parent::getCMSFields();
-
+        $fields->addFieldToTab('Root.Main', TextField::create("ExtraLink")->setRightText("<small>include http for external links</small>"), "Content");
 
         //house keeping
         $fields->dataFieldByName('Content')->setRows(20);
@@ -125,6 +130,7 @@ class ListingPage extends Page
         if ($this->Parent()->RemoveChildLinking) {
             return "javascript:void(0);";
         }
+
         return parent::Link();
     }
 
@@ -150,6 +156,7 @@ class ListingPage extends Page
         if ($html->Value) {
             return $html->Value;
         }
+
         return $html;
 
     }
@@ -179,6 +186,7 @@ class ListingPage extends Page
     {
         if (count($this->Images())) {
             $image = $this->Images()->first();
+
             return $image->Image();
         }
 
@@ -217,6 +225,7 @@ class ListingPage_Controller extends Page_Controller
 
             return false;
         }
+
         return parent::SlideShow();
     }
 }
