@@ -9,6 +9,9 @@ var AjaxValidator = function () {
     return {
         IsValid: function (form, aRequiredFields, prefix) {
 
+            if (typeof prefix === 'undefined') {
+                prefix = '';
+            }
 
             if (aRequiredFields.length && (typeof aRequiredFields !== 'undefined')) {
                 //Validate required fields
@@ -73,7 +76,7 @@ var AjaxValidator = function () {
             //if any inputs on the page have the class 'needsfilled' the form will not submit
             if ($(":input").hasClass("needsfilled")) {
                 $('html, body').animate({
-                    scrollTop: $(".needsfilled").offset().top
+                    scrollTop: $(".needsfilled").offset().top - 76
                 }, 1000);
                 return false;
             }

@@ -13,3 +13,7 @@ ListingHolder:
 ListingHolder_Controller:
   extensions:
     - InsiteCommonListingControllerExtension
+
+ListingCollection:
+  extensions:
+    - DataObjectURLSegmentExtension
