@@ -7,6 +7,8 @@ namespace InsiteApps\Common;
 use SilverStripe\Security\Member;
  */
 
+
+
 class Manager extends Common
 {
 

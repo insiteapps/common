@@ -1,6 +1,6 @@
 <?php
 
-namespace InsiteApps;
+namespace InsiteApps\Common;
 
 /**
  * Class InsiteApps
