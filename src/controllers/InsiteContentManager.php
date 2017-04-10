@@ -7,7 +7,7 @@ use SilverStripe\Core\Convert;
 use SilverStripe\ORM\FieldType\DBField;
 */
 
-class InsiteContentManager extends PageController
+class InsiteContentManager extends Page_Controller
 {
     private static $allowed_actions = array(
         'view',
