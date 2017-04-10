@@ -1,4 +1,18 @@
 <?php
+/**
+ *
+ * Copyright (c) 2017 Insite Apps - http://www.insiteapps.co.za
+ * All rights reserved.
+ * @package insiteapps
+ * @author Patrick Chitovoro  <patrick@insiteapps.co.za>
+ * Redistribution and use in source and binary forms, with or without modification, are NOT permitted at all.
+ * There is no freedom to share or change it this file.
+ *
+ *
+ */
+
+use SilverStripe\Core\Object;
+use SilverStripe\View\Requirements;
 
 /**
  * Class BowerComponentManager
@@ -10,7 +24,7 @@ class BowerComponentManager extends Object
     {
         self::includeBootstrap($aRequirements);
         $aRequirements["JS"] = array_merge($aRequirements["JS"], [
-            BOWER_COMPONENTS_DIR . '/jquery-migrate/jquery-migrate.js',
+            //BOWER_COMPONENTS_DIR . '/jquery-migrate/jquery-migrate.js',
             JQUERY_UI_DIR . '/jquery-ui.min.js',
             JQUERY_FORM_DIR . '/jquery.form.min.js',
             INSITE_COMMON_DIR . "/js/js.cookie.js",
@@ -30,7 +44,7 @@ class BowerComponentManager extends Object
 
             BOWER_COMPONENTS_DIR . '/imagesloaded/imagesloaded.pkgd.min.js',
             BOWER_COMPONENTS_DIR . "/owl.carousel/dist/owl.carousel.min.js",
-            BOWER_COMPONENTS_DIR . "/rrssb/js/rrssb.js",
+            //BOWER_COMPONENTS_DIR . "/rrssb/js/rrssb.js",
             BOWER_COMPONENTS_DIR . "/nouislider/distribute/nouislider.min.js",
 
             BOWER_COMPONENTS_DIR . "/mixitup/dist/mixitup.min.js",
@@ -73,7 +87,7 @@ class BowerComponentManager extends Object
             JQUERY_UI_DIR . '/themes/smoothness/jquery-ui.min.css',
             BOWER_COMPONENTS_DIR . "/animate.css/animate.min.css",
             BOWER_COMPONENTS_DIR . "/owl.carousel/dist/assets/owl.carousel.css",
-            BOWER_COMPONENTS_DIR . "/owl.carousel/dist/assets/owl.theme.css",
+            BOWER_COMPONENTS_DIR . "/owl.carousel/dist/assets/owl.theme.default.css",
             BOWER_COMPONENTS_DIR . '/pixeden-stroke-7-icon/pe-icon-7-stroke/dist/pe-icon-7-stroke.min.css',
             CHOSEN_DIR . '/chosen.css',
             BOWER_COMPONENTS_DIR . "/mediaelement/build/mediaelementplayer.min.css",
@@ -91,13 +105,13 @@ class BowerComponentManager extends Object
         $aRequirements["JS"] = array_merge($aRequirements["JS"], [
             JQUERY_DIR . '/jquery.min.js',
             BOWER_COMPONENTS_DIR . "/tether/dist/js/tether.js",
-            BOWER_COMPONENTS_DIR . '/bootstrap/js/dist/util.js',
+            //BOOTSTRAP_DIR . '/bootstrap/js/dist/util.js',
             BOOTSTRAP_DIR . '/js/bootstrap.js'
         ]);
 
         $aRequirements["CSS"] = array_merge($aRequirements["CSS"], [
             BOOTSTRAP_DIR . "/css/bootstrap.min.css",
-            BOOTSTRAP_DIR . "/css/bootstrap-theme.min.css",
+            //BOOTSTRAP_DIR . "/css/bootstrap-theme.min.css",
 
         ]);
 

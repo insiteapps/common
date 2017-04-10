@@ -1,5 +1,6 @@
 ### Version History
 
+<<<<<<< HEAD
 *3.1.2 (2017/02/10)*
 
 * Expanded workflow to stop media loading completely when removing player @ron666
@@ -16,6 +17,8 @@
 * Added reference to "johndyer/mediaelement-plugins" (https://github.com/johndyer/mediaelement/pull/2067) @isantolin
 * Standardized way to display chapters tracks using button and menu @ron666
 
+=======
+>>>>>>> 19a3a21949abe3a0b8fcebeef5423ddd85cf81e3
 *3.1.1 (2017/02/02)*
 
 * Added patch in Flash audio shim to load new source correctly @an1rk4

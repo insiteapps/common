@@ -1,4 +1,19 @@
 <?php
+use SilverStripe\ORM\DataObject;
+use SilverStripe\View\Requirements;
+use SilverStripe\Security\Group;
+
+/**
+ *
+ * Copyright (c) 2017 Insite Apps - http://www.insiteapps.co.za
+ * All rights reserved.
+ * @package insiteapps
+ * @author Patrick Chitovoro  <patrick@insiteapps.co.za>
+ * Redistribution and use in source and binary forms, with or without modification, are NOT permitted at all.
+ * There is no freedom to share or change it this file.
+ *
+ *
+ */
 
 class RecordController extends InsiteMainController
 {
@@ -97,7 +112,7 @@ class RecordController extends InsiteMainController
         return $url;
     }
 
-    public static function find_or_make_customers_group() {
+    public static function find_or_make_customers_groupp() {
         $group = DataObject::get_one("Group", "Code='customers'");
         if (!$group) {
             $group = new Group();

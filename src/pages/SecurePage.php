@@ -1,20 +1,38 @@
 <?php
+/**
+ *
+ * Copyright (c) 2017 Insite Apps - http://www.insiteapps.co.za
+ * All rights reserved.
+ * @package insiteapps
+ * @author Patrick Chitovoro  <patrick@insiteapps.co.za>
+ * Redistribution and use in source and binary forms, with or without modification, are NOT permitted at all.
+ * There is no freedom to share or change it this file.
+ *
+ *
+ */
+
+use SilverStripe\Security\PermissionProvider;
+use SilverStripe\Security\Security;
+use SilverStripe\Security\Member;
+use SilverStripe\ORM\DB;
+use SilverStripe\ORM\DataObject;
+use SilverStripe\Assets\Folder;
 
 class SecurePage extends Page
 {
 
-    public function requireDefaultRecords()
+    public function requireDefaultRecords_()
     {
         parent::requireDefaultRecords();
         $path = "Vault";
 
         $vault = DataObject::get_one('Folder', "Title = 'Vault'");
         if (!$vault) {
-            $vault = Folder::find_or_make($path);
+            $vault = SilverStripe\Assets\Folder::find_or_make($path);
             $vault->ParentID = "0";
             $vault->CanViewType = "LoggedInUsers";
             $vault->write();
-            DB::alteration_message(' Vault created', 'created');
+            SilverStripe\ORM\DB::alteration_message(' Vault created', 'created');
         }
 
         if ($vault->CanViewType != "LoggedInUsers") {
@@ -24,7 +42,7 @@ class SecurePage extends Page
     }
 }
 
-class SecurePage_Controller extends Page_Controller implements PermissionProvider
+class SecurePageController extends PageController implements PermissionProvider
 {
     /**
      * @var Array Codes which are required from the current user to view this controller.

@@ -1,4 +1,21 @@
 <?php
+/**
+ *
+ * Copyright (c) 2017 Insite Apps - http://www.insiteapps.co.za
+ * All rights reserved.
+ * @package insiteapps
+ * @author Patrick Chitovoro  <patrick@insiteapps.co.za>
+ * Redistribution and use in source and binary forms, with or without modification, are NOT permitted at all.
+ * There is no freedom to share or change it this file.
+ *
+ *
+ */
+
+use SilverStripe\View\Requirements;
+use SilverStripe\ORM\PaginatedList;
+use SilverStripe\Forms\GridField\GridField;
+use SilverStripe\Forms\GridField\GridFieldConfig_RecordEditor;
+use SilverStripe\GridFieldExtensions\GridFieldAddNewMultiClass;
 
 class ListingHolder extends Page
 {
@@ -26,9 +43,9 @@ class ListingHolder extends Page
         $gridFieldConfig = GridFieldConfig_RecordEditor::create();
         $gridFieldConfig->addComponent(new GridFieldAddNewMultiClass());
         $gridFieldConfig->removeComponentsByType('GridFieldAddNewButton');
-        $gridFieldConfig->addComponent(new GridFieldSortableRows('SortOrder'));
+       // $gridFieldConfig->addComponent(new GridFieldSortableRows('SortOrder'));
 
-        $f->addFieldsToTab('Root.Settings', [
+        $f->addFieldsToTab('Root.Manager', [
             //new GridField('FilterComponents', 'FilterComponents', $this->FilterComponents(), $gridFieldConfig),
             GridField::create('Areas', 'Areas', $this->Areas(), GridFieldConfig_RecordEditor::create()),
             GridField::create('Locations', 'Locations', $this->Locations(), GridFieldConfig_RecordEditor::create()),
@@ -63,7 +80,7 @@ class ListingHolder extends Page
     }
 }
 
-class ListingHolder_Controller extends Page_Controller
+class ListingHolderController extends PageController
 {
 
     public function init()

@@ -878,7 +878,11 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var mejs = {};
 
 // version number
+<<<<<<< HEAD
 mejs.version = '3.1.2';
+=======
+mejs.version = '3.1.1';
+>>>>>>> 19a3a21949abe3a0b8fcebeef5423ddd85cf81e3
 
 // Basic HTML5 settings
 mejs.html5media = {
@@ -2226,8 +2230,11 @@ var _player = _dereq_(16);
 var _player2 = _interopRequireDefault(_player);
 
 var _time = _dereq_(24);
+<<<<<<< HEAD
 
 var _general = _dereq_(21);
+=======
+>>>>>>> 19a3a21949abe3a0b8fcebeef5423ddd85cf81e3
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -3084,7 +3091,11 @@ if ('x\n\ny'.split(/\n/gi).length !== 3) {
 	};
 }
 
+<<<<<<< HEAD
 },{"16":16,"21":21,"24":24,"4":4,"6":6}],13:[function(_dereq_,module,exports){
+=======
+},{"16":16,"24":24,"4":4,"6":6}],13:[function(_dereq_,module,exports){
+>>>>>>> 19a3a21949abe3a0b8fcebeef5423ddd85cf81e3
 'use strict';
 
 var _player = _dereq_(16);
@@ -3591,6 +3602,7 @@ var _i18n = _dereq_(4);
 var _i18n2 = _interopRequireDefault(_i18n);
 
 var _constants = _dereq_(19);
+<<<<<<< HEAD
 
 var _general = _dereq_(21);
 
@@ -3599,6 +3611,14 @@ var _time = _dereq_(24);
 var _dom = _dereq_(20);
 
 var _media = _dereq_(22);
+=======
+
+var _general = _dereq_(21);
+
+var _time = _dereq_(24);
+
+var _dom = _dereq_(20);
+>>>>>>> 19a3a21949abe3a0b8fcebeef5423ddd85cf81e3
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -5155,6 +5175,7 @@ var MediaElementPlayer = function () {
 				// @todo: detach event listeners better than this; also detach ONLY the events attached by this plugin!
 				t.$node.attr('id', t.$node.attr('id').replace('_' + rendererName, ''));
 				t.$node.attr('id', t.$node.attr('id').replace('_from_mejs', ''));
+<<<<<<< HEAD
 
 				// Remove `autoplay` (not worth bringing it back once player is destroyed)
 				t.$node.removeProp('autoplay');
@@ -5163,6 +5184,8 @@ var MediaElementPlayer = function () {
 				if (t.media.canPlayType((0, _media.getTypeFromFile)(src))) {
 					t.$node.attr('src', src);
 				}
+=======
+>>>>>>> 19a3a21949abe3a0b8fcebeef5423ddd85cf81e3
 				t.$node.clone().insertBefore(t.container).show();
 				t.$node.remove();
 			} else {
@@ -5223,7 +5246,11 @@ exports.default = MediaElementPlayer;
 	}
 })(_mejs2.default.$);
 
+<<<<<<< HEAD
 },{"19":19,"2":2,"20":20,"21":21,"22":22,"24":24,"3":3,"4":4,"5":5,"6":6}],17:[function(_dereq_,module,exports){
+=======
+},{"19":19,"2":2,"20":20,"21":21,"24":24,"3":3,"4":4,"5":5,"6":6}],17:[function(_dereq_,module,exports){
+>>>>>>> 19a3a21949abe3a0b8fcebeef5423ddd85cf81e3
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -5319,8 +5346,13 @@ var PluginDetector = exports.PluginDetector = {
 		    description = void 0,
 		    ax = void 0;
 
+<<<<<<< HEAD
 		// Firefox, Webkit, Opera; avoid MS Edge since `plugins` cannot be accessed
 		if (!_constants.IS_EDGE && _constants.NAV.plugins !== null && _constants.NAV.plugins !== undefined && _typeof(_constants.NAV.plugins[pluginName]) === 'object') {
+=======
+		// Firefox, Webkit, Opera
+		if (_constants.NAV.plugins !== undefined && _typeof(_constants.NAV.plugins[pluginName]) === 'object') {
+>>>>>>> 19a3a21949abe3a0b8fcebeef5423ddd85cf81e3
 			description = _constants.NAV.plugins[pluginName].description;
 			if (description && !(typeof _constants.NAV.mimeTypes !== 'undefined' && _constants.NAV.mimeTypes[mimeType] && !_constants.NAV.mimeTypes[mimeType].enabledPlugin)) {
 				version = description.replace(pluginName, '').replace(/^\s+/, '').replace(/\sr/gi, '.').split('.');
@@ -5484,6 +5516,7 @@ var FlashMediaElementRenderer = {
 			assignMethods(methods[i]);
 		}
 
+<<<<<<< HEAD
 		// give initial events like in others renderers
 		var initEvents = ['rendererready', 'loadeddata', 'loadedmetadata', 'canplay'];
 
@@ -5492,12 +5525,20 @@ var FlashMediaElementRenderer = {
 			mediaElement.dispatchEvent(event);
 		}
 
+=======
+>>>>>>> 19a3a21949abe3a0b8fcebeef5423ddd85cf81e3
 		// add a ready method that Flash can call to
 		_window2.default['__ready__' + flash.id] = function () {
 
 			flash.flashReady = true;
 			flash.flashApi = _document2.default.getElementById('__' + flash.id);
 
+<<<<<<< HEAD
+=======
+			var event = (0, _dom.createEvent)('rendererready', flash);
+			mediaElement.dispatchEvent(event);
+
+>>>>>>> 19a3a21949abe3a0b8fcebeef5423ddd85cf81e3
 			// do call stack
 			if (flash.flashApiStack.length) {
 				for (var _i = 0, _il = flash.flashApiStack.length; _i < _il; _i++) {
@@ -5534,10 +5575,13 @@ var FlashMediaElementRenderer = {
 		    flashHeight = isVideo ? mediaElement.originalNode.height : 1,
 		    flashWidth = isVideo ? mediaElement.originalNode.width : 1;
 
+<<<<<<< HEAD
 		if (!!mediaElement.originalNode.currentSrc.length) {
 			flashVars.push('src=' + mediaElement.originalNode.currentSrc);
 		}
 
+=======
+>>>>>>> 19a3a21949abe3a0b8fcebeef5423ddd85cf81e3
 		if (flash.options.enablePseudoStreaming === true) {
 			flashVars.push('pseudostreamstart=' + flash.options.pseudoStreamingStartQueryParam);
 			flashVars.push('pseudostreamtype=' + flash.options.pseudoStreamingType);
@@ -5612,6 +5656,10 @@ var FlashMediaElementRenderer = {
 			for (i = 0, il = mediaFiles.length; i < il; i++) {
 				if (_renderer.renderer.renderers[options.prefix].canPlayType(mediaFiles[i].type)) {
 					flash.setSrc(mediaFiles[i].src);
+<<<<<<< HEAD
+=======
+					flash.load();
+>>>>>>> 19a3a21949abe3a0b8fcebeef5423ddd85cf81e3
 					break;
 				}
 			}

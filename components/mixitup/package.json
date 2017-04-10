@@ -1,7 +1,11 @@
 {
   "name": "mixitup",
   "title": "MixItUp",
+<<<<<<< HEAD
   "version": "3.1.7",
+=======
+  "version": "3.1.6",
+>>>>>>> 19a3a21949abe3a0b8fcebeef5423ddd85cf81e3
   "description": "A high-performance, dependency-free library for animated filtering, sorting and more",
   "author": "KunkaLabs Limited",
   "homepage": "https://www.kunkalabs.com/mixitup/",
