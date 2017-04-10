@@ -1,22 +1,10 @@
 <?php
-/**
- *
- * Copyright (c) 2017 Insite Apps - http://www.insiteapps.co.za
- * All rights reserved.
- * @package insiteapps
- * @author Patrick Chitovoro  <patrick@insiteapps.co.za>
- * Redistribution and use in source and binary forms, with or without modification, are NOT permitted at all.
- * There is no freedom to share or change it this file.
- *
- *
- */
 
+/*
 use SilverStripe\Core\Object;
 use SilverStripe\View\Requirements;
-
-/**
- * Class BowerComponentManager
  */
+
 class BowerComponentManager extends Object
 {
 
@@ -106,7 +94,7 @@ class BowerComponentManager extends Object
             JQUERY_DIR . '/jquery.min.js',
             BOWER_COMPONENTS_DIR . "/tether/dist/js/tether.js",
             //BOOTSTRAP_DIR . '/bootstrap/js/dist/util.js',
-            BOOTSTRAP_DIR . '/js/bootstrap.js'
+            BOOTSTRAP_DIR . '/js/bootstrap.js',
         ]);
 
         $aRequirements["CSS"] = array_merge($aRequirements["CSS"], [
@@ -124,7 +112,7 @@ class BowerComponentManager extends Object
     {
         $aRequirements["JS"] = array_merge($aRequirements["JS"], [
             CHOSEN_DIR . '/chosen.jquery.min.js',
-            INSITE_COMMON_DIR . '/js/chosen.jquery_init.js'
+            INSITE_COMMON_DIR . '/js/chosen.jquery_init.js',
         ]);
 
         $aRequirements["CSS"] = array_merge($aRequirements["CSS"], [

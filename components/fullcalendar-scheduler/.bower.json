@@ -1,0 +1,40 @@
+{
+  "name": "fullcalendar-scheduler",
+  "title": "FullCalendar Scheduler",
+  "description": "A premium add-on to FullCalendar for displaying events and resources",
+  "homepage": "https://fullcalendar.io/scheduler/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/fullcalendar/fullcalendar-scheduler.git"
+  },
+  "license": "SEE LICENSE IN LICENSE.md",
+  "copyright": "2017 Adam Shaw",
+  "dependencies": {
+    "jquery": "2 - 3",
+    "moment": "^2.9.0",
+    "fullcalendar": "~3.3.1"
+  },
+  "main": [
+    "dist/scheduler.js",
+    "dist/scheduler.css"
+  ],
+  "ignore": [
+    "*",
+    "**/.*",
+    "!/dist/**",
+    "!/README.*",
+    "!/LICENSE.*",
+    "!/CHANGELOG.*",
+    "!/CONTRIBUTING.*"
+  ],
+  "version": "1.6.1",
+  "_release": "1.6.1",
+  "_resolution": {
+    "type": "version",
+    "tag": "v1.6.1",
+    "commit": "17b1ff967251351adfc5d311b23fb185681bb016"
+  },
+  "_source": "https://github.com/fullcalendar/fullcalendar-scheduler.git",
+  "_target": "*",
+  "_originalSource": "fullcalendar-scheduler"
+}

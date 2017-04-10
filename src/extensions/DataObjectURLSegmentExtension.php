@@ -1,36 +1,5 @@
 <?php
-/**
- *
- * @copyright (c) 2017 Insite Apps - http://www.insiteapps.co.za
- * @package insiteapps
- * @author Patrick Chitovoro  <patrick@insiteapps.co.za>
- * All rights reserved. No warranty, explicit or implicit, provided.
- *
- * NOTICE:  All information contained herein is, and remains the property of Insite Apps and its suppliers,  if any.
- * The intellectual and technical concepts contained herein are proprietary to Insite Apps and its suppliers and may be covered by South African. and Foreign Patents, patents in process, and are protected by trade secret or copyright law.
- * Dissemination of this information or reproduction of this material is strictly forbidden unless prior written permission is obtained from Insite Apps.
- *
- * There is no freedom to use, share or change this file.
- *
- *
- */
 
-
-/**
- *
- * @copyright (c) 2016 - 2017 Insite Apps - http://www.insiteapps.co.za
- * @package insiteapps
- * @author Patrick Chitovoro  <patrick@insiteapps.co.za>
- * All rights reserved. No warranty, explicit or implicit, provided.
- *
- * NOTICE:  All information contained herein is, and remains the property of Insite Apps and its suppliers,  if any.
- * The intellectual and technical concepts contained herein are proprietary to Insite Apps and its suppliers and may be covered by South African. and Foreign Patents, patents in process, and are protected by trade secret or copyright law.
- * Dissemination of this information or reproduction of this material is strictly forbidden unless prior written permission is obtained from Insite Apps.
- *
- * There is no freedom to use, share or change this file.
- *
- *
- */
 /*
 use SilverStripe\ORM\DataExtension;
 use SilverStripe\Forms\ReadonlyField;
@@ -39,6 +8,7 @@ use SilverStripe\Core\Convert;
 use SilverStripe\Core\Config\Config;
 use SilverStripe\Forms\FieldList;
 */
+
 class DataObjectURLSegmentExtension extends DataExtension
 {
 
@@ -51,13 +21,13 @@ class DataObjectURLSegmentExtension extends DataExtension
     );
 
     private static $casting = array(
-        "Breadcrumbs" => "HTMLText",
-        "LastEdited" => "SS_Datetime",
-        "Created" => "SS_Datetime",
-        'Link' => 'Text',
+        "Breadcrumbs"  => "HTMLText",
+        "LastEdited"   => "SS_Datetime",
+        "Created"      => "SS_Datetime",
+        'Link'         => 'Text',
         'RelativeLink' => 'Text',
         'AbsoluteLink' => 'Text',
-        'TreeTitle' => 'HTMLText',
+        'TreeTitle'    => 'HTMLText',
     );
 
     /**
@@ -87,6 +57,7 @@ class DataObjectURLSegmentExtension extends DataExtension
      * @todo Move <title> tag in separate getter for easier customization and more obvious usage
      *
      * @param boolean|string $includeTitle Show default <title>-tag, set to false for custom templating
+     *
      * @return string The XHTML metatags
      */
     public function MetaTags($includeTitle = true)
@@ -131,10 +102,11 @@ class DataObjectURLSegmentExtension extends DataExtension
         $URLSegment = singleton('SiteTree')->generateURLSegment($title);
         $prevurlsegment = $URLSegment;
         $i = 1;
-        while (!$this->validURLSegment($URLSegment)) {
+        while ( !$this->validURLSegment($URLSegment) ) {
             $URLSegment = $prevurlsegment . "-" . $i;
             $i++;
         }
+
         return $URLSegment;
 
     }
@@ -144,11 +116,12 @@ class DataObjectURLSegmentExtension extends DataExtension
         $existingPage = $this->owner->get()->filter(array(
             'URLSegment' => $URLSegment,
         ))->exclude(array(
-            'ID' => $this->owner->ID
+            'ID' => $this->owner->ID,
         ))->first();
         if ($existingPage) {
             return false;
         }
+
         return true;
     }
 }

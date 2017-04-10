@@ -45,10 +45,10 @@ class ListingPage extends Page
                 //$urlSegment->setURLPrefix($this->Parent()->RelativeLink());
                 //  $fields->push(HiddenField::create('URLSegment'));
                 // $fields->push(HiddenField::create('MenuTitle'));
-                $fields->removeFieldsFromTab('Root.Main', array(
+                //$fields->removeFieldsFromTab('Root.Main', array(
                         // 'MenuTitle',
                         //'URLSegment',
-                ));
+                //));
 
                 $summary = HtmlEditorField::create('Summary', false);
                 $summary->setRows(5);

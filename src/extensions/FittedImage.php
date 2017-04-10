@@ -1,31 +1,27 @@
 <?php
-/**
- *
- * Copyright (c) 2017 Insite Apps - http://www.insiteapps.co.za
- * All rights reserved.
- * @package insiteapps
- * @author Patrick Chitovoro  <patrick@insiteapps.co.za>
- * Redistribution and use in source and binary forms, with or without modification, are NOT permitted at all.
- * There is no freedom to share or change it this file.
- *
- *
- */
 
+/*
 use SilverStripe\Assets\Image;
+*/
 
 class FittedImage extends Image
 {
 
-   function Fit($width, $height){
-       return $this->CroppedResize($width, $height);
-   }
+    function Fit($width, $height)
+    {
+        return $this->CroppedResize($width, $height);
+    }
 
-    function ScaleWidth($width){
+    function ScaleWidth($width)
+    {
         return $this->ResizeByWidth($width);
     }
-    function ScaleHeight($height){
+
+    function ScaleHeight($height)
+    {
         return $this->ResizeByHeight($height);
     }
+
     function generateCroppedResize($gd, $width, $height)
     {
         return $gd->croppedResize($width, $height);

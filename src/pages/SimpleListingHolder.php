@@ -1,16 +1,6 @@
 <?php
-/**
- *
- * Copyright (c) 2017 Insite Apps - http://www.insiteapps.co.za
- * All rights reserved.
- * @package insiteapps
- * @author Patrick Chitovoro  <patrick@insiteapps.co.za>
- * Redistribution and use in source and binary forms, with or without modification, are NOT permitted at all.
- * There is no freedom to share or change it this file.
- *
- *
- */
 
+/*
 use SilverStripe\Control\Cookie;
 use SilverStripe\Forms\CompositeField;
 use SilverStripe\Forms\ToggleCompositeField;
@@ -18,48 +8,53 @@ use SilverStripe\Forms\DropdownField;
 use SilverStripe\Forms\CheckboxField;
 use SilverStripe\Forms\TextField;
 use SilverStripe\Forms\NumericField;
+*/
 
 class SimpleListingHolder extends Page
 {
 
     private static $allowed_children = array("ListingPage");
+
     private static $default_child = "ListingPage";
+
     private static $db = array(
-        "View" => "Enum('list,grid','list')",
-        "AllowViewChange" => "Boolean",
-        "Columns" => "Int",
-        "RemoveReadMore" => "Boolean",
-        "SameHeightBoxes" => "Boolean",
-        "ReadMoreButtonText" => "Varchar(255)",
-        "ImageMaxHeight" => "Varchar(255)",
-        "RemoveOverlay" => "Boolean",
-        "RemoveChildLinking" => "Boolean",
-        "RandomDisplayImage" => "Boolean",
+        "View"                     => "Enum('list,grid','list')",
+        "AllowViewChange"          => "Boolean",
+        "Columns"                  => "Int",
+        "RemoveReadMore"           => "Boolean",
+        "SameHeightBoxes"          => "Boolean",
+        "ReadMoreButtonText"       => "Varchar(255)",
+        "ImageMaxHeight"           => "Varchar(255)",
+        "RemoveOverlay"            => "Boolean",
+        "RemoveChildLinking"       => "Boolean",
+        "RandomDisplayImage"       => "Boolean",
         "ShowListImagesAsCarousel" => "Boolean",
-        "ChildrenTemplate" => "Enum('Simple,Boomerang','Boomerang')",
-        'ListingsPerPage' => 'Int',
+        "ChildrenTemplate"         => "Enum('Simple,Boomerang','Boomerang')",
+        'ListingsPerPage'          => 'Int',
     );
 
     private static $has_one = array();
-    private static $has_many = array(
 
-    );
+    private static $has_many = array();
+
     private static $many_many = array();
 
     private static $defaults = array(
         "SidebarPosition" => "left",
-        "View" => "grid",
+        "View"            => "grid",
         'ListingsPerPage' => 10,
     );
+
     public static function getColumnEnums()
     {
         return array("0" => "0", "1" => "1", "2" => "2", "3" => "3", "4" => "4");
     }
+
     public function getCMSFields()
     {
         $f = parent::getCMSFields();
         $f->removeByName(["SidebarPosition"]);
-    
+
         return $f;
     }
 
@@ -77,6 +72,7 @@ class SimpleListingHolder extends Page
             return $LayoutView;
         }
         Cookie::set('LayoutView_' . $this->ID, $DefaultView);
+
         return $DefaultView ? $DefaultView : "list";
     }
 
@@ -91,6 +87,7 @@ class SimpleListingHolder extends Page
     function ColumnsSpanWidth()
     {
         $Columns = ($c = $this->Columns) ? $c : 3;
+
         return 12 / $Columns;
     }
 
@@ -106,7 +103,7 @@ class SimpleListingHolder extends Page
                 CheckboxField::create("SameHeightBoxes", "Same height boxes on Grid"),
                 CheckboxField::create("RemoveReadMore"),
                 TextField::create("ReadMoreButtonText", "Button Text"),
-                NumericField::create('ListingsPerPage','Listings per page')
+                NumericField::create('ListingsPerPage', 'Listings per page'),
 
             ]),
             ToggleCompositeField::create('ImagesConfiguration', 'List Item', [
@@ -114,7 +111,7 @@ class SimpleListingHolder extends Page
                 TextField::create("ImageMaxHeight", "Image max height")->setDescription('height in px against width of 520px'),
                 CheckboxField::create("RemoveChildLinking"),
                 CheckboxField::create("RemoveOverlay", "Remove image overlay"),
-                CheckboxField::create("ShowListImagesAsCarousel")
+                CheckboxField::create("ShowListImagesAsCarousel"),
 
             ])
 
@@ -122,6 +119,7 @@ class SimpleListingHolder extends Page
         //$fields->push(DropdownField::create("Template")->setSource($this->getTemplateList()));
         $fields->push(DropdownField::create("ChildrenTemplate", "Children template")
             ->setSource($this->getTemplateList()));
+
         return $fields;
     }
 
@@ -130,12 +128,13 @@ class SimpleListingHolder extends Page
         if ($this->View === 'grid' && $this->SameHeightBoxes) {
             return "SameHeightBoxes";
         }
+
         return false;
 
     }
 }
 
-class SimpleListingHolderController extends PageController
+class SimpleListingHolderController extends Page_Controller
 {
 
     public function init()
