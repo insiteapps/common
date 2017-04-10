@@ -134,7 +134,7 @@ class SimpleListingHolder extends Page
     }
 }
 
-class SimpleListingHolderController extends Page_Controller
+class SimpleListingHolder_Controller extends Page_Controller
 {
 
     public function init()

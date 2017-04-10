@@ -34,7 +34,7 @@ class SecurePage extends Page
     }
 }
 
-class SecurePageController extends Page_Controller implements PermissionProvider
+class SecurePage_Controller extends Page_Controller implements PermissionProvider
 {
     /**
      * @var Array Codes which are required from the current user to view this controller.

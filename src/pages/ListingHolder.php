@@ -76,7 +76,7 @@ class ListingHolder extends Page
     }
 }
 
-class ListingHolderController extends Page_Controller
+class ListingHolder_Controller extends Page_Controller
 {
 
     public function init()
