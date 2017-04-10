@@ -40,7 +40,7 @@ class ListingPage extends Page
                 $fields->addFieldToTab('Root.Main', TextField::create("ExtraLink")->setRightTitle("<small>include http for external links</small>"), "Content");
 
                 //house keeping
-                $fields->dataFieldByName('Content')->setRows(20);
+                //$fields->dataFieldByName('Content')->setRows(20);
                 //$urlSegment = $fields->dataFieldByName('URLSegment');
                 //$urlSegment->setURLPrefix($this->Parent()->RelativeLink());
                 //  $fields->push(HiddenField::create('URLSegment'));
