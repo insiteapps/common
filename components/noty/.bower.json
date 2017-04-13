@@ -1,18 +1,28 @@
 {
   "name": "noty",
-  "main": "js/noty/packaged/jquery.noty.packaged.js",
-  "ignore": [],
-  "authors": [
-    "Nedim Arabacı"
+  "description": "Noty - notification plugin",
+  "license": "MIT",
+  "homepage": "http://ned.im/noty",
+  "main": "dist/noty.js",
+  "keywords": [
+    "noty",
+    "notification",
+    "alert",
+    "confirmation"
   ],
-  "description": "noty - a jQuery notification plugin",
-  "homepage": "https://github.com/needim/noty",
-  "version": "2.4.1",
-  "_release": "2.4.1",
+  "ignore": [
+    "node_modules",
+    "tests"
+  ],
+  "authors": [
+    "Nedim Arabacı <nedimarabaci@gmail.com>"
+  ],
+  "version": "3.0.0",
+  "_release": "3.0.0",
   "_resolution": {
     "type": "version",
-    "tag": "v2.4.1",
-    "commit": "ebb543ef0a3c039cdb7cdae887197ffa43433d52"
+    "tag": "v3.0.0",
+    "commit": "97d312232ffdc4266234a727a3784772644deab3"
   },
   "_source": "https://github.com/needim/noty.git",
   "_target": "*",
