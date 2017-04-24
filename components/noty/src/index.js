@@ -96,6 +96,10 @@ export default class Noty {
       API.fire(this, 'onHover');
     }, false);
 
+    if (this.options.timeout) {
+      Utils.addClass(this.barDom, 'noty_has_timeout');
+    }
+
     if (Utils.inArray('button', this.options.closeWith)) {
       Utils.addClass(this.barDom, 'noty_close_with_button');
 
@@ -111,21 +115,25 @@ export default class Noty {
     }
 
     API.fire(this, 'onShow');
-    Utils.addClass(this.barDom, this.options.animation.open);
 
-    Utils.addListener(this.barDom, Utils.animationEndEvents, () => {
-      Utils.removeClass(this.barDom, this.options.animation.open);
-      API.fire(this, 'afterShow');
-      API.queueClose(this);
-
-      Utils.addListener(this.barDom, 'mouseenter', () => {
-        API.dequeueClose(this);
+    if (this.options.animation.open == null) {
+      const _t = this;
+      setTimeout(function() { // ugly fix for progressbar display bug
+        API.openFlow(_t);
+      }, 100);
+    } else if (typeof this.options.animation.open == 'function') {
+      this.options.animation.open.apply(this);
+      const _t = this;
+      setTimeout(function() { // ugly fix for progressbar display bug
+        API.openFlow(_t);
+      }, 100);
+    } else {
+      Utils.addClass(this.barDom, this.options.animation.open);
+      Utils.addListener(this.barDom, Utils.animationEndEvents, () => {
+        Utils.removeClass(this.barDom, this.options.animation.open);
+        API.openFlow(this);
       });
-
-      Utils.addListener(this.barDom, 'mouseleave', () => {
-        API.queueClose(this);
-      });
-    });
+    }
 
     return this;
   }
@@ -140,6 +148,23 @@ export default class Noty {
     return this;
   }
 
+  setTimeout (ms) {
+    this.stop();
+    this.options.timeout = ms;
+    if (this.options.timeout) {
+      Utils.addClass(this.barDom, 'noty_has_timeout');
+    } else {
+      Utils.removeClass(this.barDom, 'noty_has_timeout');
+    }
+
+    var _t = this;
+    setTimeout(function() { // ugly fix for progressbar display bug
+      _t.resume();
+    }, 100);
+
+    return this;
+  }
+
   setText (html, optionsOverride = false) {
     this.barDom.querySelector('.noty_body').innerHTML = html;
 
@@ -150,10 +175,13 @@ export default class Noty {
   }
 
   setType (type, optionsOverride = false) {
-    const oldClass = `noty_type__${this.options.type}`;
-    const newClass = `noty_type__${type}`;
-    Utils.removeClass(this.barDom, oldClass);
-    Utils.addClass(this.barDom, newClass);
+    let classList = Utils.classList(this.barDom).split(' ');
+    classList.forEach((c) => {
+      if (c.substring(0, 11) == 'noty_type__')
+        Utils.removeClass(this.barDom, c);
+    });
+
+    Utils.addClass(this.barDom, `noty_type__${type}`);
 
     if (optionsOverride)
       this.options.type = type;
@@ -162,10 +190,13 @@ export default class Noty {
   }
 
   setTheme (theme, optionsOverride = false) {
-    const oldClass = `noty_theme__${this.options.theme}`;
-    const newClass = `noty_theme__${theme}`;
-    Utils.removeClass(this.barDom, oldClass);
-    Utils.addClass(this.barDom, newClass);
+    let classList = Utils.classList(this.barDom).split(' ');
+    classList.forEach((c) => {
+      if (c.substring(0, 12) == 'noty_theme__')
+        Utils.removeClass(this.barDom, c);
+    });
+
+    Utils.addClass(this.barDom, `noty_theme__${theme}`);
 
     if (optionsOverride)
       this.options.theme = theme;
@@ -187,24 +218,25 @@ export default class Noty {
 
     API.fire(this, 'onClose');
 
-    Utils.addClass(this.barDom, this.options.animation.close);
+    if (this.options.animation.close == null) {
+      Utils.remove(this.barDom);
+      API.closeFlow(this);
+    } else if (typeof this.options.animation.close == 'function') {
+      this.options.animation.close.apply(this);
+      API.closeFlow(this);
+    } else {
+      Utils.addClass(this.barDom, this.options.animation.close);
+      Utils.addListener(this.barDom, Utils.animationEndEvents, () => {
+        if (this.options.force) {
+          Utils.remove(this.barDom);
+        } else {
+          API.ghostFix(this);
+        }
+        API.closeFlow(this);
+      });
+    }
 
     this.closed = true;
-
-    Utils.addListener(this.barDom, Utils.animationEndEvents, () => {
-      if (this.options.force) {
-        Utils.remove(this.barDom);
-      } else {
-        API.ghostFix(this);
-      }
-      delete API.Store[this.id];
-      API.fire(this, 'afterClose');
-
-      if (this.layoutDom.querySelectorAll('.noty_bar').length == 0 && !this.options.container)
-        Utils.remove(this.layoutDom);
-
-      API.queueRender(this.options.queue);
-    });
 
     return this;
   }

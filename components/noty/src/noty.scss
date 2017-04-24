@@ -7,10 +7,12 @@ $corner-space: 20px;
   margin: 0;
   padding: 0;
   z-index: 9999999;
-  -webkit-backface-visibility: hidden;
-  -webkit-transform: translate(0, 0) translateZ(0) scale(1.0, 1.0);
-  transform: translate(0, 0) scale(1.0, 1.0);
+  transform: translateZ(0) scale(1.0, 1.0);
+  backface-visibility: hidden;
   -webkit-font-smoothing: subpixel-antialiased;
+  filter: blur(0);
+  -webkit-filter: blur(0);
+  max-width: 90%;
 }
 
 #noty_layout__top {
@@ -32,7 +34,7 @@ $corner-space: 20px;
   top: 5%;
   left: 50%;
   width: $default-width;
-  transform: translate(-50%) translateZ(0) scale(1.0, 1.0);
+  transform: translate(calc(-50% - .5px)) translateZ(0) scale(1.0, 1.0);
 }
 
 #noty_layout__topRight {
@@ -61,7 +63,7 @@ $corner-space: 20px;
   bottom: 5%;
   left: 50%;
   width: $default-width;
-  transform: translate(-50%) translateZ(0) scale(1.0, 1.0);
+  transform: translate(calc(-50% - .5px)) translateZ(0) scale(1.0, 1.0);
 }
 
 #noty_layout__bottomRight {
@@ -76,7 +78,7 @@ $corner-space: 20px;
   top: 50%;
   left: 50%;
   width: $default-width;
-  transform: translate(-50%, -50%) translateZ(0) scale(1.0, 1.0);
+  transform: translate(calc(-50% - .5px), calc(-50% - .5px)) translateZ(0) scale(1.0, 1.0);
 }
 
 #noty_layout__centerLeft {
@@ -84,7 +86,7 @@ $corner-space: 20px;
   top: 50%;
   left: $corner-space;
   width: $default-width;
-  transform: translate(0, -50%) translateZ(0) scale(1.0, 1.0);
+  transform: translate(0, calc(-50% - .5px)) translateZ(0) scale(1.0, 1.0);
 }
 
 #noty_layout__centerRight {
@@ -92,10 +94,13 @@ $corner-space: 20px;
   top: 50%;
   right: $corner-space;
   width: $default-width;
-  transform: translate(0, -50%) translateZ(0) scale(1, 1);
+  transform: translate(0, calc(-50% - .5px)) translateZ(0) scale(1, 1);
 }
-
 .noty_progressbar {
+  display: none;
+}
+.noty_has_timeout .noty_progressbar {
+  display: block;
   position: absolute;
   left: 0;
   bottom: 0;

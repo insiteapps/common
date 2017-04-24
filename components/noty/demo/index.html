@@ -3,70 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <title>Demo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <link href="https://fonts.googleapis.com/css?family=Ubuntu:300,400,500,700&amp;subset=latin-ext" rel="stylesheet">
     <link rel="stylesheet" href="../lib/noty.css"/>
     <link rel="stylesheet" href="animate.css"/>
     <link rel="stylesheet" href="fonts/stylesheet.css"/>
     <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css"/>
-
-    <style type="text/css">
-        body {
-            font-family: 'GothamRoundedLight', sans-serif;
-            font-weight: 300;
-            background-color: rgb(255, 253, 250);
-            background-image: url('bg-dot.png');
-            background-size: 41px 40px;
-            background-position: 0 0;
-            background-repeat: repeat;
-        }
-
-        a {
-            color: inherit;
-            font-family: 'GothamRoundedMedium', sans-serif;
-        }
-
-        a:hover {
-            text-decoration: none;
-        }
-
-        .activity-item i {
-            float: left;
-            margin-top: 3px;
-            font-size: 16px;
-        }
-
-        div.activity {
-            margin-left: 28px;
-            line-height: 1.4em;
-        }
-
-        div.activity-item {
-            padding: 7px 12px;
-        }
-
-        div.activity > span {
-            display: block;
-            font-size: .8em;
-        }
-
-        #custom_container {
-            border: 2px solid #ccc;
-            width: 500px;
-            margin: 40px auto;
-            min-height: 100px;
-            border-radius: 5px;
-            background: rgba(255, 255, 255, .5);
-            overflow: hidden;
-        }
-
-        .logo {
-            text-align: center;
-            background: rgb(255, 253, 250);
-            padding: 0 20px;
-            width: 200px;
-            margin: 0 auto;
-        }
-    </style>
+    <link rel="stylesheet" href="demo.css"/>
 </head>
 <body>
 
@@ -74,14 +17,218 @@
         <img src="noty-logo.png" alt="">
     </div>
 
+    <div>
+        <p class="mt30" style="text-align: center">
+            <select class="" name="layout" id="layout">
+                <option value="top">top</option>
+                <option value="topLeft">topLeft</option>
+                <option value="topCenter">topCenter</option>
+                <option value="topRight" selected>topRight</option>
+                <option value="center">center</option>
+                <option value="centerLeft">centerLeft</option>
+                <option value="centerRight">centerRight</option>
+                <option value="bottom">bottom</option>
+                <option value="bottomLeft">bottomLeft</option>
+                <option value="bottomCenter">bottomCenter</option>
+                <option value="bottomRight">bottomRight</option>
+                <optgroup label="Custom Container">
+                  <option value="inline">inline</option>
+                </optgroup>
+            </select>
+            <select name="type" id="type">
+                <option value="random" selected>random</option>
+                <option value="alert">alert</option>
+                <option value="success">success</option>
+                <option value="warning">warning</option>
+                <option value="error">error</option>
+                <option value="information">information</option>
+            </select>
+            <br><br>
+            <a href="#run" class="btn button runner" style="position: relative; top: -3px; margin-left: 10px; text-decoration: none">CREATE</a>
+        </p>
+    </div>
+
     <div id="custom_container">
         <h2 style="text-align: center">Custom Container</h2>
     </div>
 
+    <script src="//cdn.jsdelivr.net/velocity/1.5/velocity.min.js"></script>
+    <script src="//cdn.jsdelivr.net/mojs/latest/mo.min.js"></script>
+    <script type="text/javascript" src="bouncejs/bounce.js"></script>
     <script type="text/javascript" src="../lib/noty.js"></script>
 
     <script type="text/javascript">
         (function () {
+
+            var mojsOpenExample = function () {
+                var n = this;
+                new mojs.Html({
+                    el        : n.barDom,
+                    x         : {200: 0, delay: 10, duration: 500, easing: 'cubic.out'},
+                    skewY     : {5: 0, delay: 10, duration: 500, easing: 'cubic.out'},
+                    isForce3d : true,
+                    onComplete: function () {
+                        n.resume();
+                    }
+                }).play();
+            };
+
+            var mojsCloseExample = function () {
+                var n = this;
+                new mojs.Html({
+                    el        : n.barDom,
+                    x         : {0: 500, delay: 10, duration: 500, easing: 'cubic.out'},
+                    skewY     : {0: 10, delay: 10, duration: 500, easing: 'cubic.out'},
+                    isForce3d : true,
+                    onComplete: function () {
+                        n.barDom.parentNode.removeChild(n.barDom);
+                    }
+                }).play();
+            };
+
+            var bouncejsOpenExample = function () {
+                var n = this;
+                new Bounce()
+                    .translate({
+                        from     : {x: 450, y: 0},
+                        to       : {x: 0, y: 0},
+                        easing   : "bounce",
+                        duration : 1000,
+                        bounces  : 4,
+                        stiffness: 3
+                    })
+                    .scale({
+                        from     : {x: 1.2, y: 1},
+                        to       : {x: 1, y: 1},
+                        easing   : "bounce",
+                        duration : 1000,
+                        delay    : 100,
+                        bounces  : 4,
+                        stiffness: 1
+                    })
+                    .scale({
+                        from     : {x: 1, y: 1.2},
+                        to       : {x: 1, y: 1},
+                        easing   : "bounce",
+                        duration : 1000,
+                        delay    : 100,
+                        bounces  : 6,
+                        stiffness: 1
+                    })
+                    .applyTo(n.barDom, {
+                        onComplete: function () {
+                            n.resume();
+                        }
+                    });
+            };
+
+            var bouncejsCloseExample = function () {
+                var n = this;
+                new Bounce()
+                    .translate({
+                        from     : {x: 0, y: 0},
+                        to       : {x: 450, y: 0},
+                        easing   : "bounce",
+                        duration : 500,
+                        bounces  : 4,
+                        stiffness: 1
+                    })
+                    .applyTo(n.barDom, {
+                        onComplete: function () {
+                            n.barDom.parentNode.removeChild(n.barDom);
+                        }
+                    });
+            };
+
+            var velocityShowExample = function() {
+                var n = this;
+
+                Velocity(n.barDom, {
+                    left: 450,
+                    scaleY: 2
+                }, {
+                    duration: 0
+                });
+                Velocity(n.barDom, {
+                    left: 0,
+                    scaleY: 1
+                }, {
+                    easing: [ 8, 8 ]
+                });
+            };
+
+            var velocityCloseExample = function() {
+                var n = this;
+
+                Velocity(n.barDom, {
+                    left: '+=-50'
+                }, {
+                    easing: [ 8, 8, 2],
+                    duration: 350
+                });
+                Velocity(n.barDom, {
+                    left: 450,
+                    scaleY: .2,
+                    height: 0,
+                    margin: 0
+                }, {
+                    easing: [ 8, 8 ],
+                    complete: function () {
+                        n.barDom.parentNode.removeChild(n.barDom);
+                    }
+                });
+            };
+
+            Noty.overrideDefaults({
+                layout   : 'topRight',
+                theme    : 'mint',
+                closeWith: ['button', 'click'],
+                animation: {
+                    open : velocityShowExample,
+                    close: velocityCloseExample
+                }
+            });
+
+            document.querySelector('.runner').addEventListener('click', function (e) {
+                e.preventDefault();
+
+                var notes = [];
+
+                var layout = document.querySelector('select#layout');
+                var type = document.querySelector('select#type');
+
+                layout = layout.options[layout.selectedIndex].text;
+                type = type.options[type.selectedIndex].text;
+
+                var types = ['alert', 'error', 'success', 'information', 'warning'];
+                if (type == 'random')
+                    type = types[Math.floor(Math.random() * types.length)];
+
+                notes['alert'] = 'Best check yo self, you\'re not looking too good.';
+                notes['error'] = 'Change a few things up and try submitting again.';
+                notes['success'] = 'You successfully read this important alert message.';
+                notes['information'] = 'This alert needs your attention, but it\'s not super important.';
+                notes['warning'] = '<strong>Warning!</strong> <br /> Best check yo self, you\'re not looking too good.';
+
+                if (layout == 'inline') {
+                    new Noty({
+                        text     : notes[type],
+                        type     : type,
+                        timeout  : 5000,
+                        container: '#custom_container'
+                    }).show();
+                    return false;
+                }
+
+                new Noty({
+                    text   : notes[type],
+                    type   : type,
+                    timeout: 5000,
+                    layout : layout
+                }).show();
+
+                return false;
+            });
 
             function getRandomInt (min, max) {
                 return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -94,73 +241,52 @@
                 notification_error   = '<div class="activity-item"> <i class="fa fa-times-circle text-danger"></i> <div class="activity"> Opps! something bad happend! <span>14 minutes ago</span> </div> </div>';
 
 
-            Noty.overrideDefaults({
-                layout   : 'topRight',
-                theme    : 'semanticui',
-                closeWith: ['button'],
-                animation: {
-//                open : 'animated fadeInRight',
-//                close: 'animated fadeOutRight'
-                },
-                callbacks: {
-                  onTemplate: function () {
-                      console.log('template dude', this);
-                  }
-                },
-                force    : false
-//            ,buttons  : [
-//                Noty.button('Button 1', null, function () {
-//                    console.log('button 1 clicked');
-//                }, {id: 'button1', 'data-status': 'ok'}),
-//                Noty.button('Button 2', null, function () {
-//                    console.log('button 2 clicked');
-//                })
-//            ]
-            });
-
-
             Noty.setMaxVisible(5); // global queue's max visible amount (default is 5)
             Noty.setMaxVisible(5, 'bottomRight');
 
-            var n1 = new Noty({
-                text   : notification_alert,
-                type   : 'alert',
-                timeout: false
-            }).show();
-            var n2 = new Noty({
-                text   : notification_success,
-                type   : 'success',
-                timeout: getRandomInt(4000, 10000)
-            }).show();
-
-            var n3 = new Noty({
-                text   : notification_warning,
-                type   : 'warning',
-                timeout: getRandomInt(4000, 10000)
-            }).show();
-            var n4 = new Noty({
-                text   : notification_error,
-                type   : 'error',
-                timeout: getRandomInt(4000, 10000)
-            }).show();
-            var n5 = new Noty({
-                text   : notification_info,
-                type   : 'info',
-                timeout: getRandomInt(4000, 10000)
-            }).show();
-            var n6 = new Noty({
-                text   : notification_success,
-                type   : 'success',
-                timeout: getRandomInt(4000, 10000)
-            }).show();
+//            var n1 = new Noty({
+//                text   : notification_alert,
+//                type   : 'alert',
+//                timeout: false
+//            }).show();
+//            var n2 = new Noty({
+//                text   : notification_success,
+//                type   : 'success',
+//                timeout: getRandomInt(4000, 10000)
+//            }).show();
+//
+//            var n3 = new Noty({
+//                text   : notification_warning,
+//                type   : 'warning',
+//                timeout: getRandomInt(4000, 10000)
+//            }).show();
+//            var n4 = new Noty({
+//                text   : notification_error,
+//                type   : 'error',
+//                timeout: getRandomInt(4000, 10000)
+//            }).show();
+//            var n5 = new Noty({
+//                text   : notification_info,
+//                type   : 'info',
+//                timeout: getRandomInt(4000, 10000)
+//            }).show();
+//            var n6 = new Noty({
+//                text   : notification_success,
+//                type   : 'success',
+//                timeout: getRandomInt(4000, 10000)
+//            }).show();
 
 //            setTimeout(function() {
 //                n1.setText('Opps something is changed!', true);
 //            }, 1000);
 //
 //            setTimeout(function() {
-//                n1.setType('warning', true);
-//            }, 2000);
+//                n1.setTheme('relax', false);
+//            }, 1000);
+//
+//            setTimeout(function() {
+//                n1.setTheme('semanticui', false);
+//            }, 3000);
 //
 //            setTimeout(function() {
 //                n1.setTheme('relax', true);

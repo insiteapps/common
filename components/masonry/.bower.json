@@ -37,12 +37,12 @@
     "globals",
     "node"
   ],
-  "version": "4.1.1",
-  "_release": "4.1.1",
+  "version": "4.2.0",
+  "_release": "4.2.0",
   "_resolution": {
     "type": "version",
-    "tag": "v4.1.1",
-    "commit": "92c9263acceb130aa4033ad9dbed665e1dad7b0a"
+    "tag": "v4.2.0",
+    "commit": "55f57c9534cf553da9c9a43427a1b046388dd75d"
   },
   "_source": "https://github.com/desandro/masonry.git",
   "_target": "^4.1.0",

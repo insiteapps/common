@@ -6,6 +6,7 @@
 ![Bower version](https://img.shields.io/bower/v/noty.svg)
 ![npm version](https://img.shields.io/npm/v/noty.svg)
 ![Packagist version](https://img.shields.io/packagist/v/needim/noty.svg)
+![David](https://img.shields.io/david/needim/noty.svg)
 ![devDependency Status](https://img.shields.io/david/dev/needim/noty.svg)
 ![npm](https://img.shields.io/npm/dm/noty.svg?label=npm%20downloads)
 ![Contributors](https://img.shields.io/github/contributors/needim/noty.svg)
@@ -30,6 +31,29 @@ Documentation and examples are here: <http://ned.im/noty>
 
 ***
 
+##### Basic Usage
+
+```js
+import Noty from 'noty';
+
+new Noty({
+    text: 'Notification text'
+}).show();
+
+// or 
+
+const Noty = require('noty');
+
+new Noty({
+    text: 'Notification text'
+}).show();
+
+```
+
 ##### Development
 
-npm run dev
+```console
+$ npm run dev
+$ npm run build
+$ npm test
+```
