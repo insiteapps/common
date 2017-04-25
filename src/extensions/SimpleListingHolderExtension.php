@@ -88,7 +88,12 @@ class SimpleListingHolderExtension extends DataExtension
         return 12 / $Columns;
     }
 
-    function getPageSetupFields()
+    function updatePageSetupFields($fields)
+    {
+        return $fields;
+    }
+
+    function getPageSetupFields_()
     {
         $fields = Page::getDefaultPageSetupFields();
         $fields->push(CompositeField::create(
