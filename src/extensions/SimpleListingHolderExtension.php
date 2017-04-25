@@ -15,6 +15,7 @@ class SimpleListingHolderExtension extends DataExtension
 {
 
     private static $db = array(
+        /*
         "View" => "Enum('list,grid','list')",
         "AllowViewChange" => "Boolean",
         "Columns" => "Int",
@@ -28,6 +29,7 @@ class SimpleListingHolderExtension extends DataExtension
         "ShowListImagesAsCarousel" => "Boolean",
         "ChildrenTemplate" => "Enum('Simple,Boomerang','Boomerang')",
         'ListingsPerPage' => 'Int',
+        */
     );
 
     private static $has_one = array();
@@ -46,16 +48,6 @@ class SimpleListingHolderExtension extends DataExtension
     }
 
 
-
-    public function getCMSFields()
-    {
-        $f = parent::getCMSFields();
-        $f->removeByName(["SidebarPosition"]);
-        $setup = PageSetupBar::create('Setup', $this->getPageSetupFields());
-        $f->insertBefore($setup, 'Root');
-        $f->fieldByName('Root')->setTemplate('PageSetupBar');
-        return $f;
-    }
 
     public function requireDefaultRecords()
     {
@@ -90,37 +82,6 @@ class SimpleListingHolderExtension extends DataExtension
 
     function updatePageSetupFields($fields)
     {
-        return $fields;
-    }
-
-    function getPageSetupFields_()
-    {
-        $fields = Page::getDefaultPageSetupFields();
-        $fields->push(CompositeField::create(
-            ToggleCompositeField::create('ViewConfiguration', 'Display', [
-                DropdownField::create("SidebarPosition", "Sidebar position")->setSource(["none" => "none", "left" => "left", "right" => "right"]),
-                CheckboxField::create("AllowViewChange"),
-                DropdownField::create("View")->setSource($this->owner->dbObject("View")->enumValues()),
-                DropdownField::create("Columns")->setSource(self::getColumnEnums()),
-                CheckboxField::create("SameHeightBoxes", "Same height boxes on Grid"),
-                CheckboxField::create("RemoveReadMore"),
-                TextField::create("ReadMoreButtonText", "Button Text"),
-                NumericField::create('ListingsPerPage', 'Listings per page')
-
-            ]),
-            ToggleCompositeField::create('ImagesConfiguration', 'List Item', [
-                CheckboxField::create("RandomDisplayImage"),
-                TextField::create("ImageMaxHeight", "Image max height")->setDescription('height in px against width of 520px'),
-                CheckboxField::create("RemoveChildLinking"),
-                CheckboxField::create("RemoveOverlay", "Remove image overlay"),
-                CheckboxField::create("ShowListImagesAsCarousel"),
-
-            ])
-
-        ));
-        $fields->push(DropdownField::create("Template")->setSource($this->getTemplateList()));
-        $fields->push(DropdownField::create("ChildrenTemplate", "Children template")
-            ->setSource($this->getTemplateList()));
         return $fields;
     }
 
