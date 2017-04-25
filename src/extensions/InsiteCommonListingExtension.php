@@ -14,7 +14,7 @@ use SilverStripe\Control\Cookie;
 
 class InsiteCommonListingExtension extends DataExtension
 {
-    function updatePageSetupFields($fields)
+    function updateManagerFields($fields)
     {
         $fields->push(CompositeField::create(
 

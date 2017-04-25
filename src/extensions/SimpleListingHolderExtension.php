@@ -80,7 +80,7 @@ class SimpleListingHolderExtension extends DataExtension
         return 12 / $Columns;
     }
 
-    function updatePageSetupFields($fields)
+    function updateManagerFields($fields)
     {
         return $fields;
     }
