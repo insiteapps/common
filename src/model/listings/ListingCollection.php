@@ -42,6 +42,16 @@ class ListingCollection extends DataObject
         return $f;
     }
 
+    function Listings($limit = null, $sort = "Rand()")
+    {
+        $iListIds = DB::query(sprintf("SELECT ListPageID FROM ListPage_Categories WHERE CategoryID = %d", $this->ID));
+        $oListings = ListPage::get()->filter([
+            "ID" => $iListIds->column(),
+            "Status" => 'Active'
+        ]);
+
+        return $oListings->limit($limit);
+    }
 
     function Link()
     {
