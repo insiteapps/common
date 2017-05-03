@@ -16,6 +16,7 @@ class InsiteCommonListingExtension extends DataExtension
 {
     function updateManagerFields($fields)
     {
+        /*
         $fields->push(CompositeField::create(
 
             ToggleCompositeField::create('ViewConfiguration', 'View', [
@@ -58,7 +59,7 @@ class InsiteCommonListingExtension extends DataExtension
         ));
         $fields->push(DropdownField::create("Template")->setSource($this->owner->dbObject("Template")->enumValues()));
         $fields->push(DropdownField::create("ChildrenTemplate", "Children template")->setSource($this->owner->dbObject("ChildrenTemplate")->enumValues()));
-
+*/
         return $fields;
     }
 
@@ -72,6 +73,7 @@ class InsiteCommonListingExtension extends DataExtension
     }
 
     private static $db = array(
+        /*
         "View" => "Enum('list,grid','list')",
         "AllowViewChange" => "Boolean",
         "Columns" => "Int",
@@ -88,6 +90,7 @@ class InsiteCommonListingExtension extends DataExtension
         "Template" => "Enum('Simple,Boomerang','Boomerang')",
         "ChildrenTemplate" => "Enum('Simple,Boomerang','Boomerang')",
         'ListingsPerPage' => 'Int',
+        */
     );
     private static $defaults = array(
         "SidebarPosition" => "left",
