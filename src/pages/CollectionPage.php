@@ -20,7 +20,9 @@ class CollectionPage extends Page
 {
     private static $empty_string = "-Select-";
 
-    private static $db = array();
+    private static $many_many = array(
+        "Collections" => "ListingCollection",
+    );
 
     private static $allowed_children = array();
 
@@ -46,11 +48,28 @@ class CollectionPage extends Page
         $oCollections = ListingCollection::get();
         foreach ( $oCollections as $oCollection ) {
             $aData = array(
-                "Link"=>$oCollection->Link()
+                "Title" => $oCollection->Title,
+                "Link"  => $oCollection->Link(),
             );
         }
 
         return $aChildren;
+    }
+
+    public function getCMSFields()
+    {
+        $fields = parent::getCMSFields();
+
+        $oListingCollection = ListingCollection::get();
+        $oListingCollectionMap = $oListingCollection ? $oListingCollection->map()->toArray() : array();
+        asort($oListingTypeMap);
+        $fields->addFieldToTab('Root.Main', ListboxField::create('Collections', 'Please select your Collections')
+            ->setMultiple(true)
+            ->setSource($oListingCollectionMap)
+            ->setAttribute('data-placeholder', 'Collections'));
+
+
+        return $fields;
     }
 
 }
