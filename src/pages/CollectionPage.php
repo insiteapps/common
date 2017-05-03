@@ -39,6 +39,11 @@ class CollectionPage extends Page
         return $page->Link($action);
     }
 
+    function Link()
+    {
+        return "javascript:void(0)";
+    }
+
     function Children()
     {
         $aChildren = ArrayList::create();
