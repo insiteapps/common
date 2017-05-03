@@ -20,9 +20,6 @@ class CollectionPage extends Page
 {
     private static $empty_string = "-Select-";
 
-    private static $many_many = array(
-        "Collections" => "ListingCollection",
-    );
 
     private static $allowed_children = array();
 
@@ -47,10 +44,11 @@ class CollectionPage extends Page
         $aChildren = ArrayList::create();
         $oCollections = ListingCollection::get();
         foreach ( $oCollections as $oCollection ) {
-            $aData = array(
+            $aChildren->push(ArrayData::create([
                 "Title" => $oCollection->Title,
+                "MenuTitle" => $oCollection->Title,
                 "Link"  => $oCollection->Link(),
-            );
+            ]));
         }
 
         return $aChildren;
@@ -60,14 +58,6 @@ class CollectionPage extends Page
     {
         $fields = parent::getCMSFields();
 
-        $oListingCollection = ListingCollection::get();
-        $oListingCollectionMap = $oListingCollection ? $oListingCollection->map()->toArray() : array();
-        asort($oListingTypeMap);
-        $fields->addFieldToTab('Root.Main', ListboxField::create('Collections', 'Please select your Collections')
-            ->setMultiple(true)
-            ->setSource($oListingCollectionMap)
-            ->setAttribute('data-placeholder', 'Collections'));
-
 
         return $fields;
     }
@@ -76,20 +66,23 @@ class CollectionPage extends Page
 
 class CollectionPage_Controller extends Page_Controller
 {
-    private static $allowed_actions = array('collections',);
-
-    function collections()
+    private static $allowed_actions = array('view',);
+    static $url_handlers = array(
+        '' => 'index',
+        '$ID/$OtherID' => 'view',
+    );
+    function view()
     {
         $oCollection = DataObject::get_one("ListingCollection", sprintf("URLSegment = '%s'", $this->urlParamsID()));
         if ($oCollection) {
             $title = $oCollection->Title;
             $aData = array(
                 "Title"           => $title,
-                "CustomPageTitle" => $this->Title . " - " . $title . " <small>Collection</small>",
+                "CustomPageTitle" => $title . " <small>Collection</small>",
                 "ProductList"     => $oCollection->Products(),
             );
 
-            return $this->customise($aData)->renderWith(["Product_collection", "Page"]);
+            return $this->customise($aData)->renderWith(["CollectionPage_view", "Page"]);
 
         }
 
