@@ -45,7 +45,7 @@ class ListingCollection extends DataObject
 
     function Link()
     {
-        return Controller::join_links(ProductCollectionHolder::find_link(), $this->getItemURLSegment(), '/');
+        return Controller::join_links(CollectionPage::find_link(), $this->getItemURLSegment(), '/');
     }
 
     public function onBeforeWrite()
