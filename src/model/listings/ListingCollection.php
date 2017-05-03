@@ -42,17 +42,20 @@ class ListingCollection extends DataObject
         return $f;
     }
 
-    function Listings($limit = null, $sort = "Rand()")
+    function Listings()
     {
-        $iListIds = DB::query(sprintf("SELECT ListPageID FROM ListPage_Categories WHERE CategoryID = %d", $this->ID));
-        $oListings = ListPage::get()->filter([
+        $iListIds = DB::query(sprintf("SELECT ProductID FROM Product_Collections WHERE ListingCollectionID = %d", $this->ID));
+        $oListings = Product::get()->filter([
             "ID" => $iListIds->column(),
-            "Status" => 'Active'
         ]);
 
-        return $oListings->limit($limit);
+        return $oListings;
     }
-
+    function ListingCounter()
+    {
+        $oListings = $this->Listings();
+        return $oListings ? $oListings->count() : false;
+    }
     function Link()
     {
         return Controller::join_links(CollectionPage::find_link(), $this->getItemURLSegment(), '/');

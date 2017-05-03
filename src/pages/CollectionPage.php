@@ -42,12 +42,15 @@ class CollectionPage extends Page
     function Children()
     {
         $aChildren = ArrayList::create();
-        $oCollections = ListingCollection::get();
+        $oCollections = ListingCollection::get()
+            ->filterByCallback(function ($item, $list) {
+                return ($item->ListingCounter());
+            });
         foreach ( $oCollections as $oCollection ) {
             $aChildren->push(ArrayData::create([
-                "Title" => $oCollection->Title,
+                "Title"     => $oCollection->Title,
                 "MenuTitle" => $oCollection->Title,
-                "Link"  => $oCollection->Link(),
+                "Link"      => $oCollection->Link(),
             ]));
         }
 
@@ -67,10 +70,12 @@ class CollectionPage extends Page
 class CollectionPage_Controller extends Page_Controller
 {
     private static $allowed_actions = array('view',);
+
     static $url_handlers = array(
-        '' => 'index',
+        ''             => 'index',
         '$ID/$OtherID' => 'view',
     );
+
     function view()
     {
         $oCollection = DataObject::get_one("ListingCollection", sprintf("URLSegment = '%s'", $this->urlParamsID()));
