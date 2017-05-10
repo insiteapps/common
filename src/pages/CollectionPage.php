@@ -20,7 +20,6 @@ class CollectionPage extends Page
 {
     private static $empty_string = "-Select-";
 
-
     private static $allowed_children = array();
 
     private static $default_child = "";
