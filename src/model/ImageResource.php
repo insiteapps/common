@@ -7,18 +7,20 @@ class ImageResource extends DataObject
 {
 
     private static $default_sort = 'SortOrder';
+
     private static $db = array(
-        'VideoLink' => 'Varchar(255)',
-        'VideoType' => 'Enum("Youtube,Vimeo","Vimeo")',
-        'Name' => 'Varchar(255)',
+        'VideoLink'   => 'Varchar(255)',
+        'VideoType'   => 'Enum("Youtube,Vimeo","Vimeo")',
+        'Name'        => 'Varchar(255)',
         'Description' => 'Text',
-        'Easing' => 'Enum("default,easeOutBack,easeInBack,Power4.easeOut","default")',
-        'Transition' => 'Enum("fade,boxfade,slideleft,zoomout,papercut,slidedown,slotfade-horizontal,slideoverhorizontal","fade")',
-        'SortOrder' => 'Int',
+        'Easing'      => 'Enum("default,easeOutBack,easeInBack,Power4.easeOut","default")',
+        'Transition'  => 'Enum("fade,boxfade,slideleft,zoomout,papercut,slidedown,slotfade-horizontal,slideoverhorizontal","fade")',
+        'SortOrder'   => 'Int',
     );
+
     private static $has_one = array(
         'Image' => 'FittedImage',
-        'Page' => 'Page',
+        'Page'  => 'Page',
     );
 
     public function getCMSFields()
@@ -92,6 +94,7 @@ class ImageResource extends DataObject
 
             return true;
         }
+
         return false;
     }
 
@@ -100,6 +103,7 @@ class ImageResource extends DataObject
         if ($this->IsVideo()) {
             return "HasVideo";
         }
+
         return false;
     }
 }
