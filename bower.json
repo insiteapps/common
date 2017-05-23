@@ -31,7 +31,7 @@
     "fullcalendar-scheduler": "*",
     "owl.carousel": "*",
     "jquery-form": "*",
-    "jquery-ui": "*",
+    "jquery-ui": "latest",
     "jquery-pjax": "latest",
     "select2": "3.5.4",
     "slimScroll": "1.3.7",

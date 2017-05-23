@@ -1,9 +1,9 @@
 {
   "name": "noty",
-  "description": "Noty - notification plugin",
+  "description": "Noty - Notification library",
   "license": "MIT",
   "homepage": "http://ned.im/noty",
-  "main": "dist/noty.js",
+  "main": "lib/noty.js",
   "keywords": [
     "noty",
     "notification",
@@ -17,12 +17,12 @@
   "authors": [
     "Nedim Arabacı <nedimarabaci@gmail.com>"
   ],
-  "version": "3.0.1",
-  "_release": "3.0.1",
+  "version": "3.1.0",
+  "_release": "3.1.0",
   "_resolution": {
     "type": "version",
-    "tag": "v3.0.1",
-    "commit": "d118db6db4177565db8c1fef2fb61960ae024573"
+    "tag": "v3.1.0",
+    "commit": "846c376471e26ee9a2cf3ff223ca3600d987d2e4"
   },
   "_source": "https://github.com/needim/noty.git",
   "_target": "*",
