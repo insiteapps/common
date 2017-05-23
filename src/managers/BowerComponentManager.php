@@ -12,7 +12,7 @@ class BowerComponentManager extends Object
     {
         self::includeBootstrap($aRequirements);
         $aRequirements["JS"] = array_merge($aRequirements["JS"], [
-            BOWER_COMPONENTS_DIR . '/jquery-migrate/jquery-migrate.js',
+            //BOWER_COMPONENTS_DIR . '/jquery-migrate/jquery-migrate.js',
             JQUERY_UI_DIR . '/jquery-ui.min.js',
             JQUERY_FORM_DIR . '/jquery.form.min.js',
             INSITE_COMMON_DIR . "/js/js.cookie.js",
