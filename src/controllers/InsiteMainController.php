@@ -88,7 +88,7 @@ class InsiteMainController extends Page_Controller
      */
     public static function get_fonts_library_names()
     {
-        $url = "http://cdn.insiteapps.co.za/fonts/names/";
+        $url = "https://cdn.insiteapps.co.za/fonts/names/";
         $oManager = new  InsiteAppsCurlManager();
         $results = $oManager->processCurlWithHeaders($url);
 
