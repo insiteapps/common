@@ -38,7 +38,7 @@ class Manager extends Common
         $oMembers = Member::get()
             ->leftJoin("Group_Members", "Group_Members.MemberID = Member.ID")
             ->leftJoin("Permission", "Permission.GroupID = Group_Members.GroupID")
-            ->filter(["Permission.Code" => 'RECEIVE_NOTIFICATION']);
+            ->filter(["Permission.Code" => 'ADMIN']);
 
         return $oMembers;
     }

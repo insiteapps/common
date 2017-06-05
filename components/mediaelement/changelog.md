@@ -1,5 +1,39 @@
 ### Version History
 
+*4.1.1 (2017/05/16)*
+
+* Added missing conditional to reuse `exitFullscreen` method @rafa8626
+* Added new code snippet to use player with `AudioContext.decodeAudioData()` @rafa8626
+* Added missing conditional for bug with hidden iframes in Firefox @rafa8626
+* Fixed typo in `Vimeo` renderer @rafa8626
+* Added workflow to solve issue with iOS and HTTPS playing media @rafa8626
+* Changed `match` to `test` and `includes` to `indexOf` to improve performance @rafa8626
+* Fixed `responsive` mode within iframe (https://github.com/mediaelement/mediaelement/pull/2207) @lucash
+* Updated German translation (https://github.com/mediaelement/mediaelement/pull/2210) @SoftCreatR 
+* Enforced https protocol on external libraries (https://github.com/mediaelement/mediaelement/pull/2212) @jimmywarting
+* Fixed issue when using YouTube in audio tag triggering double buffering/play events when starting media @rafa8626
+* Fixed `fill` mode within iframe @rafa8626
+* Fixed player accessibility using Tab key and avoid hidding controls on audio element @rafa8626 
+* Fix usage for iOS with native controls (https://github.com/mediaelement/mediaelement/pull/2215) @lucash
+
+*4.1.0 (2017/05/04)*
+
+* Added `grunt watch` and tasks depending on files modified @rafa8626
+* Fixed typo for documentation about `features` configuration element (https://github.com/mediaelement/mediaelement/pull/2189) @abumalick
+* Fixed issue related to time tooltip appearing on all player instances when hovering over one player's progress bar @rafa8626
+* Improved workflow to store all `source` attributes for `mediaFiles` list @rafa8626 
+* Added improvements and hover behavior to player slider (https://github.com/mediaelement/mediaelement/pull/2191) @ricking06 and @rafa8626
+* Added `babel-preset-env` to optimize bundles based on supported browsers @rafa8626
+* Fixed typos in `Vimeo` and `Twitch` renderers @rafa8626
+
+*4.0.7 (2017/04/25)*
+
+* Fixed issues when using `MediaElement` inside an iframe (cross and non cross-domain) @rafa8626
+* Fixed way to detect fullscreen mode properly for all renderers and fixed fullscreen for iOS @rafa8626
+* Fixed workflow when using `data-mejsoptions` attribute @rafa8626
+* Updated flv.js library (https://github.com/mediaelement/mediaelement/pull/2180) @isantolin
+* Added new section on Documentation to link Code Snippets related to `MediaElement` @rafa8626
+
 *4.0.6 (2017/04/20)*
 
 * Remove loading overlay only if it exists instead of failing (https://github.com/mediaelement/mediaelement/pull/2167) @kozze89

@@ -1,6 +1,6 @@
 
 /*!
-FullCalendar Scheduler v1.6.1
+FullCalendar Scheduler v1.6.2
 Docs & License: https://fullcalendar.io/scheduler/
 (c) 2017 Adam Shaw
  */
@@ -19,7 +19,7 @@ Docs & License: https://fullcalendar.io/scheduler/
 		factory(jQuery, moment);
 	}
 })(function($, moment) {;
-var COL_MIN_WIDTH, Calendar, CalendarExtension, Class, ClippedScroller, CoordCache, DEFAULT_GRID_DURATION, DragListener, EmitterMixin, EnhancedScroller, EventRow, FC, Grid, HRowGroup, LICENSE_INFO_URL, ListenerMixin, MAX_AUTO_CELLS, MAX_AUTO_SLOTS_PER_LABEL, MAX_CELLS, MIN_AUTO_LABELS, PRESET_LICENSE_KEYS, Promise, RELEASE_DATE, ResourceAgendaView, ResourceBasicView, ResourceDayGrid, ResourceDayTableMixin, ResourceGridMixin, ResourceManager, ResourceMonthView, ResourceRow, ResourceTimeGrid, ResourceTimelineGrid, ResourceTimelineView, ResourceViewMixin, RowGroup, RowParent, STOCK_SUB_DURATIONS, ScrollFollower, ScrollFollowerSprite, ScrollJoiner, ScrollerCanvas, Spreadsheet, TaskQueue, TimelineGrid, TimelineView, UPGRADE_WINDOW, VRowGroup, VertResourceViewMixin, View, _filterResourcesWithEvents, applyAll, capitaliseFirstLetter, compareByFieldSpecs, computeGreatestUnit, computeOffsetForSeg, computeOffsetForSegs, copyRect, createObject, cssToStr, debounce, detectWarningInContainer, divideDurationByDuration, divideRangeByDuration, durationHasTime, flexibleCompare, getContentRect, getOuterRect, getOwnCells, getRectHeight, getRectWidth, getScrollbarWidths, hContainRect, htmlEscape, intersectRanges, intersectRects, isImmuneUrl, isInt, isValidKey, joinRects, multiplyDuration, origExecuteEventsRender, origGetSegCustomClasses, origGetSegDefaultBackgroundColor, origGetSegDefaultBorderColor, origGetSegDefaultTextColor, origOnDateRender, origRemoveElement, origSetElement, parseFieldSpecs, processLicenseKey, proxy, renderingWarningInContainer, testRectContains, testRectHContains, testRectVContains, timeRowSegsCollide, vContainRect,
+var COL_MIN_WIDTH, Calendar, CalendarExtension, Class, ClippedScroller, CoordCache, DEFAULT_GRID_DURATION, DragListener, EmitterMixin, EnhancedScroller, EventRow, FC, Grid, HRowGroup, LICENSE_INFO_URL, ListenerMixin, MAX_AUTO_CELLS, MAX_AUTO_SLOTS_PER_LABEL, MAX_CELLS, MIN_AUTO_LABELS, PRESET_LICENSE_KEYS, Promise, RELEASE_DATE, ResourceAgendaView, ResourceBasicView, ResourceDayGrid, ResourceDayTableMixin, ResourceGridMixin, ResourceManager, ResourceMonthView, ResourceRow, ResourceTimeGrid, ResourceTimelineGrid, ResourceTimelineView, ResourceViewMixin, RowGroup, RowParent, STOCK_SUB_DURATIONS, ScrollFollower, ScrollFollowerSprite, ScrollJoiner, ScrollerCanvas, Spreadsheet, TaskQueue, TimelineGrid, TimelineView, UPGRADE_WINDOW, VRowGroup, VertResourceViewMixin, View, _filterResourcesWithEvents, applyAll, capitaliseFirstLetter, compareByFieldSpecs, computeGreatestUnit, computeOffsetForSeg, computeOffsetForSegs, copyRect, createObject, cssToStr, debounce, detectWarningInContainer, divideDurationByDuration, divideRangeByDuration, durationHasTime, flexibleCompare, getContentRect, getOuterRect, getOwnCells, getRectHeight, getRectWidth, getScrollbarWidths, hContainRect, htmlEscape, intersectRanges, intersectRects, isImmuneUrl, isInt, isValidKey, joinRects, multiplyDuration, origGetSegCustomClasses, origGetSegDefaultBackgroundColor, origGetSegDefaultBorderColor, origGetSegDefaultTextColor, origOnBaseRender, origRemoveElement, origSetElement, parseFieldSpecs, processLicenseKey, proxy, renderingWarningInContainer, testRectContains, testRectHContains, testRectVContains, timeRowSegsCollide, vContainRect,
   extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
   hasProp = {}.hasOwnProperty,
   indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; },
@@ -27,7 +27,7 @@ var COL_MIN_WIDTH, Calendar, CalendarExtension, Class, ClippedScroller, CoordCac
 
 FC = $.fullCalendar;
 
-FC.schedulerVersion = "1.6.1";
+FC.schedulerVersion = "1.6.2";
 
 if (FC.internalApiVersion !== 9) {
   FC.warn('v' + FC.schedulerVersion + ' of FullCalendar Scheduler ' + 'is incompatible with v' + FC.version + ' of the core.\n' + 'Please see http://fullcalendar.io/support/ for more information.');
@@ -1102,7 +1102,7 @@ CalendarExtension = (function(superClass) {
     var spec, viewClass;
     spec = this.getViewSpec(viewType);
     viewClass = spec['class'];
-    if (this.options.resources && spec.options.resources !== false) {
+    if (this.opt('resources') && spec.options.resources !== false) {
       if (spec.queryResourceClass) {
         viewClass = spec.queryResourceClass(spec) || viewClass;
       } else if (spec.resourceClass) {
@@ -1136,7 +1136,8 @@ CalendarExtension = (function(superClass) {
   };
 
   CalendarExtension.prototype.refetchResources = function() {
-    this.resourceManager.fetchResources();
+    this.resourceManager.clear();
+    this.view.flash('initialResources');
   };
 
   CalendarExtension.prototype.rerenderResources = function() {
@@ -1224,7 +1225,7 @@ CalendarExtension = (function(superClass) {
       allEvents = [];
       for (k = 0, len1 = flatResources.length; k < len1; k++) {
         resource = flatResources[k];
-        events = this.computeBusinessHourEvents(wholeDay, resource.businessHours || this.options.businessHours);
+        events = this.computeBusinessHourEvents(wholeDay, resource.businessHours || this.opt('businessHours'));
         for (l = 0, len2 = events.length; l < len2; l++) {
           event = events[l];
           event.resourceId = resource.id;
@@ -1293,7 +1294,7 @@ CalendarExtension = (function(superClass) {
   };
 
   CalendarExtension.prototype.getEventResourceField = function() {
-    return this.options['eventResourceField'] || 'resourceId';
+    return this.opt('eventResourceField') || 'resourceId';
   };
 
   CalendarExtension.prototype.getResourceEvents = function(idOrResource) {
@@ -1341,197 +1342,200 @@ origSetElement = View.prototype.setElement;
 
 origRemoveElement = View.prototype.removeElement;
 
-origOnDateRender = View.prototype.onDateRender;
-
-origExecuteEventsRender = View.prototype.executeEventsRender;
-
-View.prototype.isResourcesBound = false;
-
-View.prototype.isResourcesSet = false;
+origOnBaseRender = View.prototype.onBaseRender;
 
 Calendar.defaults.refetchResourcesOnNavigate = false;
 
+View.prototype.canHandleSpecificResources = false;
+
+View.prototype.isDestroying = false;
+
 View.prototype.setElement = function() {
-  var promise;
-  promise = origSetElement.apply(this, arguments);
-  if (!this.opt('refetchResourcesOnNavigate')) {
-    this.bindResources();
-  }
-  return promise;
+  origSetElement.apply(this, arguments);
+  return this.watchResources();
 };
 
 View.prototype.removeElement = function() {
-  this.unbindResources({
-    skipRerender: true
-  });
-  return origRemoveElement.apply(this, arguments);
+  this.isDestroying = true;
+  this.unwatchResources();
+  origRemoveElement.apply(this, arguments);
+  return this.isDestroying = false;
 };
 
-
-/*
-Replace the supermethod's logic. Important to unbind/bind *events* (TODO: make more DRY)
- */
-
-View.prototype.handleDate = function(dateProfile) {
-  var resourcesNeedDate;
-  resourcesNeedDate = this.opt('refetchResourcesOnNavigate');
-  this.unbindEvents();
-  if (resourcesNeedDate) {
-    this.unbindResources({
-      skipUnrender: true
-    });
-  }
-  return this.requestDateRender(dateProfile).then((function(_this) {
-    return function() {
-      _this.bindEvents();
-      if (resourcesNeedDate) {
-        return _this.bindResources(true);
-      }
-    };
-  })(this));
+View.prototype.onBaseRender = function() {
+  processLicenseKey(this.calendar.opt('schedulerLicenseKey'), this.el);
+  return origOnBaseRender.apply(this, arguments);
 };
 
-View.prototype.onDateRender = function() {
-  processLicenseKey(this.calendar.options.schedulerLicenseKey, this.el);
-  return origOnDateRender.apply(this, arguments);
-};
-
-View.prototype.executeEventsRender = function(events) {
-  return this.whenResourcesSet().then((function(_this) {
-    return function() {
-      return origExecuteEventsRender.call(_this, events);
-    };
-  })(this));
-};
-
-View.prototype.bindResources = function(forceInitialFetch) {
-  var promise;
-  if (!this.isResourcesBound) {
-    this.isResourcesBound = true;
-    this.trigger('resourcesBind');
-    promise = forceInitialFetch ? this.fetchResources() : this.requestResources();
-    return this.rejectOn('resourcesUnbind', promise).then((function(_this) {
-      return function(resources) {
-        _this.listenTo(_this.calendar.resourceManager, {
-          set: _this.setResources,
-          reset: _this.setResources,
-          unset: _this.unsetResources,
-          add: _this.addResource,
-          remove: _this.removeResource
-        });
-        return _this.setResources(resources);
-      };
-    })(this));
-  }
-};
-
-View.prototype.unbindResources = function(teardownOptions) {
-  if (this.isResourcesBound) {
-    this.isResourcesBound = false;
-    this.stopListeningTo(this.calendar.resourceManager);
-    this.unsetResources(teardownOptions);
-    return this.trigger('resourcesUnbind');
-  }
-};
-
-View.prototype.setResources = function(resources) {
-  var isReset;
-  isReset = this.isResourcesSet;
-  this.isResourcesSet = true;
-  this.handleResources(resources, isReset);
-  return this.trigger(isReset ? 'resourcesReset' : 'resourcesSet', resources);
-};
-
-View.prototype.unsetResources = function(teardownOptions) {
-  if (this.isResourcesSet) {
-    this.isResourcesSet = false;
-    this.handleResourcesUnset(teardownOptions);
-    return this.trigger('resourcesUnset');
-  }
-};
-
-View.prototype.whenResourcesSet = function() {
-  if (this.isResourcesSet) {
-    return Promise.resolve();
-  } else {
-    return new Promise((function(_this) {
-      return function(resolve) {
-        return _this.one('resourcesSet', resolve);
-      };
-    })(this));
-  }
-};
-
-View.prototype.addResource = function(resource) {
-  if (this.isResourcesSet) {
-    this.handleResourceAdd(resource);
-    return this.trigger('resourceAdd', resource);
-  }
-};
-
-View.prototype.removeResource = function(resource) {
-  if (this.isResourcesSet) {
-    this.handleResourceRemove(resource);
-    return this.trigger('resourceRemove', resource);
-  }
-};
-
-View.prototype.handleResources = function(resources) {
-  if (this.isEventsRendered) {
-    return this.requestCurrentEventsRender();
-  }
-};
-
-View.prototype.handleResourcesUnset = function(teardownOptions) {
-  if (teardownOptions == null) {
-    teardownOptions = {};
-  }
-  return this.requestEventsUnrender();
-};
-
-View.prototype.handleResourceAdd = function(resource) {
-  if (this.isEventsRendered) {
-    return this.requestCurrentEventsRender();
-  }
-};
-
-View.prototype.handleResourceRemove = function(resource) {
-  if (this.isEventsRendered) {
-    return this.requestCurrentEventsRender();
-  }
-};
-
-
-/*
-Like fetchResources, but won't refetch if already fetched (regardless of start/end).
-If refetchResourcesOnNavigate is enabled,
-this function expects the view's start/end to be already populated.
- */
-
-View.prototype.requestResources = function() {
+View.prototype.watchResources = function() {
+  var bindingDepNames, initialDepNames;
+  initialDepNames = [];
+  bindingDepNames = ['initialResources'];
   if (this.opt('refetchResourcesOnNavigate')) {
-    return this.calendar.resourceManager.getResources(this.activeRange.start, this.activeRange.end);
+    initialDepNames.push('dateProfile');
+  }
+  if (this.opt('filterResourcesWithEvents')) {
+    bindingDepNames.push('currentEvents');
+  }
+  this.watch('initialResources', initialDepNames, (function(_this) {
+    return function(deps) {
+      return _this.getInitialResources(deps.dateProfile);
+    };
+  })(this));
+  return this.watch('bindingResources', bindingDepNames, (function(_this) {
+    return function(deps) {
+      _this.bindResourceChanges(deps.currentEvents);
+      _this.setResources(deps.initialResources, deps.currentEvents);
+    };
+  })(this), (function(_this) {
+    return function() {
+      _this.unbindResourceChanges();
+      _this.unsetResources();
+    };
+  })(this));
+};
+
+View.prototype.unwatchResources = function() {
+  this.unwatch('initialResources');
+  return this.unwatch('bindingResources');
+};
+
+View.prototype.getInitialResources = function(dateProfile) {
+  if (dateProfile) {
+    return this.calendar.resourceManager.getResources(dateProfile.activeRange.start, dateProfile.activeRange.end);
   } else {
     return this.calendar.resourceManager.getResources();
   }
 };
 
+View.prototype.bindResourceChanges = function(currentEvents) {
+  return this.listenTo(this.calendar.resourceManager, {
+    set: (function(_this) {
+      return function(resources) {
+        return _this.setResources(resources, currentEvents);
+      };
+    })(this),
+    unset: (function(_this) {
+      return function() {
+        return _this.unsetResources();
+      };
+    })(this),
+    reset: (function(_this) {
+      return function(resources) {
+        return _this.resetResources(resources, currentEvents);
+      };
+    })(this),
+    add: (function(_this) {
+      return function(resource, allResources) {
+        return _this.addResource(resource, allResources, currentEvents);
+      };
+    })(this),
+    remove: (function(_this) {
+      return function(resource, allResources) {
+        return _this.removeResource(resource, allResources, currentEvents);
+      };
+    })(this)
+  });
+};
 
-/*
-If refetchResourcesOnNavigate is enabled,
-this function expects the view's start/end to be already populated.
- */
+View.prototype.unbindResourceChanges = function() {
+  return this.stopListeningTo(this.calendar.resourceManager);
+};
 
-View.prototype.fetchResources = function() {
-  if (this.opt('refetchResourcesOnNavigate')) {
-    return this.calendar.resourceManager.fetchResources(this.activeRange.start, this.activeRange.end);
-  } else {
-    return this.calendar.resourceManager.fetchResources();
+View.watch('displayingEvents', ['displayingDates', 'hasEvents', 'currentResources'], function(deps) {
+  return this.requestEventsRender(this.get('currentEvents'));
+}, function() {
+  return this.requestEventsUnrender();
+});
+
+View.prototype.setResources = function(resources, currentEvents) {
+  if (currentEvents) {
+    resources = this.filterResourcesWithEvents(resources, currentEvents);
+  }
+  this.set('currentResources', resources);
+  this.set('hasResources', true);
+  return this.handleResourcesSet(resources);
+};
+
+View.prototype.unsetResources = function() {
+  this.unset('currentResources');
+  this.unset('hasResources');
+  return this.handleResourcesUnset();
+};
+
+View.prototype.resetResources = function(resources, currentEvents) {
+  this.startBatchRender();
+  this.unsetResources();
+  this.setResources(resources, currentEvents);
+  return this.stopBatchRender();
+};
+
+View.prototype.addResource = function(resource, allResources, currentEvents) {
+  var a;
+  if (!this.canHandleSpecificResources) {
+    return this.resetResources(allResources, currentEvents);
+  }
+  if (currentEvents) {
+    a = this.filterResourcesWithEvents([resource], currentEvents);
+    if (!a.length) {
+      resource = null;
+    }
+  }
+  if (resource) {
+    this.set('currentResources', allResources);
+    return this.handleResourceAdd(resource);
   }
 };
 
-View.prototype.getCurrentResources = function() {
-  return this.calendar.resourceManager.topLevelResources;
+View.prototype.removeResource = function(resource, allResources, currentEvents) {
+  if (!this.canHandleSpecificResources) {
+    return this.resetResources(allResources, currentEvents);
+  }
+  this.set('currentResources', allResources);
+  return this.handleResourceRemove(resource);
+};
+
+View.prototype.handleResourcesSet = function(resources) {};
+
+View.prototype.handleResourcesUnset = function(resources) {};
+
+View.prototype.handleResourceAdd = function(resource) {};
+
+View.prototype.handleResourceRemove = function(resource) {};
+
+View.prototype.filterResourcesWithEvents = function(resources, events) {
+  var event, j, k, len, len1, ref, resourceId, resourceIdHits;
+  resourceIdHits = {};
+  for (j = 0, len = events.length; j < len; j++) {
+    event = events[j];
+    ref = this.calendar.getEventResourceIds(event);
+    for (k = 0, len1 = ref.length; k < len1; k++) {
+      resourceId = ref[k];
+      resourceIdHits[resourceId] = true;
+    }
+  }
+  return _filterResourcesWithEvents(resources, resourceIdHits);
+};
+
+_filterResourcesWithEvents = function(sourceResources, resourceIdHits) {
+  var filteredChildren, filteredResource, filteredResources, j, len, sourceResource;
+  filteredResources = [];
+  for (j = 0, len = sourceResources.length; j < len; j++) {
+    sourceResource = sourceResources[j];
+    if (sourceResource.children.length) {
+      filteredChildren = _filterResourcesWithEvents(sourceResource.children, resourceIdHits);
+      if (filteredChildren.length || resourceIdHits[sourceResource.id]) {
+        filteredResource = createObject(sourceResource);
+        filteredResource.children = filteredChildren;
+        filteredResources.push(filteredResource);
+      }
+    } else {
+      if (resourceIdHits[sourceResource.id]) {
+        filteredResources.push(sourceResource);
+      }
+    }
+  }
+  return filteredResources;
 };
 
 origGetSegCustomClasses = Grid.prototype.getSegCustomClasses;
@@ -1631,6 +1635,10 @@ ResourceManager = (function(superClass) {
 
   ResourceManager.prototype.fetching = null;
 
+  ResourceManager.prototype.currentStart = null;
+
+  ResourceManager.prototype.currentEnd = null;
+
   function ResourceManager(calendar1) {
     this.calendar = calendar1;
     this.initializeCache();
@@ -1638,11 +1646,17 @@ ResourceManager = (function(superClass) {
 
 
   /*
-  	Like fetchResources, but won't refetch if already fetched (regardless of start/end).
+  	Like fetchResources, but won't refetch if already fetched.
    */
 
   ResourceManager.prototype.getResources = function(start, end) {
-    return this.fetching || this.fetchResources(start, end);
+    var isSameRange;
+    isSameRange = (!start && !this.currentStart) || (start && this.currentStart && start.isSame(this.currentStart) && end.isSame(this.currentEnd));
+    if (!this.fetching || !isSameRange) {
+      return this.fetchResources(start, end);
+    } else {
+      return this.fetching;
+    }
   };
 
 
@@ -1655,7 +1669,7 @@ ResourceManager = (function(superClass) {
   ResourceManager.prototype.fetchResources = function(start, end) {
     var currentFetchId;
     currentFetchId = (this.fetchId += 1);
-    return this.fetching = new Promise((function(_this) {
+    return this.fetching = Promise.construct((function(_this) {
       return function(resolve, reject) {
         return _this.fetchResourceInputs(function(resourceInputs) {
           if (currentFetchId === _this.fetchId) {
@@ -1676,10 +1690,10 @@ ResourceManager = (function(superClass) {
    */
 
   ResourceManager.prototype.fetchResourceInputs = function(callback, start, end) {
-    var calendar, options, requestParams, source;
+    var calendar, requestParams, source, timezone;
     calendar = this.calendar;
-    options = calendar.options;
-    source = options.resources;
+    source = calendar.opt('resources');
+    timezone = calendar.opt('timezone');
     if ($.type(source) === 'string') {
       source = {
         url: source
@@ -1693,15 +1707,15 @@ ResourceManager = (function(superClass) {
             _this.calendar.popLoading();
             return callback(resourceInputs);
           };
-        })(this), start, end, options.timezone);
+        })(this), start, end, calendar.opt('timezone'));
       case 'object':
         calendar.pushLoading();
         requestParams = {};
         if (start && end) {
-          requestParams[options.startParam] = start.format();
-          requestParams[options.endParam] = end.format();
-          if (options.timezone && options.timezone !== 'local') {
-            requestParams[options.timezoneParam] = options.timezone;
+          requestParams[calendar.opt('startParam')] = start.format();
+          requestParams[calendar.opt('endParam')] = end.format();
+          if (timezone && timezone !== 'local') {
+            requestParams[calendar.opt('timezoneParam')] = timezone;
           }
         }
         return $.ajax($.extend({
@@ -1779,20 +1793,29 @@ ResourceManager = (function(superClass) {
     }
   };
 
+  ResourceManager.prototype.clear = function() {
+    this.topLevelResources = null;
+    return this.fetching = null;
+  };
+
   ResourceManager.prototype.addResource = function(resourceInput) {
-    return this.getResources().then((function(_this) {
-      return function() {
-        var resource;
-        resource = _this.buildResource(resourceInput);
-        if (_this.addResourceToIndex(resource)) {
-          _this.addResourceToTree(resource);
-          _this.trigger('add', resource);
-          return resource;
-        } else {
-          return false;
-        }
-      };
-    })(this));
+    if (this.fetching) {
+      return this.fetching.then((function(_this) {
+        return function() {
+          var resource;
+          resource = _this.buildResource(resourceInput);
+          if (_this.addResourceToIndex(resource)) {
+            _this.addResourceToTree(resource);
+            _this.trigger('add', resource, _this.topLevelResources);
+            return resource;
+          } else {
+            return false;
+          }
+        };
+      })(this));
+    } else {
+      return Promise.reject();
+    }
   };
 
   ResourceManager.prototype.addResourceToIndex = function(resource) {
@@ -1833,17 +1856,21 @@ ResourceManager = (function(superClass) {
   ResourceManager.prototype.removeResource = function(idOrResource) {
     var id;
     id = typeof idOrResource === 'object' ? idOrResource.id : idOrResource;
-    return this.getResources().then((function(_this) {
-      return function() {
-        var resource;
-        resource = _this.removeResourceFromIndex(id);
-        if (resource) {
-          _this.removeResourceFromTree(resource);
-          _this.trigger('remove', resource);
-        }
-        return resource;
-      };
-    })(this));
+    if (this.fetching) {
+      return this.fetching.then((function(_this) {
+        return function() {
+          var resource;
+          resource = _this.removeResourceFromIndex(id);
+          if (resource) {
+            _this.removeResourceFromTree(resource);
+            _this.trigger('remove', resource, _this.topLevelResources);
+          }
+          return resource;
+        };
+      })(this));
+    } else {
+      return Promise.reject();
+    }
   };
 
   ResourceManager.prototype.removeResourceFromIndex = function(resourceId) {
@@ -1924,188 +1951,132 @@ A view that structurally distinguishes events by resource
 
 ResourceViewMixin = {
   isResourcesRendered: false,
-  isResourcesDirty: false,
-  resourceRenderQueue: null,
   resourceTextFunc: null,
-  canRenderSpecificResources: false,
   setElement: function() {
-    this.resourceRenderQueue = new TaskQueue();
-    return View.prototype.setElement.apply(this, arguments);
-  },
-  onDateRender: function() {
-    return this.rejectOn('dateUnrender', this.whenResourcesRendered()).then((function(_this) {
+    View.prototype.setElement.apply(this, arguments);
+    this.watch('displayingResources', ['hasResources'], (function(_this) {
       return function() {
-        return View.prototype.onDateRender.apply(_this, arguments);
+        return _this.requestResourcesRender(_this.get('currentResources'));
+      };
+    })(this), (function(_this) {
+      return function() {
+        return _this.requestResourcesUnrender();
+      };
+    })(this));
+    return this.watch('displayingEvents', ['displayingDates', 'hasEvents', 'displayingResources'], (function(_this) {
+      return function() {
+        return _this.requestEventsRender(_this.get('currentEvents'));
+      };
+    })(this), (function(_this) {
+      return function() {
+        return _this.requestEventsUnrender();
       };
     })(this));
   },
-  handleEvents: function(events) {
-    var filteredResources, resources;
-    if (this.opt('filterResourcesWithEvents')) {
-      if (this.isResourcesSet) {
-        resources = this.getCurrentResources();
-        filteredResources = this.filterResourcesWithEvents(resources, events);
-        return this.requestResourcesRender(filteredResources);
-      }
-    } else {
-      if (this.isResourcesRendered && !this.isResourcesDirty) {
-        return this.requestEventsRender(events);
-      }
+  queryScroll: function() {
+    var scroll;
+    scroll = View.prototype.queryScroll.apply(this, arguments);
+    if (this.isResourcesRendered) {
+      $.extend(scroll, this.queryResourceScroll());
+    }
+    return scroll;
+  },
+  applyScroll: function(scroll) {
+    View.prototype.applyScroll.apply(this, arguments);
+    if (this.isResourcesRendered) {
+      return this.applyResourceScroll(scroll);
     }
   },
-  handleResources: function(resources) {
-    var events, filteredResources;
-    if (this.opt('filterResourcesWithEvents')) {
-      if (this.isEventsSet) {
-        events = this.getCurrentEvents();
-        filteredResources = this.filterResourcesWithEvents(resources, events);
-        return this.requestResourcesRender(filteredResources);
-      }
-    } else {
-      return this.requestResourcesRender(resources);
-    }
+  queryResourceScroll: function() {
+    return {};
   },
-  handleResourcesUnset: function(teardownOptions) {
-    if (teardownOptions == null) {
-      teardownOptions = {};
-    }
-    if (teardownOptions.skipUnrender) {
-      return this.isResourcesDirty = this.isResourcesRendered;
-    } else {
-      return this.requestResourcesUnrender(teardownOptions);
-    }
-  },
-  handleResourceAdd: function(resource) {
-    var a, events;
-    if (this.canRenderSpecificResources) {
-      if (this.opt('filterResourcesWithEvents')) {
-        if (this.isEventsSet) {
-          events = this.getCurrentEvents();
-          a = this.filterResourcesWithEvents([resource], events);
-          if (a.length) {
-            return this.requestResourceRender(a[0]);
-          }
+  applyResourceScroll: function() {},
+  bindBaseRenderHandlers: function() {
+    var isDatesRendered, isResourcesRendered;
+    isResourcesRendered = false;
+    isDatesRendered = false;
+    this.on('resourcesRendered.baseHandler', function() {
+      if (!isResourcesRendered) {
+        isResourcesRendered = true;
+        if (isDatesRendered) {
+          return this.onBaseRender();
         }
-      } else {
-        return this.requestResourceRender(resource);
       }
-    } else {
-      return this.handleResources(this.getCurrentResources());
-    }
+    });
+    this.on('datesRendered.baseHandler', function() {
+      if (!isDatesRendered) {
+        isDatesRendered = true;
+        if (isResourcesRendered) {
+          return this.onBaseRender();
+        }
+      }
+    });
+    this.on('before:resourcesUnrendered.baseHandler', function() {
+      if (isResourcesRendered) {
+        return isResourcesRendered = false;
+      }
+    });
+    return this.on('before:datesUnrendered.baseHandler', function() {
+      if (isDatesRendered) {
+        isDatesRendered = false;
+        return this.onBeforeBaseUnrender();
+      }
+    });
+  },
+  handleResourcesSet: function(resources) {},
+  handleResourcesUnset: function() {},
+  handleResourceAdd: function(resource) {
+    return this.requestResourceRender(resource);
   },
   handleResourceRemove: function(resource) {
-    if (this.canRenderSpecificResources) {
-      return this.requestResourceUnrender(resource);
-    } else {
-      return this.handleResources(this.getCurrentResources());
-    }
+    return this.requestResourceUnrender(resource);
   },
   requestResourcesRender: function(resources) {
-    return this.resourceRenderQueue.add((function(_this) {
+    return this.renderQueue.queue((function(_this) {
       return function() {
         return _this.executeResourcesRender(resources);
       };
-    })(this));
+    })(this), 'resource', 'init');
   },
-  requestResourcesUnrender: function(teardownOptions) {
-    if (this.isResourcesRendered) {
-      return this.resourceRenderQueue.add((function(_this) {
-        return function() {
-          return _this.executeResourcesUnrender(teardownOptions);
-        };
-      })(this));
-    } else {
-      return Promise.resolve();
-    }
+  requestResourcesUnrender: function() {
+    return this.renderQueue.queue((function(_this) {
+      return function() {
+        return _this.executeResourcesUnrender();
+      };
+    })(this), 'resource', 'destroy');
   },
   requestResourceRender: function(resource) {
-    return this.resourceRenderQueue.add((function(_this) {
+    return this.renderQueue.queue((function(_this) {
       return function() {
         return _this.executeResourceRender(resource);
       };
-    })(this));
+    })(this), 'resource', 'add');
   },
   requestResourceUnrender: function(resource) {
-    return this.resourceRenderQueue.add((function(_this) {
+    return this.renderQueue.queue((function(_this) {
       return function() {
         return _this.executeResourceUnrender(resource);
       };
-    })(this));
+    })(this), 'resource', 'remove');
   },
   executeResourcesRender: function(resources) {
-    this.captureScroll();
-    this.freezeHeight();
-    return this.executeResourcesUnrender().then((function(_this) {
-      return function() {
-        _this.renderResources(resources);
-        _this.thawHeight();
-        _this.releaseScroll();
-        return _this.reportResourcesRender();
-      };
-    })(this));
+    this.renderResources(resources);
+    this.isResourcesRendered = true;
+    return this.trigger('resourcesRendered');
   },
-  executeResourcesUnrender: function(teardownOptions) {
-    if (this.isResourcesRendered) {
-      return this.requestEventsUnrender().then((function(_this) {
-        return function() {
-          _this.captureScroll();
-          _this.freezeHeight();
-          _this.unrenderResources(teardownOptions);
-          _this.thawHeight();
-          _this.releaseScroll();
-          return _this.reportResourcesUnrender();
-        };
-      })(this));
-    } else {
-      return Promise.resolve();
-    }
+  executeResourcesUnrender: function() {
+    this.trigger('before:resourcesUnrendered');
+    this.unrenderResources();
+    return this.isResourcesRendered = false;
   },
   executeResourceRender: function(resource) {
-    if (this.isResourcesRendered) {
-      this.captureScroll();
-      this.freezeHeight();
-      this.renderResource(resource);
-      this.thawHeight();
-      return this.releaseScroll();
-    } else {
-      return Promise.reject();
-    }
+    return this.renderResource(resource);
   },
   executeResourceUnrender: function(resource) {
-    if (this.isResourcesRendered) {
-      this.captureScroll();
-      this.freezeHeight();
-      this.unrenderResource(resource);
-      this.thawHeight();
-      return this.releaseScroll();
-    } else {
-      return Promise.reject();
-    }
-  },
-  reportResourcesRender: function() {
-    this.isResourcesRendered = true;
-    this.trigger('resourcesRender');
-    if (this.isEventsSet) {
-      this.requestEventsRender(this.getCurrentEvents());
-    }
-  },
-  reportResourcesUnrender: function() {
-    this.isResourcesRendered = false;
-    return this.isResourcesDirty = false;
-  },
-  whenResourcesRendered: function() {
-    if (this.isResourcesRendered && !this.isResourcesDirty) {
-      return Promise.resolve();
-    } else {
-      return new Promise((function(_this) {
-        return function(resolve) {
-          return _this.one('resourcesRender', resolve);
-        };
-      })(this));
-    }
+    return this.unrenderResource(resource);
   },
   renderResources: function(resources) {},
-  unrenderResources: function(teardownOptions) {},
+  unrenderResources: function() {},
   renderResource: function(resource) {},
   unrenderResource: function(resource) {},
   isEventDraggable: function(event) {
@@ -2167,93 +2138,74 @@ ResourceViewMixin = {
     delete out.resourceId;
     this.calendar.setEventResourceId(out, dropLocation.resourceId);
     return out;
-  },
-  filterResourcesWithEvents: function(resources, events) {
-    var event, j, k, len, len1, ref, resourceId, resourceIdHits;
-    resourceIdHits = {};
-    for (j = 0, len = events.length; j < len; j++) {
-      event = events[j];
-      ref = this.calendar.getEventResourceIds(event);
-      for (k = 0, len1 = ref.length; k < len1; k++) {
-        resourceId = ref[k];
-        resourceIdHits[resourceId] = true;
-      }
-    }
-    return _filterResourcesWithEvents(resources, resourceIdHits);
   }
-};
-
-_filterResourcesWithEvents = function(sourceResources, resourceIdHits) {
-  var filteredChildren, filteredResource, filteredResources, j, len, sourceResource;
-  filteredResources = [];
-  for (j = 0, len = sourceResources.length; j < len; j++) {
-    sourceResource = sourceResources[j];
-    if (sourceResource.children.length) {
-      filteredChildren = _filterResourcesWithEvents(sourceResource.children, resourceIdHits);
-      if (filteredChildren.length || resourceIdHits[sourceResource.id]) {
-        filteredResource = createObject(sourceResource);
-        filteredResource.children = filteredChildren;
-        filteredResources.push(filteredResource);
-      }
-    } else {
-      if (resourceIdHits[sourceResource.id]) {
-        filteredResources.push(sourceResource);
-      }
-    }
-  }
-  return filteredResources;
 };
 
 
 /*
 For vertical resource view.
-For views that rely on grids that don't render their resources and dates together.
+For views that rely on grids that render their resources and dates in the same pass.
  */
 
 VertResourceViewMixin = $.extend({}, ResourceViewMixin, {
-  executeResourcesRender: function(resources) {
-    this.setResourcesOnGrids(resources);
-    if (this.isDateRendered) {
-      return this.requestDateRender().then((function(_this) {
-        return function() {
-          return _this.reportResourcesRender();
-        };
-      })(this));
-    } else {
-      return Promise.resolve();
-    }
-  },
-  executeResourcesUnrender: function(teardownOptions) {
-    if (teardownOptions == null) {
-      teardownOptions = {};
-    }
-    this.unsetResourcesOnGrids();
-    if (this.isDateRendered && !teardownOptions.skipRerender) {
-      return this.requestDateRender().then((function(_this) {
-        return function() {
-          return _this.reportResourcesUnrender();
-        };
-      })(this));
-    } else {
-      this.reportResourcesUnrender();
-      return Promise.resolve();
-    }
-  },
-  executeDateRender: function(dateProfile) {
-    return View.prototype.executeDateRender.apply(this, arguments).then((function(_this) {
+  setElement: function() {
+    var isDisplayingBoth, isDisplayingDatesOnly, needsScroll;
+    ResourceViewMixin.setElement.apply(this, arguments);
+    isDisplayingDatesOnly = false;
+    isDisplayingBoth = false;
+    needsScroll = false;
+    this.watch('dateProfileOnly', ['dateProfile'], (function(_this) {
       return function() {
-        if (_this.isResourcesSet) {
-          return _this.reportResourcesRender();
+        return needsScroll = true;
+      };
+    })(this));
+    this.watch('displayingDatesOnly', ['dateProfile', '?currentResources'], (function(_this) {
+      return function(deps) {
+        if (!deps.currentResources && !_this.isDestroying) {
+          isDisplayingDatesOnly = true;
+          return _this.renderQueue.queue(function() {
+            _this.executeDateRender(deps.dateProfile, !needsScroll);
+            return needsScroll = false;
+          }, 'date', 'init');
+        }
+      };
+    })(this), (function(_this) {
+      return function() {
+        if (isDisplayingDatesOnly) {
+          isDisplayingDatesOnly = false;
+          return _this.renderQueue.queue(function() {
+            return _this.executeDateUnrender();
+          }, 'date', 'destroy');
         }
       };
     })(this));
-  },
-  executeDateUnrender: function() {
-    return View.prototype.executeDateUnrender.apply(this, arguments).then((function(_this) {
-      return function() {
-        if (_this.isResourcesSet) {
-          return _this.reportResourcesUnrender();
+    this.watch('displayingDates', ['dateProfile', 'currentResources'], (function(_this) {
+      return function(deps) {
+        if (!_this.isDestroying) {
+          isDisplayingBoth = true;
+          return _this.renderQueue.queue(function() {
+            _this.setResourcesOnGrids(deps.currentResources);
+            _this.executeDateRender(deps.dateProfile, !needsScroll);
+            needsScroll = false;
+            return _this.trigger('resourcesRendered');
+          }, 'resource', 'init');
         }
+      };
+    })(this), (function(_this) {
+      return function() {
+        if (isDisplayingBoth) {
+          isDisplayingBoth = false;
+          return _this.renderQueue.queue(function() {
+            _this.trigger('before:resourcesUnrendered');
+            _this.unsetResourcesOnGrids();
+            return _this.executeDateUnrender();
+          }, 'resource', 'destroy');
+        }
+      };
+    })(this));
+    return this.watch('displayingResources', ['displayingDates'], (function(_this) {
+      return function() {
+        return true;
       };
     })(this));
   },
@@ -2547,7 +2499,7 @@ ResourceDayTableMixin = {
         ref1 = this.flattenedResources;
         for (k = 0, len1 = ref1.length; k < len1; k++) {
           resource = ref1[k];
-          businessHours = resource.businessHours || this.view.calendar.options.businessHours;
+          businessHours = resource.businessHours || this.view.calendar.opt('businessHours');
           events = this.buildBusinessHourEvents(wholeDay, businessHours);
           for (l = 0, len2 = events.length; l < len2; l++) {
             event = events[l];
@@ -2720,8 +2672,8 @@ TimelineView = (function(superClass) {
     return new TimelineGrid(this);
   };
 
-  TimelineView.prototype.setDateProfile = function(dateProfile) {
-    TimelineView.__super__.setDateProfile.apply(this, arguments);
+  TimelineView.prototype.setDateProfileForRendering = function(dateProfile) {
+    TimelineView.__super__.setDateProfileForRendering.apply(this, arguments);
     this.timeGrid.initScaleProps();
     return this.timeGrid.setRange(this.renderRange);
   };
@@ -2845,7 +2797,7 @@ TimelineView = (function(superClass) {
     return this.el.outerHeight() - this.timeGrid.headScroller.el.outerHeight() - this.timeGrid.bodyScroller.el.outerHeight();
   };
 
-  TimelineView.prototype.computeInitialScroll = function() {
+  TimelineView.prototype.computeInitialDateScroll = function() {
     var left, scrollTime;
     left = 0;
     if (this.timeGrid.isTimeScale) {
@@ -2856,22 +2808,21 @@ TimelineView = (function(superClass) {
       }
     }
     return {
-      left: left,
-      top: 0
+      left: left
     };
   };
 
-  TimelineView.prototype.queryScroll = function() {
+  TimelineView.prototype.queryDateScroll = function() {
     return {
-      left: this.timeGrid.bodyScroller.getScrollLeft(),
-      top: this.timeGrid.bodyScroller.getScrollTop()
+      left: this.timeGrid.bodyScroller.getScrollLeft()
     };
   };
 
-  TimelineView.prototype.setScroll = function(scroll) {
-    this.timeGrid.headScroller.setScrollLeft(scroll.left);
-    this.timeGrid.bodyScroller.setScrollLeft(scroll.left);
-    return this.timeGrid.bodyScroller.setScrollTop(scroll.top);
+  TimelineView.prototype.applyDateScroll = function(scroll) {
+    if (scroll.left != null) {
+      this.timeGrid.headScroller.setScrollLeft(scroll.left);
+      return this.timeGrid.bodyScroller.setScrollLeft(scroll.left);
+    }
   };
 
   TimelineView.prototype.renderEvents = function(events) {
@@ -4214,7 +4165,7 @@ ResourceTimelineView = (function(superClass) {
 
   ResourceTimelineView.mixin(ResourceViewMixin);
 
-  ResourceTimelineView.prototype.canRenderSpecificResources = true;
+  ResourceTimelineView.prototype.canHandleSpecificResources = true;
 
   ResourceTimelineView.prototype.resourceGrid = null;
 
@@ -4802,9 +4753,9 @@ ResourceTimelineView = (function(superClass) {
     return this.resourceRowHash[resourceId];
   };
 
-  ResourceTimelineView.prototype.queryScroll = function() {
+  ResourceTimelineView.prototype.queryResourceScroll = function() {
     var el, elBottom, j, len, ref, rowObj, scroll, scrollerTop;
-    scroll = ResourceTimelineView.__super__.queryScroll.apply(this, arguments);
+    scroll = {};
     scrollerTop = this.timeGrid.bodyScroller.scrollEl.offset().top;
     ref = this.getVisibleRows();
     for (j = 0, len = ref.length; j < len; j++) {
@@ -4822,8 +4773,8 @@ ResourceTimelineView = (function(superClass) {
     return scroll;
   };
 
-  ResourceTimelineView.prototype.setScroll = function(scroll) {
-    var el, elBottom, innerTop, row;
+  ResourceTimelineView.prototype.applyResourceScroll = function(scroll) {
+    var el, elBottom, innerTop, row, scrollTop;
     if (scroll.resourceId) {
       row = this.getResourceRow(scroll.resourceId);
       if (row) {
@@ -4831,12 +4782,12 @@ ResourceTimelineView = (function(superClass) {
         if (el) {
           innerTop = this.timeGrid.bodyScroller.canvas.el.offset().top;
           elBottom = el.offset().top + el.outerHeight();
-          scroll.top = elBottom - scroll.bottom - innerTop;
+          scrollTop = elBottom - scroll.bottom - innerTop;
+          this.timeGrid.bodyScroller.setScrollTop(scrollTop);
+          return this.resourceGrid.bodyScroller.setScrollTop(scrollTop);
         }
       }
     }
-    ResourceTimelineView.__super__.setScroll.call(this, scroll);
-    return this.resourceGrid.bodyScroller.setScrollTop(scroll.top);
   };
 
   ResourceTimelineView.prototype.scrollToResource = function(resource) {
@@ -4999,6 +4950,18 @@ ResourceTimelineGrid = (function(superClass) {
     return this.unrenderFgContainers(eventRows);
   };
 
+  ResourceTimelineGrid.prototype.unrenderBgSegs = function() {
+    var eventRow, eventRows, j, len, results;
+    ResourceTimelineGrid.__super__.unrenderBgSegs.apply(this, arguments);
+    eventRows = this.view.getEventRows();
+    results = [];
+    for (j = 0, len = eventRows.length; j < len; j++) {
+      eventRow = eventRows[j];
+      results.push(eventRow.bgSegs = null);
+    }
+    return results;
+  };
+
   ResourceTimelineGrid.prototype.rowCntWithCustomBusinessHours = 0;
 
   ResourceTimelineGrid.prototype.renderBusinessHours = function() {
@@ -5028,7 +4991,7 @@ ResourceTimelineGrid = (function(superClass) {
     results = [];
     for (j = 0, len = ref.length; j < len; j++) {
       row = ref[j];
-      if (this.view.isDateSet && !row.businessHourSegs) {
+      if (this.view.has('dateProfile') && !row.businessHourSegs) {
         this.populateRowBusinessHoursSegs(row);
       }
       if (row.isShown) {
@@ -5070,7 +5033,7 @@ ResourceTimelineGrid = (function(superClass) {
       }
       this.rowCntWithCustomBusinessHours += 1;
     }
-    if (this.view.isDateSet && this.rowCntWithCustomBusinessHours) {
+    if (this.view.has('dateProfile') && this.rowCntWithCustomBusinessHours) {
       return this.populateRowBusinessHoursSegs(row);
     }
   };
@@ -6510,7 +6473,7 @@ FC.views.month.queryResourceClass = function(viewSpec) {
   }
 };
 
-RELEASE_DATE = '2017-04-01';
+RELEASE_DATE = '2017-04-27';
 
 UPGRADE_WINDOW = {
   years: 1,

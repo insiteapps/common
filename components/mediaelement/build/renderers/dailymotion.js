@@ -19,8 +19,6 @@
  *
  */
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
 var DailyMotionApi = {
 	/**
   * @type {Boolean}
@@ -58,7 +56,7 @@ var DailyMotionApi = {
 		if (!DailyMotionApi.isSDKStarted) {
 			var e = document.createElement('script');
 			e.async = true;
-			e.src = '//api.dmcdn.net/all.js';
+			e.src = 'https://api.dmcdn.net/all.js';
 			var s = document.getElementsByTagName('script')[0];
 			s.parentNode.insertBefore(e, s);
 			DailyMotionApi.isSDKStarted = true;
@@ -144,7 +142,7 @@ var DailyMotionIframeRenderer = {
   * @return {Boolean}
   */
 	canPlayType: function canPlayType(type) {
-		return ['video/dailymotion', 'video/x-dailymotion'].includes(type);
+		return ~['video/dailymotion', 'video/x-dailymotion'].indexOf(type.toLowerCase());
 	},
 
 	/**
@@ -182,66 +180,44 @@ var DailyMotionIframeRenderer = {
 					var value = null;
 
 					// figure out how to get dm dta here
+					switch (propName) {
+						case 'currentTime':
+							return dmPlayer.currentTime;
 
-					var _ret = function () {
-						switch (propName) {
-							case 'currentTime':
-								return {
-									v: dmPlayer.currentTime
-								};
+						case 'duration':
+							return isNaN(dmPlayer.duration) ? 0 : dmPlayer.duration;
 
-							case 'duration':
-								return {
-									v: isNaN(dmPlayer.duration) ? 0 : dmPlayer.duration
-								};
+						case 'volume':
+							return dmPlayer.volume;
 
-							case 'volume':
-								return {
-									v: dmPlayer.volume
-								};
+						case 'paused':
+							return dmPlayer.paused;
 
-							case 'paused':
-								return {
-									v: dmPlayer.paused
-								};
+						case 'ended':
+							return dmPlayer.ended;
 
-							case 'ended':
-								return {
-									v: dmPlayer.ended
-								};
+						case 'muted':
+							return dmPlayer.muted;
 
-							case 'muted':
-								return {
-									v: dmPlayer.muted
-								};
+						case 'buffered':
+							var percentLoaded = dmPlayer.bufferedTime,
+							    duration = dmPlayer.duration;
+							return {
+								start: function start() {
+									return 0;
+								},
+								end: function end() {
+									return percentLoaded / duration;
+								},
+								length: 1
+							};
+						case 'src':
+							return mediaElement.originalNode.getAttribute('src');
 
-							case 'buffered':
-								var percentLoaded = dmPlayer.bufferedTime,
-								    duration = dmPlayer.duration;
-								return {
-									v: {
-										start: function start() {
-											return 0;
-										},
-										end: function end() {
-											return percentLoaded / duration;
-										},
-										length: 1
-									}
-								};
-							case 'src':
-								return {
-									v: mediaElement.originalNode.getAttribute('src')
-								};
+						case 'readyState':
+							return readyState;
+					}
 
-							case 'readyState':
-								return {
-									v: readyState
-								};
-						}
-					}();
-
-					if ((typeof _ret === 'undefined' ? 'undefined' : _typeof(_ret)) === "object") return _ret.v;
 					return value;
 				} else {
 					return null;
@@ -500,8 +476,8 @@ var DailyMotionIframeRenderer = {
  *
  */
 mejs.Utils.typeChecks.push(function (url) {
-	url = url.toLowerCase();
-	return url.includes('//dailymotion.com') || url.includes('www.dailymotion.com') || url.includes('//dai.ly') ? 'video/x-dailymotion' : null;
+	return (/\/\/((www\.)?dailymotion\.com|dai\.ly)/i.test(url) ? 'video/x-dailymotion' : null
+	);
 });
 
 window.dmAsyncInit = function () {

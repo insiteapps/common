@@ -8,7 +8,7 @@ body {
   background-repeat: repeat;
 }
 
-a {
+a, strong {
   color: inherit;
   font-family: 'GothamRoundedMedium', sans-serif;
 }
@@ -55,7 +55,6 @@ div.activity > span {
   width: 200px;
   margin: 0 auto;
 }
-
 
 select:focus {
   outline: none;
@@ -105,4 +104,16 @@ select {
   color: #fff;
   background-color: #c0a7fd;
   border-color: #948CE2;
+}
+
+
+.button:disabled {
+  background: #dddddd;
+  color: #333;
+  opacity: .5;
+}
+
+.button:disabled:hover {
+  background: #dddddd;
+  opacity: .5;
 }
