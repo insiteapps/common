@@ -3,15 +3,13 @@
 
 namespace InsiteApps\Common;
 
-/*
-use SilverStripe\Security\Member;
- */
 
+use Member;
 
 
 class Manager extends Common
 {
-
+    
     /**
      * @param int $x
      * @param int $max
@@ -24,10 +22,10 @@ class Manager extends Common
         for ( $i = $x; $i <= $max; $i++ ) {
             $arrValues[ $i ] = $i;
         }
-
+        
         return $arrValues;
     }
-
+    
     /**
      * Get list of all members you have the "Full administrative right" permission
      *
@@ -39,7 +37,7 @@ class Manager extends Common
             ->leftJoin("Group_Members", "Group_Members.MemberID = Member.ID")
             ->leftJoin("Permission", "Permission.GroupID = Group_Members.GroupID")
             ->filter(["Permission.Code" => 'ADMIN']);
-
+        
         return $oMembers;
     }
 }
