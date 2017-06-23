@@ -8,6 +8,8 @@ use SilverStripe\Core\Convert;
 class InsiteMainController extends Page_Controller
 {
 
+    
+    
     /**
      * @var array
      */
@@ -77,7 +79,14 @@ class InsiteMainController extends Page_Controller
     {
         return Convert::raw2sql($this->urlParams['ID']);
     }
-
+    function urlParamsOtherID()
+    {
+        return Convert::raw2sql($this->urlParams['OtherID']);
+    }
+    function urlParamsAction()
+    {
+        return Convert::raw2sql($this->urlParams['Action']);
+    }
     function urlParamsParts()
     {
         return Convert::raw2sql($this->urlParams);
