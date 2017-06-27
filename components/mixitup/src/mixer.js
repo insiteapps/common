@@ -2851,7 +2851,7 @@ h.extend(mixitup.Mixer.prototype,
                 frag.appendChild(self.dom.document.createTextNode(' '));
             }
 
-            self.insertDatasetFrag(frag, nextEl, self.dom.targets.length, insertedTargets);
+            self.insertDatasetFrag(frag, nextEl, self.targets.length, insertedTargets);
         }
 
         for (i = 0; data = operation.startDataset[i]; i++) {
@@ -2914,6 +2914,7 @@ h.extend(mixitup.Mixer.prototype,
             result  = false;
 
         if (
+            self.config.behavior.liveSort ||
             sortCommandA.order       === 'random' ||
             sortCommandA.attribute   !== sortCommandB.attribute ||
             sortCommandA.order       !== sortCommandB.order ||
@@ -3610,6 +3611,10 @@ h.extend(mixitup.Mixer.prototype,
             operation.hasEffect = self.hasEffect();
 
             self.getTweenData(operation);
+        }
+
+        if (operation.willSort) {
+            self.targets = operation.newOrder;
         }
 
         operation.newState = self.buildState(operation);

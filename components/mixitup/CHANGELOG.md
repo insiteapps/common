@@ -1,6 +1,14 @@
 Change Log
 ==========
 
+## 3.2.0
+- Removes support for legacy `$().mixItUp()` jQuery API
+- Fixes issue with Dataset API causing DOM exception when dealing with certain combinations of simultaneous insertion and sorting.
+
+## 3.1.12
+- Fixes issue where `state.targets` does not reflect the updated sort order after a sort operation.
+- Addition of `behavior.liveSort` configuration option.
+
 ## 3.1.11
 
 - Various geometry improvements related to scroll bar issues on desktop Windows and (non-inertial scroll) desktop Mac systems.
