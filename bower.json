@@ -72,7 +72,7 @@
     "pdfmake": "*",
     "html2canvas": "*",
     "mediaelement": "*",
-    "craftpip/jquery-confirm":"*",
+    "craftpip/jquery-confirm":"latest",
     "Stuk/jszip": "*"
   },
   "private": true,

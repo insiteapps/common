@@ -1,5 +1,37 @@
 ### Version History
 
+*4.2.1/4.2.2 (2017/06/28)*
+
+* Added conditional to avoid AJAX request on non-SSL media on iOS @rafa8626
+* Fixed error with .versions file @rafa8626
+
+*4.2.0 (2017/06/26)*
+
+* Fixed issues related to Promises with native renderers @rafa8626
+* Fixed typos in player to execute properly `destroy()` and `stop()` methods @rafa8626
+* Fixed issues with error message not being displayed properly in different scenarios @rafa8626
+* Fixed issue with controls not being hidden using keyboard @rafa8626
+* Fixed issue using fullscreen button and iframes @rafa8626
+* Updated documentation on ReactJS about how to destroy a player and fixed typo on WordPress section @rafa8626
+* Added missing documentation about how to install `MediaElement` in Drupal @rafa8626
+* Fixed typo in `Vimeo` renderer @rafa8626
+* Updated version of `Facebook` API @rafa8626
+* Replacing `buffer` querySelector with getter function in player (https://github.com/mediaelement/mediaelement/pull/2284) @ychen022
+* Fixed issues with keyboard not picking events correctly on Chrome @rafa8626
+* Improved error system to catch more errors and present them to user @rafa8626
+* Removed `mediaelementplayer` bundles, as well as `jQuery` file, considered unnecessary @rafa8626
+* Added new middleware layer to allow interaction with other players @rafa8626
+* Used flex-box to reduce calculation via Javascript on control bar (https://github.com/mediaelement/mediaelement/pull/2261) @marcobiedermann and @rafa8626
+* Fixed issue with events not being unbound when player is destroyed and removed unnecessary callbacks from it @rafa8626
+* Added missing style for buffering element @rafa8626
+* Removed conditional to disable control bar when an error happens @rafa8626
+* Updated references to (Adobe / Apache) Flex SDK in documentation (https://github.com/mediaelement/mediaelement/pull/2287) @isantolin
+* Updated CDN references for both native FLV and HLS renderers @rafa8626
+* Fixed issue with tooltip position when rail is 100% and gets cut off @rafa8626
+* Fixed `The play() request was interrupted` errors by changing way to check for Promises and methods @rafa8626
+* Added missing workflow to hide controls when playing media and mouse is out of player container @rafa8626
+* Added conditionals to check if `src` track is not empty to avoid render empty track sources @rafa8626
+
 *4.1.3 (2017/06/06)*
 
 * Updated Chinese translations (https://github.com/mediaelement/mediaelement/pull/2239) @PeterDaveHello

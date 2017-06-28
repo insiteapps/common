@@ -36,16 +36,22 @@ A complete HTML/CSS audio/video player built on top `MediaElement.js`. Many grea
 `MediaElement.js` is a set of custom Flash plugins that mimic the HTML5 MediaElement API for browsers that don't support HTML5 or don't support the media codecs you're using.
 Instead of using Flash as a _fallback_, Flash is used to make the browser seem HTML5 compliant and enable codecs like H.264 (via Flash) on all browsers.
 
-In general, `MediaElement.js` supports **IE9+, MS Edge, Chrome, Firefox, Safari, iOS 8+** and **Android 4.0+**.
+In general, `MediaElement.js` supports **IE11+, MS Edge, Chrome, Firefox, Safari, iOS 8+** and **Android 4.0+**.
 
-## * IMPORTANT NOTE ABOUT `4.x` VERSION
+**It is strongly recommended to read the entire documentation and check the `demo` folder to get the most out of this package**. Visit [here](docs) to start.
 
-`jQuery` has been completely removed from the code base, with the only exception of converting `MediaElementPlayer` into a `jQuery` plugin.
+## * IMPORTANT CHANGES on `4.2.0` version
+
+As part of the continuous improvements the player, we have decided to drop completely support for IE9 and IE10, since market share of those browsers together is 0.4%, according to http://caniuse.com/usage-table.
+ 
+This change is for `MediaElement` and `MediaElement Plugins` repositories. 
 
 <a id="migration"></a>
-## * IMPORTANT: Migrating from `2.x` to `3.x` version
+## * IMPORTANT: Migrating from `2.x` to `4.x` version
 
-In order to successfully install `3.x` in an existing setup, you must consider the following guidelines:
+**NOTE:** `3.x` version has jQuery in the code base, and `4.x` is framework-agnostic. So for either `3.x` or `4.x` versions, the following steps are valid, but it is highly recommended to upgrade to `4.x`.
+
+In order to successfully install `4.x` in an existing setup, you must consider the following guidelines:
 
 1. If your installation relies on the legacy player classes (i.e., `mejs-player`, `mejs-container`, etc.), you **must** set up the proper namespace. In `2.x`, the default namespace is `mejs-` but now is `mejs__`. In order to set up a new namespace (or the legacy one), use the `classPrefix` configuration, and make sure you use the `mediaelementplayer-legacy` stylesheet provided in the `/build/` folder.
 
@@ -71,8 +77,6 @@ $('video, audio').mediaelementplayer({
 	}
 });
 ```
-
-**It is strongly recommended to read the documentation and check the `demo` folder to get the most out of this package**. Visit [here](docs) to start.
 
 <a id="installation"></a>
 ## Installation and Usage
