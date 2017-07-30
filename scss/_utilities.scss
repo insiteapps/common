@@ -1,4 +1,3 @@
-
 $dark-green: #377c23;
 $lGreen: #396F00;
 $lLightGreen: #ADBA22;
@@ -7,10 +6,10 @@ $lOrange: #F75B10;
 $lRed: #90303C;
 $rudablack: 'rudablack';
 $rudaregular: 'rudaregular';
-$orange : #FFCC2A;
+$orange: #FFCC2A;
 $gooddogregular: 'gooddogregular';
 $CamboRegular: "CamboRegular", Georgia, "Times New Roman", Times, serif;
-
+@import "controlpanel";
 @-webkit-viewport {
   width: device-width;
 }
@@ -54,13 +53,17 @@ $CamboRegular: "CamboRegular", Georgia, "Times New Roman", Times, serif;
   -moz-box-sizing: content-box;
   box-sizing: content-box;
 }
+
 @-moz-document url-prefix() {
-  fieldset { display: table-cell; }
+  fieldset {
+    display: table-cell;
+  }
 }
 
 .green-text {
   color: $dark-green;
 }
+
 a {
   /*display: block;*/
 }
