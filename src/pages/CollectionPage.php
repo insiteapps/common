@@ -23,8 +23,8 @@ class CollectionPage extends Page
     private static $allowed_children = array();
 
     private static $default_child = "";
-
-    public function canCreate()
+    
+    public function canCreate($member = null)
     {
         return !DataObject::get_one($this->class);
     }
