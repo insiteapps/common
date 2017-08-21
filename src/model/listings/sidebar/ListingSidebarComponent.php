@@ -56,7 +56,7 @@ class ListingSidebarComponent extends DataObject
     function NumericDropdown($name)
     {
         return BootstrapDropdownField::create($name)
-            ->setSource(self::getNumericValues());
+            ->setSource(UtilityManager::getNumericValues());
     }
 
     public function requireDefaultRecords()
@@ -83,19 +83,5 @@ class ListingSidebarComponent extends DataObject
 
     }
 
-    /**
-     * @param int $x
-     * @param int $max
-     *
-     * @return array
-     */
-    public static function getNumericValues($x = 0, $max = 6)
-    {
-        $arrValues = array();
-        for ( $i = $x; $i <= $max; $i++ ) {
-            $arrValues[ $i ] = $i;
-        }
-
-        return $arrValues;
-    }
+    
 }
