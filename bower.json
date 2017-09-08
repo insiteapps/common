@@ -28,6 +28,7 @@
     "font-awesome": "4.7.0",
     "bootstrap-sass": "*",
     "fullcalendar": "*",
+    "jquery.browser": "*",
     "fullcalendar-scheduler": "*",
     "owl.carousel": "*",
     "jquery-form": "*",
