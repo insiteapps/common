@@ -17,7 +17,7 @@ var AjaxValidator = function () {
                 //Validate required fields
                 for (var i = 0; i < aRequiredFields.length; i++) {
                     var input = $('#' + prefix + aRequiredFields[i]);
-                    var isSelect = (input.getInputType() === 'select') ? true : false;
+                    var isSelect = (input.getInputType() === 'select');
                     var inputVal = input.val();
                     var inputLabel = input.closest('div.field').find('label').text();
                     var inputName = (input.attr('placeholder')) ? input.attr('placeholder') : input.attr('name');
