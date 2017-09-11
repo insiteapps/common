@@ -14,7 +14,7 @@ var AjaxFormMainValidator = function () {
             }
         },
         submit: function (form) {
-
+            AjaxLoading.start(form.attr('id'));
             var messageArea = form.find('.message');
             form.ajaxSubmit({
                 dataType: 'json',
@@ -32,8 +32,8 @@ var AjaxFormMainValidator = function () {
                     form.clearForm();
                     form.resetForm();
                     //form.find('fieldset,.Actions').hide();
-                    AjaxFormMainValidator.loadButtonAjaxStart(form, true);
-                    AjaxFormMainValidator.loadAjaxStart(form.attr('id'), true);
+                    //AjaxFormMainValidator.loadButtonAjaxStart(form, true);
+                    AjaxLoading.start(form.attr('id'), true);
                 }
             });
         },
