@@ -27,7 +27,10 @@ var AjaxFormMainValidator = function () {
 
                     messageArea.html('');
                     messageArea.html(data.message);
-                    //messageArea.addClass("good col-sm-4");
+                    messageArea.addClass("good");
+                    $('html, body').animate({
+                        scrollTop: $(form.attr('id')).offset().top
+                    }, 1000);
                     messageArea.show();
                     form.clearForm();
                     form.resetForm();
