@@ -12,7 +12,7 @@ class ListingPage extends Page
         private static $allowed_children = array();
 
         private static $db = array(
-            'Status'         => "Enum('Active,Approved,Pending,Suspended','Pending')",
+            'Status'         => "Enum('Active,Approved,Pending,Suspended','Active')",
             "Reference"      => "Varchar(100)",
             "Summary"        => "HTMLText",
             'LastViewedDate' => 'SS_Datetime',
