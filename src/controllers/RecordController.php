@@ -23,8 +23,8 @@ class RecordController extends InsiteMainController
 
     static function find_link($action = false)
     {
-
-        return self::Link($action);
+    
+        return self::create()->Link($action);
     }
 
     function loadVideoModal()

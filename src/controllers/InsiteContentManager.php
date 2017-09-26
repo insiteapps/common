@@ -18,8 +18,8 @@ class InsiteContentManager extends Page_Controller
     }
     static function find_link($action = false)
     {
-
-        return self::Link($action);
+    
+        return self::create()->Link($action);
     }
     function view()
     {
