@@ -23,14 +23,11 @@
     "tests"
   ],
   "dependencies": {
-    "jquery": "~3",
-    "jquery-migrate": "latest",
-    "font-awesome": "4.7.0",
-    "bootstrap-sass": "*",
+
     "fullcalendar": "*",
     "jquery.browser": "*",
     "fullcalendar-scheduler": "*",
-    "owl.carousel": "*",
+
     "jquery-form": "*",
     "jquery-ui": "latest",
     "jquery-pjax": "latest",
@@ -46,7 +43,7 @@
     "isotope": "*",
     "isotope-horizontal": "*",
     "isotope-masonry-horizontal": "*",
-    "bootstrap": "~3",
+
     "mixitup": "*",
     "nouislider": "*",
     "imagesloaded": "*",
@@ -71,8 +68,8 @@
     "datatables.net-responsive": "*",
     "datatables.net-responsive-bs": "*",
     "pdfmake": "*",
-    "html2canvas": "*",
-    "mediaelement": "*",
+
+
     "craftpip/jquery-confirm":"latest",
     "Stuk/jszip": "*"
   },

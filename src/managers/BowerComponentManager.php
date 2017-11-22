@@ -72,14 +72,14 @@ class BowerComponentManager extends Object
 
         $aRequirements["CSS"] = array_merge($aRequirements["CSS"], [
             INSITE_COMMON_DIR . '/css/common.css',
-            BOWER_COMPONENTS_DIR . '/font-awesome/css/font-awesome.min.css',
+            //BOWER_COMPONENTS_DIR . '/font-awesome/css/font-awesome.min.css',
             JQUERY_UI_DIR . '/themes/smoothness/jquery-ui.min.css',
-            BOWER_COMPONENTS_DIR . "/animate.css/animate.min.css",
-            BOWER_COMPONENTS_DIR . "/owl.carousel/dist/assets/owl.carousel.css",
-            BOWER_COMPONENTS_DIR . "/owl.carousel/dist/assets/owl.theme.default.css",
-            BOWER_COMPONENTS_DIR . '/pixeden-stroke-7-icon/pe-icon-7-stroke/dist/pe-icon-7-stroke.min.css',
+            //BOWER_COMPONENTS_DIR . "/animate.css/animate.min.css",
+            //BOWER_COMPONENTS_DIR . "/owl.carousel/dist/assets/owl.carousel.css",
+            //BOWER_COMPONENTS_DIR . "/owl.carousel/dist/assets/owl.theme.default.css",
+            //BOWER_COMPONENTS_DIR . '/pixeden-stroke-7-icon/pe-icon-7-stroke/dist/pe-icon-7-stroke.min.css',
             CHOSEN_DIR . '/chosen.css',
-            BOWER_COMPONENTS_DIR . "/mediaelement/build/mediaelementplayer.min.css",
+            //BOWER_COMPONENTS_DIR . "/mediaelement/build/mediaelementplayer.min.css",
 
             //INSITE_COMMON_DIR . '/css/fresh-bootstrap-table.css',
 
@@ -89,17 +89,17 @@ class BowerComponentManager extends Object
 
     public static function includeBootstrap(&$aRequirements)
     {
-        Requirements::block(THIRDPARTY_DIR . "/jquery/jquery.js");
+        //Requirements::block(THIRDPARTY_DIR . "/jquery/jquery.js");
 
         $aRequirements["JS"] = array_merge($aRequirements["JS"], [
-            JQUERY_DIR . '/jquery.min.js',
-            BOWER_COMPONENTS_DIR . "/tether/dist/js/tether.js",
+            //JQUERY_DIR . '/jquery.min.js',
+            //BOWER_COMPONENTS_DIR . "/tether/dist/js/tether.js",
             //BOOTSTRAP_DIR . '/bootstrap/js/dist/util.js',
-            BOOTSTRAP_DIR . '/js/bootstrap.js',
+            //BOOTSTRAP_DIR . '/js/bootstrap.js',
         ]);
 
         $aRequirements["CSS"] = array_merge($aRequirements["CSS"], [
-            BOOTSTRAP_DIR . "/css/bootstrap.min.css",
+            //BOOTSTRAP_DIR . "/css/bootstrap.min.css",
             //BOOTSTRAP_DIR . "/css/bootstrap-theme.min.css",
 
         ]);
