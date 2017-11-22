@@ -84,6 +84,7 @@ export let Defaults = {
     afterShow: null,
     onClose: null,
     afterClose: null,
+    onClick: null,
     onHover: null,
     onTemplate: null
   },
@@ -96,7 +97,7 @@ export let Defaults = {
     conditions: []
   },
   modal: false,
-  visibilityControl: true
+  visibilityControl: false
 }
 
 /**

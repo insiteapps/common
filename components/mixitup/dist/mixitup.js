@@ -1,7 +1,7 @@
 /**!
- * MixItUp v3.2.1
+ * MixItUp v3.2.2
  * A high-performance, dependency-free library for animated filtering, sorting and more
- * Build ea75207d-1036-4d1b-af10-9800590d2906
+ * Build 20a1a182-d7bd-4c8f-807d-b888e325e44d
  *
  * @copyright Copyright 2014-2017 KunkaLabs Limited.
  * @author    KunkaLabs Limited.
@@ -831,7 +831,7 @@
             frag = doc.createDocumentFragment();
             temp = doc.createElement('div');
 
-            temp.innerHTML = htmlString;
+            temp.innerHTML = htmlString.trim();
 
             while (temp.firstChild) {
                 frag.appendChild(temp.firstChild);
@@ -5053,12 +5053,12 @@
             if (self.config.controls.enable) {
                 self.initControls();
 
+                self.buildToggleArray(null, self.state);
+
                 self.updateControls({
                     filter: self.state.activeFilter,
                     sort: self.state.activeSort
                 });
-
-                self.buildToggleArray(null, self.state);
             }
 
             self.parseEffects();
@@ -8097,11 +8097,14 @@
             var self            = this,
                 instruction     = self.parseFilterArgs(arguments),
                 selector        = instruction.command.selector,
+                selectorIndex   = self.toggleArray.indexOf(selector),
                 toggleSelector  = '';
 
             self.isToggling = true;
 
-            self.toggleArray.splice(self.toggleArray.indexOf(selector), 1);
+            if (selectorIndex > -1) {
+                self.toggleArray.splice(selectorIndex, 1);
+            }
 
             toggleSelector = self.getToggleSelector();
 
@@ -9150,27 +9153,17 @@
          *
          * @example <caption>Example: Force render targets after changing the target render function</caption>
          *
-         * console.log(container.innerHTML);
-         *
-         * // <div class="container">
-         * //     <div class="mix">Foo</div>
-         * //     <div class="mix">Bar</div>
-         * // </div>
+         * console.log(container.innerHTML); // ... &lt;span class="mix"&gt;Foo&lt;/span&gt; ...
          *
          * mixer.configure({
          *     render: {
-         *         target: (item) => `<a href="/${item.slug}/" class="mix">${item.title}</a>`
+         *         target: (item) => `&lt;a href="/${item.slug}/" class="mix"&gt;${item.title}&lt;/a&gt;`
          *     }
          * });
          *
          * mixer.forceRender();
          *
-         * console.log(container.innerHTML);
-         *
-         * // <div class="container">
-         * //     <a href="/foo/" class="mix">Foo</div>
-         * //     <a href="/bar/" class="mix">Bar</div>
-         * // </div>
+         * console.log(container.innerHTML); // ... &lt;a href="/foo/" class="mix"&gt;Foo&lt;/a&gt; ...
          *
          * @public
          * @instance
@@ -10655,5 +10648,5 @@
     mixitup.BaseStatic.call(mixitup.constructor);
 
     mixitup.NAME = 'mixitup';
-    mixitup.CORE_VERSION = '3.2.1';
+    mixitup.CORE_VERSION = '3.2.2';
 })(window);

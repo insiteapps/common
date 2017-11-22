@@ -1,3 +1,11 @@
+/* 
+  @package NOTY - Dependency-free notification library 
+  @version version: 3.1.3 
+  @contributors https://github.com/needim/noty/graphs/contributors 
+  @documentation Examples and Documentation - http://needim.github.com/noty 
+  @license Licensed under the MIT licenses: http://www.opensource.org/licenses/mit-license.php 
+*/
+
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
 		module.exports = factory();
@@ -509,6 +517,7 @@ var Defaults = exports.Defaults = {
     afterShow: null,
     onClose: null,
     afterClose: null,
+    onClick: null,
     onHover: null,
     onTemplate: null
   },
@@ -521,14 +530,13 @@ var Defaults = exports.Defaults = {
     conditions: []
   },
   modal: false,
-  visibilityControl: true
-};
+  visibilityControl: false
 
-/**
- * @param {string} queueName
- * @return {object}
- */
-function getQueueCounts() {
+  /**
+   * @param {string} queueName
+   * @return {object}
+   */
+};function getQueueCounts() {
   var queueName = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'global';
 
   var count = 0;
@@ -2365,6 +2373,7 @@ var Noty = function () {
       afterShow: [],
       onClose: [],
       afterClose: [],
+      onClick: [],
       onHover: [],
       onTemplate: []
     };
@@ -2377,6 +2386,7 @@ var Noty = function () {
     this.on('afterShow', this.options.callbacks.afterShow);
     this.on('onClose', this.options.callbacks.onClose);
     this.on('afterClose', this.options.callbacks.afterClose);
+    this.on('onClick', this.options.callbacks.onClick);
     this.on('onHover', this.options.callbacks.onHover);
     this.on('onTemplate', this.options.callbacks.onTemplate);
 
@@ -2411,26 +2421,26 @@ var Noty = function () {
     value: function show() {
       var _this = this;
 
-      if (this.options.killer === true && !API.PageHidden) {
+      if (this.options.killer === true) {
         Noty.closeAll();
-      } else if (typeof this.options.killer === 'string' && !API.PageHidden) {
+      } else if (typeof this.options.killer === 'string') {
         Noty.closeAll(this.options.killer);
-      } else {
-        var queueCounts = API.getQueueCounts(this.options.queue);
+      }
 
-        if (queueCounts.current >= queueCounts.maxVisible || API.PageHidden) {
-          API.addToQueue(this);
+      var queueCounts = API.getQueueCounts(this.options.queue);
 
-          if (API.PageHidden && this.hasSound && Utils.inArray('docHidden', this.options.sounds.conditions)) {
-            Utils.createAudioElements(this);
-          }
+      if (queueCounts.current >= queueCounts.maxVisible || API.PageHidden && this.options.visibilityControl) {
+        API.addToQueue(this);
 
-          if (API.PageHidden && Utils.inArray('docHidden', this.options.titleCount.conditions)) {
-            API.docTitle.increment();
-          }
-
-          return this;
+        if (API.PageHidden && this.hasSound && Utils.inArray('docHidden', this.options.sounds.conditions)) {
+          Utils.createAudioElements(this);
         }
+
+        if (API.PageHidden && Utils.inArray('docHidden', this.options.titleCount.conditions)) {
+          API.docTitle.increment();
+        }
+
+        return this;
       }
 
       API.Store[this.id] = this;
@@ -2481,6 +2491,7 @@ var Noty = function () {
         Utils.addClass(this.barDom, 'noty_close_with_click');
         Utils.addListener(this.barDom, 'click', function (e) {
           Utils.stopPropagation(e);
+          API.fire(_this, 'onClick');
           _this.close();
         }, false);
       }
@@ -2490,6 +2501,9 @@ var Noty = function () {
       }, false);
 
       if (this.options.timeout) Utils.addClass(this.barDom, 'noty_has_timeout');
+      if (this.options.progressBar) {
+        Utils.addClass(this.barDom, 'noty_has_progressbar');
+      }
 
       if (Utils.inArray('button', this.options.closeWith)) {
         Utils.addClass(this.barDom, 'noty_close_with_button');
@@ -2805,7 +2819,7 @@ var Noty = function () {
   }, {
     key: 'version',
     value: function version() {
-      return "3.1.0";
+      return "3.1.3";
     }
 
     /**
@@ -3004,6 +3018,10 @@ process.off = noop;
 process.removeListener = noop;
 process.removeAllListeners = noop;
 process.emit = noop;
+process.prependListener = noop;
+process.prependOnceListener = noop;
+
+process.listeners = function (name) { return [] }
 
 process.binding = function (name) {
     throw new Error('process.binding is not supported');

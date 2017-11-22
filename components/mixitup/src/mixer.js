@@ -125,12 +125,12 @@ h.extend(mixitup.Mixer.prototype,
         if (self.config.controls.enable) {
             self.initControls();
 
+            self.buildToggleArray(null, self.state);
+
             self.updateControls({
                 filter: self.state.activeFilter,
                 sort: self.state.activeSort
             });
-
-            self.buildToggleArray(null, self.state);
         }
 
         self.parseEffects();
@@ -3169,11 +3169,14 @@ h.extend(mixitup.Mixer.prototype,
         var self            = this,
             instruction     = self.parseFilterArgs(arguments),
             selector        = instruction.command.selector,
+            selectorIndex   = self.toggleArray.indexOf(selector),
             toggleSelector  = '';
 
         self.isToggling = true;
 
-        self.toggleArray.splice(self.toggleArray.indexOf(selector), 1);
+        if (selectorIndex > -1) {
+            self.toggleArray.splice(selectorIndex, 1);
+        }
 
         toggleSelector = self.getToggleSelector();
 
@@ -4222,27 +4225,17 @@ h.extend(mixitup.Mixer.prototype,
      *
      * @example <caption>Example: Force render targets after changing the target render function</caption>
      *
-     * console.log(container.innerHTML);
-     *
-     * // <div class="container">
-     * //     <div class="mix">Foo</div>
-     * //     <div class="mix">Bar</div>
-     * // </div>
+     * console.log(container.innerHTML); // ... &lt;span class="mix"&gt;Foo&lt;/span&gt; ...
      *
      * mixer.configure({
      *     render: {
-     *         target: (item) => `<a href="/${item.slug}/" class="mix">${item.title}</a>`
+     *         target: (item) => `&lt;a href="/${item.slug}/" class="mix"&gt;${item.title}&lt;/a&gt;`
      *     }
      * });
      *
      * mixer.forceRender();
      *
-     * console.log(container.innerHTML);
-     *
-     * // <div class="container">
-     * //     <a href="/foo/" class="mix">Foo</div>
-     * //     <a href="/bar/" class="mix">Bar</div>
-     * // </div>
+     * console.log(container.innerHTML); // ... &lt;a href="/foo/" class="mix"&gt;Foo&lt;/a&gt; ...
      *
      * @public
      * @instance

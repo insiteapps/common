@@ -12,7 +12,7 @@
   "dependencies": {
     "jquery": "2 - 3",
     "moment": "^2.9.0",
-    "fullcalendar": "~3.4.0"
+    "fullcalendar": "~3.7.0"
   },
   "main": [
     "dist/scheduler.js",
@@ -27,12 +27,12 @@
     "!/CHANGELOG.*",
     "!/CONTRIBUTING.*"
   ],
-  "version": "1.6.2",
-  "_release": "1.6.2",
+  "version": "1.9.0",
+  "_release": "1.9.0",
   "_resolution": {
     "type": "version",
-    "tag": "v1.6.2",
-    "commit": "41e5ddb858f5039e0c8598f30b0cf26f3f8d1481"
+    "tag": "v1.9.0",
+    "commit": "d9ca1022d56cee6eb97a4f8fe24faf2e6f2abffe"
   },
   "_source": "https://github.com/fullcalendar/fullcalendar-scheduler.git",
   "_target": "*",

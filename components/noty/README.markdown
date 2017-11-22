@@ -1,6 +1,6 @@
 <p align="center">
   <a href="http://ned.im/noty?ref=readme">
-    <img src="http://ned.im/noty/img/projects/noty-v3-logo.png" width=200 height=70>
+    <img src="http://ned.im/noty/_media/noty-v3-logo.png" width=200 height=70>
   </a>
 
   <p align="center">
@@ -83,14 +83,18 @@ new Noty({
 $ npm run dev
 $ npm test
 $ npm run build
+$ npm run browserstack
+$ npm run serve-docs
 ```
 
 ##### Development environment
 - [x] Standard
+- [x] Prettier
 - [x] ES6 & Babel & Webpack
 - [x] Sass
 - [x] Autoprefixer
-- [x] AVA
+- [x] QUnit
+- [x] BrowserStack
 - [x] Pre-commit tests
 - [x] Travis CI
 
