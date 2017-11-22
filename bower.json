@@ -28,7 +28,6 @@
     "jquery.browser": "*",
     "fullcalendar-scheduler": "*",
 
-    "jquery-form": "*",
     "jquery-ui": "latest",
     "jquery-pjax": "latest",
     "select2": "3.5.4",
@@ -78,10 +77,7 @@
     "jquery": "~3",
     "d3": "~3.5.4",
     "underscore": "1.8.3",
-    "backbone": "^1.1.2",
-    "font-awesome": "~4.7.0",
-    "animate.css": "~3.5.0",
-    "bootstrap": "~3"
+    "backbone": "^1.1.2"
   },
   "devDependencies": {
     "tether": "~1.1.1"
