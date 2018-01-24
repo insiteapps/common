@@ -4,7 +4,7 @@ var AjaxFormMainValidator = function () {
         validate: function (form, aRequiredFields, prefix, canSubmit) {
 
             var valid = AjaxValidator.IsValid(form, aRequiredFields, prefix);
-            console.log(canSubmit);
+         //   console.log(canSubmit);
             if (valid) {
                 if (canSubmit) {
                     return AjaxFormMainValidator.submit(form);
