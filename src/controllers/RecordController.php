@@ -41,7 +41,7 @@ class RecordController extends InsiteMainController
                 $record_id = $params[ 'OtherID' ];
                 if ( $ClassName && $record_id ) {
                     $record = DataObject::get_by_id( $ClassName, $record_id );
-                    if ( $record->exists() && $record->canDelete() ) {
+                    if ( Page::IsAdmin() || ( $record->exists() && $record->canDelete() ) ) {
                         $record->delete();
                         $record->destroy();
                         $aResponse[ 'status' ]  = "success";
