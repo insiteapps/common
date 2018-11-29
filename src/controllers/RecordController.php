@@ -17,7 +17,7 @@ class RecordController extends InsiteMainController
         'delete_record',
     );
     
-    function Link( $action = null )
+    public function Link( $action = null )
     {
         
         return "records/$action";
@@ -25,19 +25,26 @@ class RecordController extends InsiteMainController
     
     public static function Guid()
     {
-        mt_srand((double)microtime() * 10000);
-        $charid = strtoupper(md5(uniqid(rand(), true)));
-        $hyphen = chr(45);// "-"
-        return substr($charid, 0, 8) . $hyphen . substr($charid, 8, 4) . $hyphen . substr($charid, 12, 4) . $hyphen . substr($charid, 16, 4) . $hyphen . substr($charid, 20, 12);
+        mt_srand( (double) microtime() * 10000 );
+        $charid = strtoupper( md5( uniqid( rand(), true ) ) );
+        $hyphen = chr( 45 );// "-"
+        return substr( $charid, 0, 8 ) . $hyphen . substr( $charid, 8, 4 ) . $hyphen . substr( $charid, 12, 4 ) . $hyphen . substr( $charid, 16, 4 ) . $hyphen . substr( $charid, 20, 12 );
     }
     
-    static function find_link( $action = false )
+    public static function uuid()
+    {
+        mt_srand( (double) microtime() * 100000 );
+        $charid = strtolower( md5( uniqid( rand(), true ) ) );
+        return substr( $charid, 0, 8 ) . substr( $charid, 8, 4 ) . substr( $charid, 12, 4 ) . substr( $charid, 16, 4 ) . substr( $charid, 20, 12 );
+    }
+    
+    public static function find_link( $action = false )
     {
         
         return self::create()->Link( $action );
     }
     
-    function delete_record()
+    public function delete_record()
     {
         
         $member = Member::currentUser();
@@ -70,8 +77,7 @@ class RecordController extends InsiteMainController
         return Convert::raw2json( $aResponse );
     }
     
-    
-    function loadVideoModal()
+    public function loadVideoModal()
     {
         
         $params              = $this->urlParamsParts();
@@ -84,7 +90,7 @@ class RecordController extends InsiteMainController
         return $this->customise( $data )->renderWith( array( 'VideoModalContent' ) );
     }
     
-    function resend_contact_email()
+    public function resend_contact_emaill()
     {
         
         $pages = ContactPage::get();
@@ -123,7 +129,7 @@ class RecordController extends InsiteMainController
         
     }
     
-    function mapmarkers()
+    public function mapmarkers()
     {
         
         Requirements::css( BOOTSTRAP_DIR . "/css/bootstrap.min.css" );
@@ -142,7 +148,7 @@ class RecordController extends InsiteMainController
     }
     
     
-    static public function AddProtocol( $url )
+    public static function AddProtocol( $url )
     {
         
         if ( strtolower( substr( $url, 0, 8 ) ) !== 'https://' && strtolower( substr( $url, 0, 7 ) ) !== 'http://' ) {
