@@ -102,7 +102,7 @@ class ListingPage extends Page
         return $fields;
     }
     
-    public function Link()
+    public function Link($action = null)
     {
         if ( $this->Parent()->RemoveChildLinking ) {
             return "javascript:void(0);";
