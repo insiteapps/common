@@ -5,12 +5,7 @@ namespace InsiteApps\Common;
 /**
  * Class InsiteApps
  */
-class Common extends \Object
+class Common
 {
-
-    public function __construct()
-    {
-        parent::__construct();
-    }
 
 }

@@ -16,7 +16,7 @@
  *
  * @author Patrick Chitovoro
  */
-class CalendarTimeManager extends Object
+class CalendarTimeManager extends SS_Object
 {
 
     /**

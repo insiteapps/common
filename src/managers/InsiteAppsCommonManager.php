@@ -3,7 +3,8 @@
 /*
 use SilverStripe\Core\Object;
  */
-class InsiteAppsCommonManager extends Object
+
+class InsiteAppsCommonManager extends \InsiteApps\Common\Manager
 {
 
 

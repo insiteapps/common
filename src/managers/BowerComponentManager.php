@@ -5,7 +5,9 @@ use SilverStripe\Core\Object;
 use SilverStripe\View\Requirements;
  */
 
-class BowerComponentManager extends Object
+use InsiteApps\Common\Manager;
+
+class BowerComponentManager extends Manager
 {
 
     public static function include_code(&$aRequirements)
