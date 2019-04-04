@@ -5,11 +5,11 @@ namespace InsiteApps\Common;
 
 
 use Member;
+use SS_Object;
 
-
-class Manager extends Common
+class Manager extends SS_Object
 {
-    
+
     /**
      * @param int $x
      * @param int $max
@@ -19,13 +19,13 @@ class Manager extends Common
     public function getNumericValues($x = 0, $max = 4)
     {
         $arrValues = array();
-        for ( $i = $x; $i <= $max; $i++ ) {
-            $arrValues[ $i ] = $i;
+        for ($i = $x; $i <= $max; $i++) {
+            $arrValues[$i] = $i;
         }
-        
+
         return $arrValues;
     }
-    
+
     /**
      * Get list of all members you have the "Full administrative right" permission
      *
@@ -37,7 +37,7 @@ class Manager extends Common
             ->leftJoin("Group_Members", "Group_Members.MemberID = Member.ID")
             ->leftJoin("Permission", "Permission.GroupID = Group_Members.GroupID")
             ->filter(["Permission.Code" => 'ADMIN']);
-        
+
         return $oMembers;
     }
 }
