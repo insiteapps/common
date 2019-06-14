@@ -33,7 +33,52 @@ class InsiteMainController extends Page_Controller
 
         return $url;
     }
-
+    
+    
+    protected function getRequestData( $query = null )
+    {
+        
+        $data = $this->requestVars();
+        if ( $data ) {
+            
+            
+            $aData = RecordController::cleanREQUEST( $data );
+            if ( $query ) {
+                
+                
+                if ( isset( $aData[ $query ] ) ) {
+                    return $aData[ $query ];
+                }
+                
+                return false;
+            }
+            
+            return $aData;
+        }
+        
+        return [];
+        
+    }
+    public function requestVars()
+    {
+        
+        $data = array_merge_recursive( $this->GetVars(), $this->PostVars() );
+        
+        return (array) static::cleanREQUEST( $data );
+    }
+    
+    
+    public function GetVars()
+    {
+        
+        return count( $_g = (array) filter_input_array( INPUT_GET ) ) ? $_g : [];
+    }
+    
+    public function PostVars()
+    {
+        
+        return count( $_g = (array) filter_input_array( INPUT_POST ) ) ? $_g : [];
+    }
     /**
      *
      * @param array $request
