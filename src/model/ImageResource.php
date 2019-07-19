@@ -9,8 +9,7 @@ class ImageResource extends DataObject
     private static $default_sort = 'SortOrder';
     
     private static $db = array(
-        'VideoLink'   => 'Varchar(255)',
-        'VideoType'   => 'Enum("Youtube,Vimeo","Vimeo")',
+      
         'Name'        => 'Varchar(255)',
         'Description' => 'Text',
         'Easing'      => 'Enum("default,easeOutBack,easeInBack,Power4.easeOut","default")',
@@ -27,11 +26,15 @@ class ImageResource extends DataObject
     {
         
         $f = parent::getCMSFields();
-        $f->removeByName( 'SortOrder' );
-        $f->removeByName( 'PageID' );
-        $f->addFieldsToTab( "Root.Settings", array(
-            DropdownField::create( "Easing" )->setSource( $this->dbObject( "Easing" )->enumValues() ),
-            DropdownField::create( "Transition" )->setSource( $this->dbObject( "Transition" )->enumValues() ),
+        $f->removeByName( [
+            'SortOrder',
+           
+            'PageID',
+        ] );
+        
+        $f->addFieldsToTab( 'Root.Settings', array(
+            DropdownField::create( 'Easing' )->setSource( $this->dbObject( 'Easing' )->enumValues() ),
+            DropdownField::create( 'Transition' )->setSource( $this->dbObject( 'Transition' )->enumValues() ),
         ) );
         
         
@@ -39,15 +42,16 @@ class ImageResource extends DataObject
         if ( $this->PageID ) {
             $URLSegment = $this->Page()->URLSegment;
         }
-        $ImageField = FileAttachmentField::create( 'Image' )->imagesOnly()->setMaxFilesize( 1 )
-                                         ->setFolderName( 'Uploads/Images/' . $URLSegment );
         
-        $f->addFieldToTab( 'Root.Images', $ImageField );
+        $f->addFieldToTab( 'Root.Main', FileAttachmentField::create( 'Image' )->imagesOnly()->setMaxFilesize( 1 )
+                                                           ->setFolderName( 'Uploads/Images/' . $URLSegment ) );
         
+        /*
         $f->addFieldsToTab( 'Root.Video', [
             DropdownField::create( "VideoType" )->setSource( $this->dbObject( "VideoType" )->enumValues() ),
             TextField::create( "VideoLink" )->setRightTitle( 'Please paste the embed code only' ),
         ] );
+        */
         
         return $f;
     }
@@ -56,11 +60,11 @@ class ImageResource extends DataObject
         'Thumbnail',
         'Name',
         //'Description',
-        "VideoLink",
+        //"VideoLink",
     
     );
     
-    function getThumbnail()
+    public function getThumbnail()
     {
         
         $image = $this->Image();
@@ -69,7 +73,7 @@ class ImageResource extends DataObject
         }
     }
     
-    function LinkingClass()
+    public function LinkingClass()
     {
         
         return strtolower( $this->VideoType );
@@ -87,27 +91,6 @@ class ImageResource extends DataObject
         */
         
         
-    }
-    
-    function IsVideo()
-    {
-        
-        if ( $this->VideoLink ) {
-            
-            return true;
-        }
-        
-        return false;
-    }
-    
-    function IsVideoClass()
-    {
-        
-        if ( $this->IsVideo() ) {
-            return "HasVideo";
-        }
-        
-        return false;
     }
     
     protected function onBeforeDelete()
