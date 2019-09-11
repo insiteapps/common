@@ -26,7 +26,7 @@ var AjaxValidator = function () {
                     if ((!inputVal) || (inputVal === fieldErrorMsg)) {
                         input.addClass("needsfilled");
                         if (isSelect) {
-                            //console.log(aRequiredFields[i] + " - " + isSelect);
+                             console.log(aRequiredFields[i] + " - " + isSelect);
                             var errSpan = '<span class="message required">' + fieldErrorMsg + '</span>';
                             var SelectHolder = input.closest('div.field');
                             if (!SelectHolder.hasClass("needsfilled")) {
