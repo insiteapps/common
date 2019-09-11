@@ -26,14 +26,15 @@ var AjaxValidator = function () {
                     if ((!inputVal) || (inputVal === fieldErrorMsg)) {
                         input.addClass("needsfilled");
                         if (isSelect) {
-                             console.log(aRequiredFields[i] + " - " + isSelect);
-                            var errSpan = '<span class="message required">' + fieldErrorMsg + '</span>';
+                            console.log(aRequiredFields[i] + " - " + isSelect);
+                            var errSpan = '<span class="errSpan message required">' + fieldErrorMsg + '</span>';
                             var SelectHolder = input.closest('div.field');
                             if (!SelectHolder.hasClass("needsfilled")) {
-                                SelectHolder.addClass("needsfilled");
-                                SelectHolder.append(errSpan);
-                            }
+                                //SelectHolder.addClass("needsfilled");
+                                //SelectHolder.append(errSpan);
 
+                            }
+                            input.append('<option class="needsfilled" value="" selected="selected">'+fieldErrorMsg+'</option>');
                         } else {
                             input.val(fieldErrorMsg);
                         }
@@ -61,17 +62,21 @@ var AjaxValidator = function () {
 
             // Clears any fields in the form when the user clicks on them
             $(":input").focus(function () {
-                if ($(this).hasClass("needsfilled")) {
-                    if ($(this).getInputType() === 'select') {
-                        $(this).find('option.needsfilled').remove();
-                        $(this).closest('div.field').addClass('needsfilled-done');
+
+                var input = $(this);
+
+                if (input.hasClass("needsfilled")) {
+                    if (input.getInputType() === 'select') {
+                        input.find('option.needsfilled').remove();
+                        input.closest('div.field').addClass('needsfilled-done');
                     } else {
-                        $(this).val("");
+                        input.val("");
 
                     }
-                    $(this).removeClass("needsfilled");
+                    input.removeClass("needsfilled");
                 }
-                var id = $(this).id;
+
+
             });
             //if any inputs on the page have the class 'needsfilled' the form will not submit
             if ($(":input").hasClass("needsfilled")) {
