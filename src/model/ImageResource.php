@@ -20,6 +20,7 @@ class ImageResource extends DataObject
     private static $has_one = array(
         'Image' => 'FittedImage',
         'Page'  => 'Page',
+        'DataObject'  => 'DataObject',
     );
     
     public function getCMSFields()
