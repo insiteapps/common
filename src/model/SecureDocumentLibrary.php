@@ -32,8 +32,7 @@ class SecureDocumentLibrary extends DataObject
     }
     
     private static $summary_fields = array(
-        'Name',
-        'Description',
+        'Title',
     );
     
     public function getThumbnail()
