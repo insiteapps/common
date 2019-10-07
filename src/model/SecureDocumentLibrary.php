@@ -27,7 +27,7 @@ class SecureDocumentLibrary extends DataObject
             'SortOrder',
             'MemberAreaPage',
         ] );
-        $f->addFieldToTab( 'Root.Main', HTMLEditorField::create( 'Content' )->setRows( 10 ) );
+        $f->addFieldToTab( 'Root.Main', HTMLEditorField::create( 'Content' )->setRows( 10 ) ,'FileID');
         return $f;
     }
     
