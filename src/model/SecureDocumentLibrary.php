@@ -27,7 +27,11 @@ class SecureDocumentLibrary extends DataObject
             'SortOrder',
             'MemberAreaPage',
         ] );
-        $f->addFieldToTab( 'Root.Main', HTMLEditorField::create( 'Content' )->setRows( 10 ) ,'FileID');
+        $f->addFieldToTab( 'Root.Main', HTMLEditorField::create( 'Content' )->setRows( 10 ) );
+        
+        $f->addFieldToTab( 'Root.Main', FileAttachmentField::create( 'File' )->setMaxFilesize( 100 )
+                                                           ->setFolderName( 'Uploads/Vault/' ) );
+        
         return $f;
     }
     
@@ -43,4 +47,11 @@ class SecureDocumentLibrary extends DataObject
         }
     }
     
+    public function Link()
+    {
+        if ( $this->FileID ) {
+            return $this->File()->URL;
+        }
+        return false;
+    }
 }
