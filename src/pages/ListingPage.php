@@ -23,10 +23,10 @@ class ListingPage extends Page
     );
     
     private static $many_many = array(
-        "Areas"       => "ListingArea",
-        "Collections" => "ListingCollection",
-        "Locations"   => "ListingLocation",
-        "Types"       => "ListingType",
+        //"Areas"       => "ListingArea",
+        //"Collections" => "ListingCollection",
+        //"Locations"   => "ListingLocation",
+        //"Types"       => "ListingType",
     );
     
     public function getChosenTemplateName()
@@ -56,53 +56,53 @@ class ListingPage extends Page
         $summary->setDescription( _t( 'BlogPost.SUMMARY_DESCRIPTION', 'If no summary is specified the first 150 words will be used.' ) );
         
         $summaryHolder = ToggleCompositeField::create( 'CustomSummary', _t( 'BlogPost.CUSTOMSUMMARY', 'Add A Custom Summary' ), array(
-                $summary,
-            ) );
+            $summary,
+        ) );
         $summaryHolder->setHeadingLevel( 4 );
         $summaryHolder->addExtraClass( 'custom-summary' );
         $fields->insertBefore( $summaryHolder, 'Content' );
-    
-      
-        $fields->addFieldsToTab( 'Root.Details', [
-            DropdownField::create( "Status" )->setSource( $this->dbObject( "Status" )->enumValues() )
-                         ->setEmptyString( "--Select--" ),
-            TextField::create( 'Reference' ),
-        ] );
         
-        $oListingArea    = ListingArea::get();
-        $oListingAreaMap = $oListingArea ? $oListingArea->map()->toArray() : array();
-        asort( $oListingAreaMap );
-        $fields->addFieldToTab( 'Root.Details', ListboxField::create( 'Areas', 'Please select your Areas' )
-                                                            ->setMultiple( true )->setSource( $oListingAreaMap )
-                                                            ->setAttribute( 'data-placeholder', 'Areas' ) );
-        
-        $oListingLocation    = ListingLocation::get();
-        $oListingLocationMap = $oListingLocation ? $oListingLocation->map()->toArray() : array();
-        asort( $oListingLocationMap );
-        $fields->addFieldToTab( 'Root.Details', ListboxField::create( 'Locations', 'Please select your Locations' )
-                                                            ->setMultiple( true )->setSource( $oListingLocationMap )
-                                                            ->setAttribute( 'data-placeholder', 'Locations' ) );
-        
-        $oListingType    = ListingType::get();
-        $oListingTypeMap = $oListingType ? $oListingType->map()->toArray() : array();
-        asort( $oListingTypeMap );
-        $fields->addFieldToTab( 'Root.Details', ListboxField::create( 'Types', 'Please select your Types' )
-                                                            ->setMultiple( true )->setSource( $oListingTypeMap )
-                                                            ->setAttribute( 'data-placeholder', 'Types' ) );
-        
-        
-        $oListingCollection    = ListingCollection::get();
-        $oListingCollectionMap = $oListingCollection ? $oListingCollection->map()->toArray() : array();
-        asort( $oListingTypeMap );
-        $fields->addFieldToTab( 'Root.Details', ListboxField::create( 'Collections', 'Please select your Collections' )
-                                                            ->setMultiple( true )->setSource( $oListingCollectionMap )
-                                                            ->setAttribute( 'data-placeholder', 'Collections' ) );
-        
+        /*
+          $fields->addFieldsToTab( 'Root.Details', [
+              DropdownField::create( "Status" )->setSource( $this->dbObject( "Status" )->enumValues() )
+                           ->setEmptyString( "--Select--" ),
+              TextField::create( 'Reference' ),
+          ] );
+          
+          $oListingArea    = ListingArea::get();
+          $oListingAreaMap = $oListingArea ? $oListingArea->map()->toArray() : array();
+          asort( $oListingAreaMap );
+          $fields->addFieldToTab( 'Root.Details', ListboxField::create( 'Areas', 'Please select your Areas' )
+                                                              ->setMultiple( true )->setSource( $oListingAreaMap )
+                                                              ->setAttribute( 'data-placeholder', 'Areas' ) );
+          
+          $oListingLocation    = ListingLocation::get();
+          $oListingLocationMap = $oListingLocation ? $oListingLocation->map()->toArray() : array();
+          asort( $oListingLocationMap );
+          $fields->addFieldToTab( 'Root.Details', ListboxField::create( 'Locations', 'Please select your Locations' )
+                                                              ->setMultiple( true )->setSource( $oListingLocationMap )
+                                                              ->setAttribute( 'data-placeholder', 'Locations' ) );
+          
+          $oListingType    = ListingType::get();
+          $oListingTypeMap = $oListingType ? $oListingType->map()->toArray() : array();
+          asort( $oListingTypeMap );
+          $fields->addFieldToTab( 'Root.Details', ListboxField::create( 'Types', 'Please select your Types' )
+                                                              ->setMultiple( true )->setSource( $oListingTypeMap )
+                                                              ->setAttribute( 'data-placeholder', 'Types' ) );
+          
+          
+          $oListingCollection    = ListingCollection::get();
+          $oListingCollectionMap = $oListingCollection ? $oListingCollection->map()->toArray() : array();
+          asort( $oListingTypeMap );
+          $fields->addFieldToTab( 'Root.Details', ListboxField::create( 'Collections', 'Please select your Collections' )
+                                                              ->setMultiple( true )->setSource( $oListingCollectionMap )
+                                                              ->setAttribute( 'data-placeholder', 'Collections' ) );
+          */
         
         return $fields;
     }
     
-    public function Link($action = null)
+    public function Link( $action = null )
     {
         if ( $this->Parent()->RemoveChildLinking ) {
             return "javascript:void(0);";
@@ -152,21 +152,10 @@ class ListingPage_Controller extends Page_Controller
     {
         parent:: init();
         Requirements::customScript( sprintf( "var REF = '%s';", base64_encode( $this->ID ) ) );
-        //$this->setLastViewedDateValue();
+        
         
     }
     
-    public function setLastViewedDateValue()
-    {
-        $now                  = SS_Datetime::now()->Rfc2822();
-        $oObj                 = Page::get()->byID( $this->ID );
-        $oObj->LastViewedDate = $now;
-        $oObj->write();
-        $oObj->doRestoreToStage();
-        
-        //debug::show($this->record['LastViewedDate']);
-        
-    }
     
     public function SlideShow()
     {
