@@ -12,7 +12,7 @@ class ListingHolder extends Page
 {
     
     //private static $allowed_children = array("ListingPage");
-    private static $default_child = "ListingPage";
+    private static $default_child = 'ListingPage';
     
     private static $db = array();
     
@@ -66,10 +66,10 @@ class ListingHolder extends Page
         return $oListings;
     }
     
-    function MakeSameHeight()
+    public  function MakeSameHeight()
     {
         if ( $this->owner->LayoutView() === 'grid' && $this->owner->SameHeightBoxes ) {
-            return "SameHeightBoxes";
+            return 'SameHeightBoxes';
         }
         
         return false;
