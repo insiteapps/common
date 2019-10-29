@@ -98,7 +98,7 @@ class ImageResource extends DataObject
     {
         
         parent::onBeforeDelete();
-        
+        /*
         if ( $this->ImageID ) {
             $oImage = $this->Image();
             if ( $oImage->exists() ) {
@@ -106,6 +106,7 @@ class ImageResource extends DataObject
                 $oImage->destroy();
             }
         }
+        */
     }
     
 }

@@ -1,0 +1,74 @@
+en:
+  CollectionPage:
+    DESCRIPTION: 'Generic content page'
+    PLURALNAME: 'Collection Pages'
+    SINGULARNAME: 'Collection Page'
+  FittedImage:
+    PLURALNAME: Files
+    SINGULARNAME: File
+  HeaderCustomTag:
+    PLURALNAME: HeaderCustomTags
+    SINGULARNAME: HeaderCustomTag
+  ImageResource:
+    PLURALNAME: 'Image Resources'
+    SINGULARNAME: 'Image Resource'
+  InsiteModelAdmin:
+    MENUTITLE: Insite
+  ListingArea:
+    PLURALNAME: Areas
+    SINGULARNAME: Area
+  ListingCollection:
+    PLURALNAME: Collections
+    SINGULARNAME: Collection
+  ListingHolder:
+    DESCRIPTION: 'Generic content page'
+    PLURALNAME: 'Listing Holders'
+    SINGULARNAME: 'Listing Holder'
+  ListingLocation:
+    PLURALNAME: Locations
+    SINGULARNAME: Location
+  ListingPage:
+    DESCRIPTION: 'Generic content page'
+    PLURALNAME: 'Listing Pages'
+    SINGULARNAME: 'Listing Page'
+  ListingSidebarComponent:
+    PLURALNAME: 'Listing Sidebar Components'
+    SINGULARNAME: 'Listing Sidebar Component'
+  ListingType:
+    PLURALNAME: Types
+    SINGULARNAME: Type
+  MainDataObject:
+    PLURALNAME: 'Main Data Objects'
+    SINGULARNAME: 'Main Data Object'
+  SecureDocumentLibrary:
+    PLURALNAME: 'Secure Document Libraries'
+    SINGULARNAME: 'Secure Document Library'
+  SecureImageResource:
+    PLURALNAME: 'Secure Image Resources'
+    SINGULARNAME: 'Secure Image Resource'
+  SecurePage:
+    DESCRIPTION: 'Generic content page'
+    PLURALNAME: 'Secure Pages'
+    SINGULARNAME: 'Secure Page'
+  SidebarComponentArea:
+    PLURALNAME: Areas
+    SINGULARNAME: Area
+  SidebarComponentCardPolicy:
+    PLURALNAME: CardPolicies
+    SINGULARNAME: CardPolicy
+  SidebarComponentCollection:
+    PLURALNAME: Collections
+    SINGULARNAME: Collection
+  SidebarComponentLocation:
+    PLURALNAME: Locations
+    SINGULARNAME: Location
+  SidebarComponentReference:
+    PLURALNAME: References
+    SINGULARNAME: Reference
+  SidebarComponentType:
+    PLURALNAME: Types
+    SINGULARNAME: Type
+  SimpleListingHolder:
+    DESCRIPTION: 'Generic content page'
+    PLURALNAME: 'Simple Listing Holders'
+    SINGULARNAME: 'Simple Listing Holder'
