@@ -19,78 +19,80 @@
 class CollectionPage extends Page
 {
     private static $empty_string = "-Select-";
-
+    
     private static $allowed_children = array();
-
+    
     private static $default_child = "";
     
-    public function canCreate($member = null)
+    public function canCreate( $member = null )
     {
-        return !DataObject::get_one($this->class);
+        return !DataObject::get_one( $this->class );
     }
-
-    public static function find_link($action = false)
+    
+    public static function find_link( $action = false )
     {
-        if (!$page = DataObject::get_one(get_class())) {
-            user_error(sprintf('No %s found. Please create one in the CMS!', get_class()), E_USER_ERROR);
+        if ( !$page = DataObject::get_one( get_class() ) ) {
+            user_error( sprintf( 'No %s found. Please create one in the CMS!', get_class() ), E_USER_ERROR );
         }
-
-        return $page->Link($action);
+        
+        return $page->Link( $action );
     }
-
+    
     function Children()
     {
-        $aChildren = ArrayList::create();
-        $oCollections = ListingCollection::get()
-            ->filterByCallback(function ($item, $list) {
-                return ($item->ListingCounter());
-            });
+        $aChildren    = ArrayList::create();
+        $oCollections = ListingCollection::get()->filterByCallback( function ( $item, $list ) {
+            return ( $item->ListingCounter() );
+        } );
         foreach ( $oCollections as $oCollection ) {
-            $aChildren->push(ArrayData::create([
+            $aChildren->push( ArrayData::create( [
                 "Title"     => $oCollection->Title,
                 "MenuTitle" => $oCollection->Title,
                 "Link"      => $oCollection->Link(),
-            ]));
+            ] ) );
         }
-
+        
         return $aChildren;
     }
-
+    
     public function getCMSFields()
     {
         $fields = parent::getCMSFields();
-
-
+        
+        
         return $fields;
     }
-
+    
 }
 
 class CollectionPage_Controller extends Page_Controller
 {
-    private static $allowed_actions = array('view',);
-
-    static $url_handlers = array(
+    private static $allowed_actions = array( 'view', );
+    
+    private static $url_handlers = array(
         ''             => 'index',
         '$ID/$OtherID' => 'view',
     );
-
-    function view()
+    
+    public function view()
     {
-        $oCollection = DataObject::get_one("ListingCollection", sprintf("URLSegment = '%s'", $this->urlParamsID()));
-        if ($oCollection) {
+        $oCollection = DataObject::get_one( 'ListingCollection', sprintf( "URLSegment = '%s'", $this->urlParamsID() ) );
+        if ( $oCollection ) {
             $title = $oCollection->Title;
             $aData = array(
-                "Title"           => $title,
-                "CustomPageTitle" => $title . " <small>Collection</small>",
-                "ProductList"     => $oCollection->Products(),
+                'Title'           => $title,
+                'CustomPageTitle' => $title . ' <small>Collection</small>',
+                'ProductList'     => $oCollection->Listings(),
             );
-
-            return $this->customise($aData)->renderWith(["CollectionPage_view", "Page"]);
-
+            
+            return $this->customise( $aData )->renderWith( [
+                'CollectionPage_view',
+                'Page',
+            ] );
+            
         }
-
-        return $this->httpError('404');
+        
+        return $this->httpError( '404' );
     }
-
+    
 }
